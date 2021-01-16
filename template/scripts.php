@@ -11,6 +11,7 @@
   <script src="../assets/vendor/aos/aos.js"></script>
   <script src="../assets/vendor/datatables/dataTables.min.js"></script>
   <script src="../assets/vendor/font-awesome/fontawesome.min.js"></script>
+  <script src="../assets/vendor/sweetalert/dist/sweetalert.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>

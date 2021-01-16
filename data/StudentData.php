@@ -8,15 +8,24 @@ $action = $_GET["action"];
 
 if ($action == "getStudents") {
     $student_list = $student->load_all_students();
+
+    $datastorage = [];
     foreach ($student_list as $student) {
-        echo $student["id"] . "<br>";
-        echo $student["first_name"] . " " . $student["middle_name"] . " " . $student["last_name"] . "<br>";
-        echo $student["address"] . "<br>";
-        echo $student["email"] . "<br>";
-        echo $student["phone_number"] . "<br>";
-        echo $student["birthdate"] . "<br><br><br>";
-        # code...
+        $datastorage[] = [
+            "id"            => $student["id"],
+            "name"          => $student["first_name"] . " " . $student["middle_name"] . " " . $student["last_name"],
+            "address"       => $student["address"],
+            "email"         => $student["email"],
+            "birthdate"     => $student["birthdate"],
+            "phone_number"  => $student["phone_number"],
+        ];
     }
+    echo json_encode($datastorage);
+}
+else if ($action == "removeStudent") {
+    $id = $_POST["id"];
+    $student->delete_student($id);
+    echo json_encode("Successfully Deleted");
 }
 
 
