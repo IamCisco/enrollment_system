@@ -21,9 +21,9 @@ class Connection
 
         $this->set_password("");
         $password = $this->get_password();
-        
+
         $conn = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-        
+
         return $conn;
     }
 
