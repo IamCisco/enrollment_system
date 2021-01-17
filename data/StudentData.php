@@ -21,11 +21,58 @@ if ($action == "getStudents") {
         ];
     }
     echo json_encode($datastorage);
-}
-else if ($action == "removeStudent") {
+} else if ($action == "removeStudent") {
     $id = $_POST["id"];
     $student->delete_student($id);
     echo json_encode("Successfully Deleted");
+} else if ($action == "insertStudent") {
+    $post_data = $_POST;
+
+    $columns = "";
+    $prepare = "";
+    $values = [];
+    foreach ($post_data as $key => $value) {
+        $values[] = $value;
+        $columns .= $key . ",";
+        $prepare .= "?,";
+    }
+
+    $columns = substr_replace($columns, "", -1);
+    $prepare = substr_replace($prepare, "", -1);
+    $student->insert_student($columns, $values,$prepare);
+    echo json_encode("Successfully Inserted");
+} else if($action == "getSpecificStudent"){
+    $id = $_POST["id"];
+    $student_list = $student->load_all_students("where id=$id");
+
+    foreach ($student_list as $student) {
+        $datastorage = [
+            "id"            => $student["id"],
+            "first_name"    => $student["first_name"],
+            "middle_name"   => $student["middle_name"],
+            "last_name"     => $student["last_name"],
+            "address"       => $student["address"],
+            "email"         => $student["email"],
+            "birthdate"     => $student["birthdate"],
+            "phone_number"  => $student["phone_number"],
+        ];
+    }
+    echo json_encode($datastorage);
+} else if($action == "updateStudent"){
+    $id = $_POST["id"];
+    $columns = "";
+    $values =[];
+    $value_string = "";
+    foreach ($_POST as $key => $value) {
+        if($key != "id"){
+            $values[] = $value;
+            $columns .= $key."=?,";
+        }
+    }
+
+    $columns = substr_replace($columns, "", -1);
+    $student->update_student($id, $columns, $values);
+    echo json_encode("Data Successfully Updated");
 }
 
 

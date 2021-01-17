@@ -9,9 +9,9 @@ class StudentController
         $this->student = new StudentModel();
     }
 
-    public function load_all_students()
+    public function load_all_students($where = null)
     {
-        return $this->student->get_student_masterlist();
+        return $this->student->get_student_masterlist($where);
     }
 
     public function insert_student($columns, $values, $prepare)
@@ -22,7 +22,7 @@ class StudentController
 
     public function update_student($id, $columns, $values)
     {
-        return $this->student->insert_student($id, $columns, $values);
+        return $this->student->update_student($id, $columns, $values);
     }
 
     public function delete_student($id)

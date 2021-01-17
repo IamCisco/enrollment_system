@@ -28,7 +28,7 @@ class StudentModel extends Connection
     {
         try {
 
-            $sql = "INSERT INTO students ($columns) VALUES (?,?,?,?,?)";
+            $sql = "INSERT INTO students ($columns) VALUES ($prepare)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($values);
             return "success";
