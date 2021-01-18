@@ -1,3 +1,5 @@
+<?php session_start();?>
+
 <!DOCTYPE html>
 <html lang="en">
 
@@ -41,6 +43,7 @@
                         <table class="table table-bordered table-striped table-hover" id="tbl_student">
                             <thead>
                                 <tr>
+                                    <td>Student No.</td>
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Birthday</td>

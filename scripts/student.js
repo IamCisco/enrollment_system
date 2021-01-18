@@ -50,6 +50,7 @@ let STUDENT = {
                     data = result[x];
                     row += `
                     <tr>
+                        <td>${data["student_number"]}</td>
                         <td>${data["name"]}</td>
                         <td>${data["address"]}</td>
                         <td>${data["birthdate"]}</td>
