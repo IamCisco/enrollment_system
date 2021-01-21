@@ -5,11 +5,11 @@ $(document).ready(function () {
     $('#frm_student_add').submit(function(event) {
         event.preventDefault();
         var post_data = {
-            first_name   : $("#txt_fname").val(),
-            middle_name  : $("#txt_mname").val(),
+            title   : $("#txt_fname").val(),
+            announcment  : $("#txt_mname").val(),
             last_name    : $("#txt_lname").val(),
             address      : $("#txt_address").val(),
-            birthdate    : $("#txt_bday").val(),
+            valdity_date    : $("#txt_bday").val(),
             email        : $("#txt_email").val(),
             phone_number : $("#txt_phonenumber").val()
         }

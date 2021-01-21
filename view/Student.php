@@ -1,4 +1,3 @@
-<?php session_start();?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -14,7 +13,7 @@
 
     </div>
 
-    <?php include "../template/header.php"; ?>
+    <?php include "../template/top_nav2.php"; ?>
 
     <main id="main" data-aos="fade-up">
 
@@ -128,7 +127,7 @@
             <div class="modal-content">
                 <form id="frm_student_update">
                     <div class="modal-header">
-                        <h4 class="modal-title">Add Student</h4>
+                        <h4 class="modal-title">Update Student</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
@@ -175,6 +174,8 @@
         </div>
     </div>
     <?php include "../template/scripts.php"; ?>
+    
+    <script src="../scripts/user.js"></script>
     <script src="../scripts/student.js"></script>
 
 </body>

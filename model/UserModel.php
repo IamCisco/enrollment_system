@@ -16,7 +16,7 @@ class UserModel extends Connection
     public function login($username,$password)
     {
         try {
-            $sql = "Select  username,first_name, middle_name, last_name from users username='$username' and password='$password'";
+            $sql = "Select  username,first_name, middle_name, last_name, user_level from users where username='$username' and password='$password'";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();
         } catch (\Throwable $th) {
