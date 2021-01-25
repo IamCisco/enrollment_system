@@ -1,5 +1,6 @@
 
 $(document).ready(function () {
+    USER.checkSession();
     ANNOUNCEMENT.getAnnouncements();
 
     $('#frm_announcement_add').submit(function(event) {
@@ -171,7 +172,7 @@ let ANNOUNCEMENT = {
 
                 
                 swal(result, {
-                    title: "Nice One!!",
+                    title: "Success!!",
                     text: result,
                     icon: "info",
                     button: "OK",

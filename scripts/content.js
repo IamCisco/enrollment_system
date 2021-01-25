@@ -1,36 +1,26 @@
 
 $(document).ready(function () {
-    ANNOUNCEMENT.getAnnouncements();
-
-    $('#frm_announcement_add').submit(function(event) {
-        event.preventDefault();
-        var post_data = {
-            title            : $("#txt_title").val(),
-            announcement     : $("#txt_announcement").val(),
-            validity_date    : $("#txt_validity").val(),
-        }
-        ANNOUNCEMENT.insertAnnouncement(post_data)
-    });
+    USER.checkSession();
+    CONTENT.getContents();
 
     
-    $('#frm_announcement_update').submit(function(event) {
+    $('#frm_content_update').submit(function(event) {
         event.preventDefault();
         var post_data = {
-            id               : ANNOUNCEMENT.id,
-            title            : $("#txt_title_update").val(),
-            announcement     : $("#txt_announcement_update").val(),
-            validity_date    : $("#txt_validity_update").val(),
+            id             : CONTENT.id,
+            name           : $("#txt_name_update").val(),
+            details        : $("#txt_detail_update").val()
         }
-        ANNOUNCEMENT.updateAnnouncement(post_data)
+        CONTENT.updateContent(post_data)
     });
 });
 
-let ANNOUNCEMENT = {
+let CONTENT = {
 
     id : 0,
-    getAnnouncements: function () {
+    getContents: function () {
         $.ajax({
-            url: "../data/AnnouncementData.php?action=getAnnouncements",
+            url: "../data/ContentData.php?action=getContents",
             dataType: "json",
             success: function (result) {
                 var row = ``;
@@ -39,109 +29,25 @@ let ANNOUNCEMENT = {
                     data = result[x];
                     row += `
                     <tr>
-                        <td>${data["title"]}</td>
-                        <td>${data["announcement"]}</td>
-                        <td>${data["validity_date"]}</td>
+                        <td>${data["name"]}</td>
+                        <td>${data["details"]}</td>
                         <td>
-                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="ANNOUNCEMENT.getSpecificAnnouncement(${data["id"]})">
+                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="CONTENT.getSpecificContent(${data["id"]})">
                             
                                 <i class='far fa-save'></i>
-                            </button>
-                        </td>
-                        <td>
-                            <button type="button"class="btn btn-danger btn-sm "style='font-size:24px' onclick="ANNOUNCEMENT.removeAnnouncement(${data["id"]})">
-                              
-                                <i class='fas fa-trash'></i>
                             </button>
                         </td>
                     </tr>
                     `;
                 }
-                $("#tbl_announcement_body").html(row);
-                $('#tbl_announcement').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'csv',
-                            className: 'btn-outline-secondary',
-                            exportOptions: {
-                              columns: ':visible'
-                            }
-                          }, 
-                    ]
-                });
+                $("#tbl_content_body").html(row);
+                $('#tbl_content').DataTable();
             }
         });
     },
-    removeAnnouncement: function (id) {
-        // ANNOUNCEMENT.reset();
-        swal("Hello world!");
-        swal({
-            title: "Are you sure?",
-            text: "Once deleted, you will not be able to recover this data!",
-            icon: "warning",
-            buttons: true,
-            dangerMode: true,
-          })
-          .then((willDelete) => {
-            if (willDelete) {
-                $.ajax({
-                    url: "../data/AnnouncementData.php?action=removeAnnouncement",
-                    data:
-                    {
-                        id: id
-                    },
-                    type: "post",
-                    dataType: "json",
-                    assync : false, 
-                    success: function (result) {
-                        ANNOUNCEMENT.getAnnouncements();
-                        swal("Data has been deleted!", {
-                            title: "Good job!",
-                            text: result,
-                            icon: "success",
-                            button: "OK",
-                        });
-                    }
-                });
-              
-            } else {
-                swal("Data not deleted!", {
-                    title: "Cancel",
-                    text: "Data no deleted",
-                    icon: "info",
-                    button: "OK",
-                });
-            }
-          });
-    },
-    insertAnnouncement : function(post_data) {
-        
+    getSpecificContent : function(id){
         $.ajax({
-            url: "../data/AnnouncementData.php?action=insertAnnouncement",
-            data: post_data,
-            type: "post",
-            dataType: "json",
-            assync : false, 
-            success: function (result) {
-                ANNOUNCEMENT.getAnnouncements();
-
-                $("#txt_title").val("")
-                $("#txt_announcement").val("")
-                $("#txt_validity").val("")
-                swal("Data has been successfully added!", {
-                    title: "Good job!",
-                    text: result,
-                    icon: "success",
-                    button: "OK",
-                });
-                $("#modal_announcement_form").modal("hide");
-            }
-        });
-    },
-    getSpecificAnnouncement : function(id){
-        $.ajax({
-            url: "../data/AnnouncementData.php?action=getSpecificAnnouncement",
+            url: "../data/ContentData.php?action=getSpecificContent",
             dataType: "json",
             data :
             {
@@ -150,33 +56,33 @@ let ANNOUNCEMENT = {
             type : "post",
             assync: false,
             success: function (result) {
-                ANNOUNCEMENT.id = id;
+                console.log(result)
+                CONTENT.id = id;
 
-                $("#modal_announcement_form_update").modal("show");
-                $("#txt_title_update").val(result.title);
-                $("#txt_announcement_update").val(result.announcement);
-                $("#txt_validity_update").val(result.validity_date);
+                $("#modal_content_form_update").modal("show");
+                $("#txt_name_update").val(result.name);
+                $("#txt_detail_update").val(result.details);
             }
         });
     },
-    updateAnnouncement : function(post_data){
+    updateContent : function(post_data){
         $.ajax({
-            url: "../data/AnnouncementData.php?action=updateAnnouncement",
+            url: "../data/ContentData.php?action=updateContent",
             data: post_data,
             type: "post",
             dataType: "json",
             assync : false, 
             success: function (result) {
-                ANNOUNCEMENT.getAnnouncements();
+                CONTENT.getContents();
 
                 
                 swal(result, {
-                    title: "Nice One!!",
+                    title: "Success!!",
                     text: result,
                     icon: "info",
                     button: "OK",
                 });
-                $("#modal_announcement_form_update").modal("hide");
+                $("#modal_content_form_update").modal("hide");
             }
         });
     }

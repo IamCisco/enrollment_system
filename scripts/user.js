@@ -1,5 +1,4 @@
 $(document).ready(function () {
-    USER.checkSession();
     
     $('#form_login').submit(function(event) {
         event.preventDefault();
@@ -87,6 +86,9 @@ let USER = {
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
                     $("#btn_login").show();
+                    var protocol = window.location.protocol;
+                    var host = window.location.host;
+                    window.location.href = `${protocol}//${host}/enrollment-system/view/index.php`
                 }
                 else
                 {

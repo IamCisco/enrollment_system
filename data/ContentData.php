@@ -6,12 +6,32 @@ $content = new ContentController();
 $action = $_GET["action"];
 
 
-if ($action == "getContents") {
-    $content_list = $content->load_all_contents();
+if ($action == "getContentVMGO") {
+    $content_list = $content->load_all_contents("where name in('Vision', 'Mission', 'Goal')");
 
     $datastorage = [];
     foreach($content_list as $content) {
         $datastorage[$content["name"]] = $content["details"];
+    }
+    echo json_encode($datastorage);
+}else if ($action == "getContentContact") {
+    $content_list = $content->load_all_contents("where name in('Address', 'Email', 'Contact Number')");
+
+    $datastorage = [];
+    foreach($content_list as $content) {
+        $datastorage[$content["name"]] = $content["details"];
+    }
+    echo json_encode($datastorage);
+}else if ($action == "getContents") {
+    $content_list = $content->load_all_contents();
+
+    $datastorage = [];
+    foreach($content_list as $content) {
+        $datastorage[] = [
+            "id"      => $content["id"],
+            "name"    => $content["name"],
+            "details" => $content["details"]
+        ];
     }
     echo json_encode($datastorage);
 } else if ($action == "removeContent") {
@@ -41,10 +61,9 @@ if ($action == "getContents") {
 
     foreach ($content_list as $content) {
         $datastorage = [
-            "id"                   => $content["id"],
-            "title"                => $content["title"],
-            "content"         => $content["content"],
-            "validity_date"        => $content["validity_date"]
+            "id"           => $content["id"],
+            "name"         => $content["name"],
+            "details"      => $content["details"]
         ];
     }
     echo json_encode($datastorage);

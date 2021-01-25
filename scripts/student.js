@@ -1,15 +1,16 @@
 
 $(document).ready(function () {
+    USER.checkSession();
     STUDENT.getStudents();
 
     $('#frm_student_add').submit(function(event) {
         event.preventDefault();
         var post_data = {
-            title   : $("#txt_fname").val(),
-            announcment  : $("#txt_mname").val(),
+            first_name   : $("#txt_fname").val(),
+            middle_name  : $("#txt_mname").val(),
             last_name    : $("#txt_lname").val(),
             address      : $("#txt_address").val(),
-            valdity_date    : $("#txt_bday").val(),
+            birthdate    : $("#txt_bday").val(),
             email        : $("#txt_email").val(),
             phone_number : $("#txt_phonenumber").val()
         }
@@ -181,7 +182,7 @@ let STUDENT = {
 
                 
                 swal(result, {
-                    title: "Nice One!!",
+                    title: "Success!!",
                     text: result,
                     icon: "info",
                     button: "OK",
