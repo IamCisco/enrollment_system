@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 25, 2021 at 08:01 AM
+-- Generation Time: Jan 30, 2021 at 06:54 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -43,7 +43,8 @@ INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`) VAL
 (2, 'Announcement 2', 'This is the description 2', '2021-01-27'),
 (4, 'Announcement 3', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22'),
 (5, 'Announcement 4', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22'),
-(6, 'Announcement 5', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22');
+(6, 'Announcement 5', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22'),
+(7, 'Announement 6', 'Test ', '2021-01-30');
 
 -- --------------------------------------------------------
 
@@ -95,7 +96,7 @@ CREATE TABLE `contents` (
 
 INSERT INTO `contents` (`id`, `name`, `details`) VALUES
 (1, 'Mission', 'This is the mission of the school'),
-(3, 'Vision', 'This is the vision of the school'),
+(3, 'Vision', 'This is the vision of the school. The quick brown fox jumps over the head of the lazy dog.'),
 (4, 'Goal', 'This is the Goal of the school'),
 (5, 'Address', 'A108 Adam Street, New York, NY 535022'),
 (6, 'Email', 'example@email.com'),
@@ -116,19 +117,22 @@ CREATE TABLE `enrollees` (
   `email` varchar(100) NOT NULL,
   `birthdate` date NOT NULL,
   `contact_number` varchar(50) NOT NULL,
-  `status` varchar(10) DEFAULT NULL,
   `image` varchar(100) NOT NULL,
   `date_registered` date NOT NULL,
   `accepted` tinyint(1) DEFAULT NULL,
-  `passed` tinyint(1) DEFAULT NULL
+  `passed` tinyint(1) DEFAULT NULL,
+  `program` varchar(20) NOT NULL,
+  `grade_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `enrollees`
 --
 
-INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `status`, `image`, `date_registered`, `accepted`, `passed`) VALUES
-(5, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-25', '1', NULL, 'one-piece-anime-artwork-i6.jpg', '2021-01-25', -1, -1);
+INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`) VALUES
+(11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11),
+(12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11),
+(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -165,16 +169,19 @@ CREATE TABLE `students` (
   `email` varchar(50) NOT NULL,
   `phone_number` varchar(20) NOT NULL,
   `status` varchar(20) NOT NULL,
-  `image` varchar(50) NOT NULL
+  `image` varchar(50) NOT NULL,
+  `program` varchar(20) NOT NULL,
+  `grade_level` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `students`
 --
 
-INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`) VALUES
-(18, 2177488, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', ''),
-(19, 2154610, 'Raquel', 'Alviola', 'Lachica', 'Shineland Village Sala Cabuyao Laguna', '1993-09-30', 'raquellachicacoe@gmail.com', '09399395763', '', '');
+INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
+(23, 2157148, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 11),
+(25, 2177349, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
+(26, 2175498, 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -254,7 +261,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `backgrounds`
@@ -272,7 +279,7 @@ ALTER TABLE `contents`
 -- AUTO_INCREMENT for table `enrollees`
 --
 ALTER TABLE `enrollees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `exam_schedule`
@@ -284,7 +291,7 @@ ALTER TABLE `exam_schedule`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
 
 --
 -- AUTO_INCREMENT for table `users`
