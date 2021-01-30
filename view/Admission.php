@@ -64,8 +64,25 @@
                                 <input type="text" class="form-control" name="contact_number" id="txt_number" placeholder="Contact Number"required>
                             </div>
                             <div class="form-group">
+                                <label for="txt_program">Program</label>
+                                <select class="form-control" id="txt_program" name="program" required>
+                                    <option value="" disabled selected>Please select a program</option>
+                                    <option value="ABM">ABM</option>
+                                    <option value="STEM">STEM</option>
+                                    <option value="HUMMS">HUMMS</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_grade">Grade</label>
+                                <select class="form-control" id="txt_grades" name="grade_level"required>
+                                    <option value="" disabled selected>Please select a grade</option>
+                                    <option value="11">XI</option>
+                                    <option value="12">XII</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
                                 <label for="txt_number">Image</label>
-                                <input type="file" name="input_file" class="form-control-file border"required>
+                                <input type="file" name="input_file" class="form-control-file border" id="file_image"required>
                             </div>
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
                         </form>
@@ -107,7 +124,7 @@
             </div>
 
         </div>
-    </div>  
+    </div>
 
     <div id="preloader"></div>
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
@@ -118,5 +135,4 @@
     <script src="../scripts/enrollee.js"></script>
 
 </body>
-
 </html>

@@ -58,7 +58,7 @@ let INDEX = {
                 let row = '';
                 $.each(result, function (index, value) {
                     row +=`
-                        <div class="col-md-6 col-lg-4 d-flex align-items-stretch mb-5 mb-lg-0">
+                        <div class="col-md-4 col-lg-4 d-flex align-items-stretch mb-4 mb-lg-0">
                             <div class="icon-box" data-aos="fade-up" data-aos-delay="${(x+1)*100}">
                                 <div class="icon"><i class="${INDEX.vmgo_icons[x]}"></i></div>
                                 <h4 class="title"><a href="">${index}</a></h4>

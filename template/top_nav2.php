@@ -9,11 +9,10 @@
         <nav class="nav-menu d-none d-lg-block">
             <ul>
                 <li class="active"><a href="index.php">Home</a></li>
-                <li><a href="index.php#featured-services">About</a></li>
-                <li><a href="index.php#announcement">Announcement</a></li>
-                <li><a href="index.php#portfolio">Portfolio</a></li>
-                <li><a href="index.php#team">Team</a></li>
-                <li><a href="index.php#contact">Contact</a></li>
+                <li><a href="Index.php#featured-services">About</a></li>
+                <li><a href="Index.php#announcement">Announcement</a></li>
+                <li><a href="Index.php#team">Team</a></li>
+                <li><a href="Index.php#contact">Contact</a></li>
                 <li class="drop-down"><a href="#" id="txt_name"></a>
                     <ul>
                         <li><a href="Content.php" id ="btn_content" style="display:none">Content Management</a></li>

@@ -2,17 +2,23 @@
 $(document).ready(function () {
     USER.checkSession();
     STUDENT.getStudents();
-
+    STUDENT.loadEntranceExamPassers();
+    $('#txt_passers').on('change', function() {
+        STUDENT.getSpecificPasser( this );
+    });
     $('#frm_student_add').submit(function(event) {
         event.preventDefault();
         var post_data = {
+            image        : $("#txt_image").val(),
             first_name   : $("#txt_fname").val(),
             middle_name  : $("#txt_mname").val(),
             last_name    : $("#txt_lname").val(),
             address      : $("#txt_address").val(),
             birthdate    : $("#txt_bday").val(),
             email        : $("#txt_email").val(),
-            phone_number : $("#txt_phonenumber").val()
+            phone_number : $("#txt_phonenumber").val(),
+            program      : $("#txt_program").val(),
+            grade_level  : $("#txt_grade").val()
         }
         STUDENT.insertStudent(post_data)
     });
@@ -28,7 +34,9 @@ $(document).ready(function () {
             address      : $("#txt_address_update").val(),
             birthdate    : $("#txt_bday_update").val(),
             email        : $("#txt_email_update").val(),
-            phone_number : $("#txt_phonenumber_update").val()
+            phone_number : $("#txt_phonenumber_update").val(),
+            program      : $("#txt_program_update").val(),
+            grade_level  : $("#txt_grade").val()
         }
         console.log(STUDENT.id)
         STUDENT.updateStudent(post_data)
@@ -44,19 +52,22 @@ let STUDENT = {
             url: "../data/StudentData.php?action=getStudents",
             dataType: "json",
             success: function (result) {
+                console.log(result)
                 var row = ``;
 
-                console.log();
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
                     row += `
                     <tr>
+                    <td><a href="../assets/img/enrollees/${data["image"]}" target="_blank"><img src="../assets/img/students/${data["image"]}" alt="Avatar" class="avatar"></a></td>
                         <td>${data["student_number"]}</td>
                         <td>${data["name"]}</td>
                         <td>${data["address"]}</td>
                         <td>${data["birthdate"]}</td>
                         <td>${data["email"]}</td>
                         <td>${data["phone_number"]}</td>
+                        <td>${data["program"]}</td>
+                        <td>${data["grade_level"]}</td>
                         <td>
                             <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="STUDENT.getSpecificStudent(${data["id"]})">
                             
@@ -74,6 +85,49 @@ let STUDENT = {
                 }
                 $("#tbl_student_body").html(row);
                 $('#tbl_student').DataTable();
+            }
+        });
+    },
+    loadEntranceExamPassers: function () {
+        $.ajax({
+            url: "../data/EnrolleeData.php?action=getPassedEnrollee",
+            dataType: "json",
+            success: function (result) {
+                var options = `<option value="" disabled selected>Please select an enrollee</option>`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    options += `
+                        <option value='${data["id"]}'>${data["name"]}</option>
+                    `;
+                }
+                $("#txt_passers").append(options);
+            }
+        });
+    },
+    getSpecificPasser : function(this_){
+        $.ajax({
+            url: "../data/EnrolleeData.php?action=getSpecificEnrollee",
+            dataType: "json",
+            data :
+            {
+                id: this_.value
+            },
+            type : "post",
+            assync: false,
+            success: function (result) {
+                console.log(result)
+                
+                $("#txt_image").val(result.image);
+                $("#txt_fname").val(result.first_name);
+                $("#txt_mname").val(result.middle_name);
+                $("#txt_lname").val(result.last_name);
+                $("#txt_address").val(result.address);
+                $("#txt_bday").val(result.birthdate);
+                $("#txt_email").val(result.email);
+                $("#txt_phonenumber").val(result.phone_number);
+                $("#txt_program").val(result.program);
+                $("#txt_grade").val(result.grade_level);
             }
         });
     },
@@ -158,6 +212,7 @@ let STUDENT = {
             type : "post",
             assync: false,
             success: function (result) {
+                console.log(result)
                 STUDENT.id = id;
                 $("#modal_student_form_update").modal("show");
                 $("#txt_fname_update").val(result.first_name);
@@ -167,6 +222,8 @@ let STUDENT = {
                 $("#txt_bday_update").val(result.birthdate);
                 $("#txt_email_update").val(result.email);
                 $("#txt_phonenumber_update").val(result.phone_number);
+                $("#txt_program_update").val(result.program);
+                $("#txt_grade_update").val(result.grade_level);
             }
         });
     },

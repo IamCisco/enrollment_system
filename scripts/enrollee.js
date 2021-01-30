@@ -1,8 +1,8 @@
 
 $(document).ready(function () {
-    USER.checkSession();
     
-    ENROLLEE.getEnrollees();
+    ENROLLEE.getEnrolleesForAccept();
+    ENROLLEE.getEnrolleesForExam();
 
     $('#frm_enrollee_add').submit(function(event) {
         event.preventDefault();
@@ -31,9 +31,9 @@ let ENROLLEE = {
 
     //method 
     id : 0,
-    getEnrollees: function () {
+    getEnrolleesForAccept: function () {
         $.ajax({
-            url: "../data/EnrolleeData.php?action=getEnrollees",
+            url: "../data/EnrolleeData.php?action=getEnrolleesForAccept",
             dataType: "json",
             success: function (result) {
                 var row = ``;
@@ -48,23 +48,64 @@ let ENROLLEE = {
                         <td>${data["email"]}</td>
                         <td>${data["phone_number"]}</td>
                         <td>${data["date_registered"]}</td>
+                        <td>${data["grade_level"]}</td>
+                        <td>${data["program"]}</td>
                         <td>
-                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="ENROLLEE.getSpecificEnrollee(${data["id"]})">
+                            <button type="button"class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Accept" style='font-size:24px' onclick="ENROLLEE.acceptEnrollee(${data["id"]})">
                             
-                                <i class='far fa-save'></i>
+                                <i class='fas fa-check'></i>
                             </button>
                         </td>
                         <td>
-                            <button type="button"class="btn btn-danger btn-sm "style='font-size:24px' onclick="ENROLLEE.removeEnrollee(${data["id"]})">
+                            <button type="button"class="btn btn-danger btn-sm data-toggle="tooltip" data-placement="top" title="Reject" style='font-size:24px' onclick="ENROLLEE.rejectEnrollee(${data["id"]})">
                               
-                                <i class='fas fa-trash'></i>
+                                <i class='fas fa-times'></i>
                             </button>
                         </td>
                     </tr>
                     `;
                 }
-                $("#tbl_enrollee_body").html(row);
-                $('#tbl_enrollee').DataTable();
+                $("#tbl_enrollee_accept_body").html(row);
+                $('#tbl_enrollee_accept').DataTable();
+            }
+        });
+    },
+    getEnrolleesForExam: function () {
+        $.ajax({
+            url: "../data/EnrolleeData.php?action=getEnrolleesForExam",
+            dataType: "json",
+            success: function (result) {
+                var row = ``;
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row += `
+                    <tr>
+                        <td><a href="../assets/img/enrollees/${data["image"]}" target="_blank"><img src="../assets/img/enrollees/${data["image"]}" alt="Avatar" class="avatar"></a></td>
+                        <td>${data["name"]}</td>
+                        <td>${data["address"]}</td>
+                        <td>${data["birthdate"]}</td>
+                        <td>${data["email"]}</td>
+                        <td>${data["phone_number"]}</td>
+                        <td>${data["date_registered"]}</td>
+                        <td>${data["grade_level"]}</td>
+                        <td>${data["program"]}</td>
+                        <td>
+                            <button type="button"class="btn btn-success btn-sm" data-toggle="tooltip" data-placement="top" title="Accept" style='font-size:24px' onclick="ENROLLEE.passEnrollee(${data["id"]})">
+                            
+                                <i class='fas fa-check'></i>
+                            </button>
+                        </td>
+                        <td>
+                            <button type="button"class="btn btn-danger btn-sm data-toggle="tooltip" data-placement="top" title="Reject" style='font-size:24px' onclick="ENROLLEE.failEnrollee(${data["id"]})">
+                              
+                                <i class='fas fa-times'></i>
+                            </button>
+                        </td>
+                    </tr>
+                    `;
+                }
+                $("#tbl_enrollee_for_exam_body").html(row);
+                $('#tbl_enrollee_for_exam').DataTable();
             }
         });
     },
@@ -90,7 +131,8 @@ let ENROLLEE = {
                     dataType: "json",
                     assync : false, 
                     success: function (result) {
-                        ENROLLEE.getEnrollees();
+                        ENROLLEE.getEnrolleesForAccept();
+                        ENROLLEE.getEnrolleesForExam();
                         swal("Data has been deleted!", {
                             title: "Good job!",
                             text: result,
@@ -110,6 +152,146 @@ let ENROLLEE = {
             }
           });
     },
+    acceptEnrollee: function (id) {
+        swal("Hello world!");
+        swal({
+            title: "Are you sure?",
+            text: "You want to accept this application?",
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "../data/EnrolleeData.php?action=acceptEnrollee",
+                    data:
+                    {
+                        id: id
+                    },
+                    type: "post",
+                    dataType: "json",
+                    assync : false, 
+                    success: function (result) {
+                        ENROLLEE.getEnrolleesForAccept();
+                        ENROLLEE.getEnrolleesForExam();
+                        swal("You accepted this student", {
+                            title: "Good job!",
+                            text: result,
+                            icon: "success",
+                            button: "OK",
+                        });
+                    }
+                });
+              
+            }
+          });
+    },
+    rejectEnrollee: function (id) {
+        swal("Hello world!");
+        swal({
+            title: "Are you sure?",
+            text: "You want to reject this application?",
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "../data/EnrolleeData.php?action=rejectEnrollee",
+                    data:
+                    {
+                        id: id
+                    },
+                    type: "post",
+                    dataType: "json",
+                    assync : false, 
+                    success: function (result) {
+                        ENROLLEE.getEnrolleesForAccept();
+                        ENROLLEE.getEnrolleesForExam();
+                        swal("You reject this student", {
+                            title: "Good job!",
+                            text: result,
+                            icon: "success",
+                            button: "OK",
+                        });
+                    }
+                });
+              
+            }
+          });
+    },
+    passEnrollee: function (id) {
+        swal("Hello world!");
+        swal({
+            title: "Are you sure?",
+            text: "You want to pass this examinee?",
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "../data/EnrolleeData.php?action=passEnrollee",
+                    data:
+                    {
+                        id: id
+                    },
+                    type: "post",
+                    dataType: "json",
+                    assync : false, 
+                    success: function (result) {
+                        ENROLLEE.getEnrolleesForAccept();
+                        ENROLLEE.getEnrolleesForExam();
+                        swal("You pass this examinee", {
+                            title: "Good job!",
+                            text: result,
+                            icon: "success",
+                            button: "OK",
+                        });
+                    }
+                });
+              
+            }
+          });
+    },
+    failEnrollee: function (id) {
+        swal("Hello world!");
+        swal({
+            title: "Are you sure?",
+            text: "You want to pass this examinee?",
+            icon: "info",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "../data/EnrolleeData.php?action=passEnrollee",
+                    data:
+                    {
+                        id: id
+                    },
+                    type: "post",
+                    dataType: "json",
+                    assync : false, 
+                    success: function (result) {
+                        ENROLLEE.getEnrolleesForAccept();
+                        ENROLLEE.getEnrolleesForExam();
+                        swal("You pass this examinee", {
+                            title: "Good job!",
+                            text: result,
+                            icon: "success",
+                            button: "OK",
+                        });
+                    }
+                });
+              
+            }
+          });
+    },
     insertEnrollee : function(_this) {
         
         $.ajax({
@@ -121,23 +303,25 @@ let ENROLLEE = {
             dataType: "json",
             assync : false, 
             success: function (result) {
-                console.log(result)
-                // ENROLLEE.getEnrollees();
+                ENROLLEE.getEnrolleesForAccept();
+                ENROLLEE.getEnrolleesForExam();
 
-                // $("#txt_fname").val("");
-                // $("#txt_mname").val(""),
-                // $("#txt_lname").val(""),
-                // $("#txt_address").val(""),
-                // $("#txt_birthday").val(""),
-                // $("#txt_email").val(""),
-                // $("#txt_number").val("")
-                // swal("Data has been successfully added!", {
-                //     title: "Good job!",
-                //     text: result,
-                //     icon: "success",
-                //     button: "OK",
-                // });
-                // $("#modal_enrollee_form").modal("hide");
+                $("#txt_fname").val("");
+                $("#txt_mname").val("");
+                $("#txt_lname").val("");
+                $("#txt_address").val("");
+                $("#txt_birthday").val("");
+                $("#txt_email").val("");
+                $("#txt_number").val("");
+                $("#txt_program").val("");
+                $("#file_image").val("");
+                swal(result.message, {
+                    title: result.title,
+                    text: result.message,
+                    icon: result.status,
+                    button: "OK",
+                });
+                $("#modal_enrollee_form").modal("hide");
             }
         });
     },
@@ -172,7 +356,8 @@ let ENROLLEE = {
             dataType: "json",
             assync : false, 
             success: function (result) {
-                ENROLLEE.getEnrollees();
+                ENROLLEE.getEnrolleesForAccept();
+                ENROLLEE.getEnrolleesForExam();
 
                 
                 swal(result, {

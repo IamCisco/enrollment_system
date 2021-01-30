@@ -19,6 +19,9 @@ if ($action == "getStudents") {
             "email"          => $student["email"],
             "birthdate"      => $student["birthdate"],
             "phone_number"   => $student["phone_number"],
+            "program"        => $student["program"],
+            "image"          => $student["image"],
+            "grade_level"    => $student["grade_level"],
         ];
     }
     echo json_encode($datastorage);
@@ -37,6 +40,10 @@ if ($action == "getStudents") {
         $columns .= $key . ",";
         $prepare .= "?,";
     }
+
+    $path_from = '../assets/img/enrollees/';
+    $path_to = '../assets/img/students/';
+    copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
 
     //generating of uniquestudent number
     $year = date("y");  
@@ -68,6 +75,9 @@ if ($action == "getStudents") {
             "email"         => $student["email"],
             "birthdate"     => $student["birthdate"],
             "phone_number"  => $student["phone_number"],
+            "program"       => $student["program"],
+            "image"         => $student["image"],
+            "grade_level"   => $student["grade_level"],
         ];
     }
     echo json_encode($datastorage);

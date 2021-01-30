@@ -45,6 +45,10 @@
                         </table>
                     </div>
                 </div>
+
+                <div>
+                <img src="../assets/img/hero-bg.jpg" class="img-responsive" alt="Responsive image">
+                </div>
             </div>
         </section>
 

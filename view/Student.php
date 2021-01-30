@@ -42,12 +42,15 @@
                         <table class="table table-bordered table-striped table-hover" id="tbl_student">
                             <thead>
                                 <tr>
+                                    <td>Image</td>
                                     <td>Student No.</td>
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Birthday</td>
                                     <td>Email</td>
                                     <td>Phone Number</td>
+                                    <td>Program</td>
+                                    <td>Grade</td>
                                     <td></td>
                                     <td></td>
                                 </tr>
@@ -77,37 +80,60 @@
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-
+                        
+                        <div class="form-group">
+                            <label for="txt_program">Entrance Exam Passers</label>
+                            <select class="form-control" id="txt_passers" name="passers" required>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <input type="hidden" class="form-control" id="txt_image" required readonly>
+                        </div>
                         <div class="form-group">
                             <label for="txt_fname">First Name</label>
-                            <input type="text" class="form-control" id="txt_fname" required>
+                            <input type="text" class="form-control" id="txt_fname" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="txt_mname">Middle Name</label>
-                            <input type="text" class="form-control" id="txt_mname" required>
+                            <input type="text" class="form-control" id="txt_mname" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="txt_lname">Last Name</label>
-                            <input type="text" class="form-control" id="txt_lname" required >
+                            <input type="text" class="form-control" id="txt_lname" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="txt_address">Address</label>
-                            <input type="text" class="form-control" id="txt_address" required>
+                            <input type="text" class="form-control" id="txt_address" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="txt_email">Email</label>
-                            <input type="text" class="form-control" id="txt_email" required>
+                            <input type="text" class="form-control" id="txt_email" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="txt_bday">Birthdate</label>
-                            <input type="date" class="form-control" id="txt_bday" required>
+                            <input type="date" class="form-control" id="txt_bday" required readonly>
                         </div>
                         <div class="form-group">
                             <label for="txt_phonenumber">Contact Number</label>
-                            <input type="text" class="form-control" id="txt_phonenumber" required>
+                            <input type="text" class="form-control" id="txt_phonenumber" required readonly>
                         </div>
-                        
-
+                        <div class="form-group">
+                            <label for="txt_program">Program</label>
+                            <select class="form-control" id="txt_program" required readonly>
+                                <option value="" disabled selected>Please select a program</option>
+                                <option value="ABM">ABM</option>
+                                <option value="STEM">STEM</option>
+                                <option value="HUMMS">HUMMS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_grade">Grade</label>
+                            <select class="form-control" id="txt_grade" required  readonly>
+                                <option value="" disabled selected>Please select a grade</option>
+                                <option value="11">XI</option>
+                                <option value="12">XII</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         
@@ -159,6 +185,23 @@
                         <div class="form-group">
                             <label for="txt_phonenumber_update">Contact Number</label>
                             <input type="text" class="form-control" id="txt_phonenumber_update" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_program_update">Program</label>
+                            <select class="form-control" id="txt_program_update" required>
+                                <option value="" disabled selected>Please select a program</option>
+                                <option value="ABM">ABM</option>
+                                <option value="STEM">STEM</option>
+                                <option value="HUMMS">HUMMS</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_grade">Grade</label>
+                            <select class="form-control" id="txt_grade_update" required  readonly>
+                                <option value="" disabled selected>Please select a grade</option>
+                                <option value="11">XI</option>
+                                <option value="12">XII</option>
+                            </select>
                         </div>
                         
 
