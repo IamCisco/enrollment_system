@@ -35,7 +35,7 @@ let USER = {
                 var protocol = window.location.protocol;
                 var host = window.location.host;
                 setTimeout(function(){
-                    window.location.href = `${protocol}//${host}/enrollment-system/view/index.php`
+                    window.location.href = `${protocol}//${host}/enrollment-system/view/Index.php`
                     
                 }, 1000);
                 
@@ -62,7 +62,7 @@ let USER = {
                 var protocol = window.location.protocol;
                 var host = window.location.host;
                 setTimeout(function(){
-                    window.location.href = `${protocol}//${host}/enrollment-system/view/index.php`
+                    window.location.href = `${protocol}//${host}/enrollment-system/view/Index.php`
                     
                 }, 1000);
             },
@@ -88,7 +88,7 @@ let USER = {
                     $("#btn_login").show();
                     var protocol = window.location.protocol;
                     var host = window.location.host;
-                    window.location.href = `${protocol}//${host}/enrollment-system/view/index.php`
+                    window.location.href = `${protocol}//${host}/enrollment-system/view/Index.php`
                 }
                 else
                 {
