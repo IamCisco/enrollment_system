@@ -5,14 +5,8 @@ $(document).ready(function () {
 
     $('#frm_announcement_add').submit(function(event) {
         event.preventDefault();
-        var post_data = {
-            title            : $("#txt_title").val(),
-            announcement     : $("#txt_announcement").val(),
-            validity_date    : $("#txt_validity").val(),
-        }
-        ANNOUNCEMENT.insertAnnouncement(post_data)
+        ANNOUNCEMENT.insertAnnouncement(this)
     });
-
     
     $('#frm_announcement_update').submit(function(event) {
         event.preventDefault();
@@ -40,8 +34,10 @@ let ANNOUNCEMENT = {
                     data = result[x];
                     row += `
                     <tr>
+                        <td><a href="../assets/img/announcements/${data["image"]}" target="_blank"><img src="../assets/img/announcements/${data["image"]}" alt="Avatar" class="avatar"></a></td>
                         <td>${data["title"]}</td>
-                        <td>${data["announcement"]}</td>
+                        <td style ="word-wrap:break-word">${data["announcement"]}</td>
+                        <td>${data["type"]}</td>
                         <td>${data["validity_date"]}</td>
                         <td>
                             <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="ANNOUNCEMENT.getSpecificAnnouncement(${data["id"]})">
@@ -59,18 +55,7 @@ let ANNOUNCEMENT = {
                     `;
                 }
                 $("#tbl_announcement_body").html(row);
-                $('#tbl_announcement').DataTable({
-                    dom: 'Bfrtip',
-                    buttons: [
-                        {
-                            extend: 'csv',
-                            className: 'btn-outline-secondary',
-                            exportOptions: {
-                              columns: ':visible'
-                            }
-                          }, 
-                    ]
-                });
+                $('#tbl_announcement').DataTable();
             }
         });
     },
@@ -116,12 +101,14 @@ let ANNOUNCEMENT = {
             }
           });
     },
-    insertAnnouncement : function(post_data) {
+    insertAnnouncement : function(_this) {
         
         $.ajax({
             url: "../data/AnnouncementData.php?action=insertAnnouncement",
-            data: post_data,
             type: "post",
+            data: new FormData( _this ),
+            processData: false,
+            contentType: false,
             dataType: "json",
             assync : false, 
             success: function (result) {

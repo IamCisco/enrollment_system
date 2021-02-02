@@ -7,7 +7,7 @@ $action = $_GET["action"];
 
 
 if ($action == "getContentVMGO") {
-    $content_list = $content->load_all_contents("where name in('Vision', 'Mission', 'Goal')");
+    $content_list = $content->load_all_contents("where name in('Vision', 'Mission', 'Core Values')");
 
     $datastorage = [];
     foreach($content_list as $content) {

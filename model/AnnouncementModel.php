@@ -16,7 +16,7 @@ class AnnouncementModel extends Connection
     public function get_announcements($where = null)
     {
         try {
-            $sql = "Select  id, title, announcement, validity_date from announcements $where";
+            $sql = "Select  id, title, announcement, validity_date,image,type from announcements $where";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();
         } catch (\Throwable $th) {

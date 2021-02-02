@@ -24,7 +24,7 @@
         </div>
     </div>
 
-    <?php include "../template/top_nav1.php";?>
+    <?php include "../template/top_nav1.php"; ?>
 
     <!-- ======= Hero Section ======= -->
     <section id="hero" class="d-flex align-items-center">
@@ -32,7 +32,7 @@
             <h1>Welcome to <span>CITech Website</spa>
             </h1>
             <h2>Come and learn new things with us</h2>
-            
+
         </div>
     </section><!-- End Hero -->
 
@@ -52,25 +52,35 @@
             </div>
         </section><!-- End About Section -->
         
-        
+        <!-- ======= Portfolio Section ======= -->
+        <section id="portfolio" class="portfolio">
+            <div class="container" data-aos="fade-up">
 
-
-
-
-        <!-- ======= Testimonials Section ======= -->
-        <section id="announcement" class="testimonials">
-            <div class="container" data-aos="zoom-in">
                 <div class="section-title">
-                    <h2>Announcemnt</h2>
-                    
+                    <h2>Portfolio</h2>
+                    <h3>Check our <span>Portfolio</span></h3>
+                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
                 </div>
-                <div class="owl-carousel testimonials-carousel" id="div_announcement">
+
+                <div class="row" data-aos="fade-up" data-aos-delay="100">
+                    <div class="col-lg-12 d-flex justify-content-center">
+                        <ul id="portfolio-flters">
+                            <li data-filter="*" class="filter-active">All</li>
+                            <li data-filter=".filter-News">News</li>
+                            <li data-filter=".filter-Events">Events</li>
+                            <li data-filter=".filter-Announcements">Announcements</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <div class="row portfolio-container" data-aos="fade-up" data-aos-delay="200" id="div_portfolio">
+
                 </div>
 
             </div>
-        </section><!-- End Testimonials Section --><    
+        </section><!-- End Portfolio Section -->
 
-        
+
 
         <!-- ======= Team Section ======= -->
         <section id="team" class="team section-bg">
@@ -173,7 +183,7 @@
                 </div>
 
                 <div class="row" data-aos="fade-up" data-aos-delay="100" id="div_contacts">
-                    
+
 
                 </div>
 
@@ -199,11 +209,11 @@
                         </div>
                         <div class="form-group">
                             <label for="txt_password">Password</label>
-                            <input type="password" class="form-control" id="txt_password" name="password"  required>
-                        </div>  
+                            <input type="password" class="form-control" id="txt_password" name="password" required>
+                        </div>
                     </div>
                     <div class="modal-footer">
-                        
+
                         <button type="submit" class="btn btn-success pull-right" id="btn_login">Save</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>
@@ -211,7 +221,7 @@
             </div>
 
         </div>
-    </div>                        
+    </div>
 
     <div id="preloader"></div>
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

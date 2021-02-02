@@ -14,6 +14,11 @@ class EnrolleeController
         return $this->enrollee->get_enrollee($where);
     }
 
+    public function load_enrollee_stats()
+    {
+        return $this->enrollee->get_enrollee_stats();
+    }
+
     public function insert_enrollee($columns, $values, $prepare)
     {
         return $this->enrollee->insert_enrollee($columns, $values, $prepare);

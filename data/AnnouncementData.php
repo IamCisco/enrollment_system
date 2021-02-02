@@ -15,7 +15,9 @@ if ($action == "getAnnouncements") {
             "id"                   => $announcement["id"],
             "title"                => $announcement["title"],
             "announcement"         => $announcement["announcement"],
-            "validity_date"        => $announcement["validity_date"]
+            "validity_date"        => $announcement["validity_date"],
+            "image"                => $announcement["image"],
+            "type"                 => $announcement["type"]
         ];
     }
     echo json_encode($datastorage);
@@ -35,8 +37,25 @@ if ($action == "getAnnouncements") {
         $prepare .= "?,";
     }
 
-    $columns = substr_replace($columns ,"", -1);
-    $prepare = substr_replace($prepare ,"", -1);
+    $tmp_name = $_FILES['input_file']['tmp_name'];
+
+    
+    $name = $_FILES['input_file']['name'];
+    $values[] = $name;
+    $columns .= " image";
+    $prepare .= " ?";
+    if (isset($name)) {
+
+        $path = '../assets/img/announcements/';
+
+        if (!empty($name)) {
+            if (move_uploaded_file($tmp_name, $path . $name)) {
+            }
+        }
+    }
+
+    // $columns = substr_replace($columns ,"", -1);
+    // $prepare = substr_replace($prepare ,"", -1);
 
     $announcement->insert_announcement($columns, $values,$prepare);
     echo json_encode("Successfully Inserted");

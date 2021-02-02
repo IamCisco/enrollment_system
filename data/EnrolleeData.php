@@ -18,7 +18,7 @@ if ($action == "getPassedEnrollee") {
         ];
     }
     echo json_encode($datastorage);
-}else if ($action == "getEnrolleesForAccept") {
+} else if ($action == "getEnrolleesForAccept") {
     $enrollee_list = $enrollee->load_all_enrollees("where accepted= -1");
 
     $datastorage = [];
@@ -37,7 +37,35 @@ if ($action == "getPassedEnrollee") {
         ];
     }
     echo json_encode($datastorage);
-}else if ($action == "getEnrolleesForExam") {
+} else if ($action == "getEnrolleeStats") {
+    $enrollee_list = $enrollee->load_enrollee_stats();
+
+    $datastorage          = [];
+    $total_count_array    = [];
+    $total_accepted_array = [];
+    $total_rejected_array = [];
+    $total_passed_array   = [];
+    $total_failed_array   = [];
+    $year_array           = [];
+    foreach ($enrollee_list as $enrollee) {
+        $total_count_array[]    = $enrollee["total_count"];
+        $total_accepted_array[] = $enrollee["total_accepted"];
+        $total_rejected_array[] = $enrollee["total_rejected"];
+        $total_passed_array[]   = $enrollee["total_passed"];
+        $total_failed_array[]   = $enrollee["total_failed"];
+        $year_array[]           = $enrollee["year"];
+    }
+
+    $datastorage = [
+        "total_count"    => $total_count_array,
+        "total_accepted" => $total_accepted_array,
+        "total_rejected" => $total_rejected_array,
+        "total_passed"   => $total_passed_array,
+        "total_failed"   => $total_failed_array,
+        "year"           => $year_array,
+    ];
+    echo json_encode($datastorage);
+} else if ($action == "getEnrolleesForExam") {
     $enrollee_list = $enrollee->load_all_enrollees("where accepted= 1 and passed=-1");
 
     $datastorage = [];

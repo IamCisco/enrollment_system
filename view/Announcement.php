@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="en">
 
@@ -42,8 +41,10 @@
                         <table class="table table-bordered table-striped table-hover" id="tbl_announcement">
                             <thead>
                                 <tr>
+                                    <td>Image</td>
                                     <td>Title</td>
                                     <td>Announcement</td>
+                                    <td>Type</td>
                                     <td>Validity Date</td>
                                     <td></td>
                                     <td></td>
@@ -77,19 +78,34 @@
 
                         <div class="form-group">
                             <label for="txt_title">Title</label>
-                            <input type="text" class="form-control" id="txt_title" required>
+                            <input type="text" name="title" class="form-control" id="txt_title" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_announcement">Announcement</label>
-                            <textarea type="text" class="form-control" id="txt_announcement" rows="5" required></textarea>
+                            <textarea type="text" class="form-control" name="announcement" id="txt_announcement" rows="5" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="txt_bday">Validity Date</label>
-                            <input type="date" class="form-control" id="txt_validity" required>
+                            <input type="date" class="form-control" name="validity_date" id="txt_validity" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txt_type">Type</label>
+                            <select class="form-control" id="txt_type" name="type" required>
+                                <option value="" disabled selected>Please select a announcement type</option>
+                                <option value="News">News</option>
+                                <option value="Events">Events</option>
+                                <option value="Announcements">Announcements</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file_image">Image</label>
+                            <input type="file" name="input_file" class="form-control-file border" id="file_image" required>
                         </div>
                     </div>
                     <div class="modal-footer">
-                        
+
                         <button type="submit" class="btn btn-success pull-right">Save</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>
@@ -125,7 +141,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        
+
                         <button type="submit" class="btn btn-success pull-right">Save</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>
