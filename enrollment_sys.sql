@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2021 at 06:54 AM
+-- Generation Time: Feb 02, 2021 at 01:05 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -31,20 +31,19 @@ CREATE TABLE `announcements` (
   `id` int(11) NOT NULL,
   `title` varchar(50) NOT NULL,
   `announcement` varchar(1000) NOT NULL,
-  `validity_date` date NOT NULL
+  `validity_date` date NOT NULL,
+  `image` varchar(100) NOT NULL,
+  `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `announcements`
 --
 
-INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`) VALUES
-(1, 'Announcement 1', 'This is the description 1', '2021-01-23'),
-(2, 'Announcement 2', 'This is the description 2', '2021-01-27'),
-(4, 'Announcement 3', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22'),
-(5, 'Announcement 4', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22'),
-(6, 'Announcement 5', 'Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. ', '2021-01-22'),
-(7, 'Announement 6', 'Test ', '2021-01-30');
+INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
+(8, 'Test', 'test', '2021-02-06', 'CONAN.jpg', 'News'),
+(10, 'Test', 'a', '2021-01-31', 'CONAN.jpg', 'Events'),
+(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'download.jpg', 'Events');
 
 -- --------------------------------------------------------
 
@@ -95,9 +94,9 @@ CREATE TABLE `contents` (
 --
 
 INSERT INTO `contents` (`id`, `name`, `details`) VALUES
-(1, 'Mission', 'This is the mission of the school'),
-(3, 'Vision', 'This is the vision of the school. The quick brown fox jumps over the head of the lazy dog.'),
-(4, 'Goal', 'This is the Goal of the school'),
+(1, 'Mission', 'To provide relevant, quality, and innovate industry-based education with equal emphasis on values formation and character building of its students.'),
+(3, 'Vision', 'A leading technological institution driven by industry demands to produce highly skilled, value-laden, and globally-competitive graduates.'),
+(4, 'Core Values', 'CI Tech will develop and nurture these personal and Industry-desired values:<br>\n1. Honesty and Integrity<br>\n2. Adaptability and Responsibility<br>\n3. Respect and Honour<br>\n4. Positive Attitude<br>'),
 (5, 'Address', 'A108 Adam Street, New York, NY 535022'),
 (6, 'Email', 'example@email.com'),
 (7, 'Contact Number', '+1 5589 55488 55');
@@ -132,7 +131,8 @@ CREATE TABLE `enrollees` (
 INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`) VALUES
 (11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11),
 (12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11),
-(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11);
+(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11),
+(14, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2020-01-30', -1, -1, 'ABM', 11);
 
 -- --------------------------------------------------------
 
@@ -261,7 +261,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
 
 --
 -- AUTO_INCREMENT for table `backgrounds`
@@ -279,7 +279,7 @@ ALTER TABLE `contents`
 -- AUTO_INCREMENT for table `enrollees`
 --
 ALTER TABLE `enrollees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `exam_schedule`
