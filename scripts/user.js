@@ -85,6 +85,7 @@ let USER = {
                     $("#btn_announcement").hide();
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
+                    $("#btn_stats").hide();
                     $("#btn_login").show();
                     var protocol = window.location.protocol;
                     var host = window.location.host;
@@ -97,6 +98,7 @@ let USER = {
                     $("#btn_announcement").show();
                     $("#btn_addmission").show();
                     $("#btn_logout").show();
+                    $("#btn_stats").show();
                     $("#btn_login").hide();
                     this.fullname = result.fullname;
                     this.username = result.username;
