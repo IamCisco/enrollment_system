@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 02, 2021 at 01:05 PM
+-- Generation Time: Feb 04, 2021 at 02:30 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -18,7 +18,7 @@ SET time_zone = "+00:00";
 /*!40101 SET NAMES utf8mb4 */;
 
 --
--- Database: `enrollment_sys`
+-- Database: `website_sys`
 --
 
 -- --------------------------------------------------------
@@ -186,6 +186,34 @@ INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `la
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `teachers`
+--
+
+CREATE TABLE `teachers` (
+  `id_number` int(11) NOT NULL,
+  `first_name` varchar(100) NOT NULL,
+  `middle_name` varchar(100) NOT NULL,
+  `last_name` varchar(100) NOT NULL,
+  `address` varchar(1000) NOT NULL,
+  `email` varchar(100) NOT NULL,
+  `birthdate` date NOT NULL,
+  `contact_number` varchar(20) NOT NULL,
+  `image` varchar(255) NOT NULL,
+  `teacher_level` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `teachers`
+--
+
+INSERT INTO `teachers` (`id_number`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `teacher_level`) VALUES
+(12345, 'john francis', 'CONSIGO', 'cabral', 'a', 'jhnfranciscabral@gmail.com', '2021-02-05', '123', 'team-1.jpg', 'Teacher 1'),
+(123451, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-02-04', '09399395763', 'team-3.jpg', 'Principal'),
+(123456, 'RAQUEL', 'Alviola', 'Lachica', 'a', 'raquellachicacoe@gmail.com', '2021-02-04', '09399395763', 'team-4.jpg', 'Teacher 2');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `users`
 --
 
@@ -246,6 +274,12 @@ ALTER TABLE `exam_schedule`
 --
 ALTER TABLE `students`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `teachers`
+--
+ALTER TABLE `teachers`
+  ADD PRIMARY KEY (`id_number`);
 
 --
 -- Indexes for table `users`

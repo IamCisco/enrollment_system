@@ -5,6 +5,7 @@ $(document).ready(function () {
     INDEX.getContentVMGO();
     INDEX.getContentContact();
     INDEX.getBackgroundMain();
+    INDEX.getTeachers();
 
 });
 
@@ -36,6 +37,44 @@ let INDEX = {
                 }
 
                 $("#div_portfolio").html(row);
+            }
+        });
+    },
+    getTeachers: function () {
+        $.ajax({
+            url: "../data/TeacherData.php?action=getTeachers",
+            dataType: "json",
+            success: function (result) {
+                console.log(result)
+                var row = ``;
+                count = 1;
+                for (var x = 0; x < result.length; x++) {
+                    var delay = count*100;
+                    count++
+                    data = result[x];
+                    row += `
+
+                    <div class="col-lg-3 col-md-6 d-flex align-items-stretch" data-aos="fade-up" data-aos-delay="${delay}">
+                        <div class="member">
+                            <div class="member-img">
+                                <img src="../assets/img/teachers/${data["image"]}" class="img-fluid" alt="">
+                                <div class="social">
+                                    <a href=""><i class="icofont-twitter"></i></a>
+                                    <a href=""><i class="icofont-facebook"></i></a>
+                                    <a href=""><i class="icofont-instagram"></i></a>
+                                    <a href=""><i class="icofont-linkedin"></i></a>
+                                </div>
+                            </div>
+                            <div class="member-info">
+                                <h4>${data["name"]}</h4>
+                                <span>${data["teacher_level"]}</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    `;
+                }
+                $("#div_teachers").html(row);
             }
         });
     },

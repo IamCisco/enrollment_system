@@ -13,7 +13,7 @@ class Connection
         $this->set_server("localhost");
         $servername = $this->get_server();
 
-        $this->set_database("enrollment_sys");
+        $this->set_database("website_sys");
         $database = $this->get_database();
 
         $this->set_username("root");

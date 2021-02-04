@@ -26,7 +26,7 @@ let USER = {
             assync : false,
             success: function (result) {
                 swal(result, {
-                    title: "Good job!",
+                    title: "Success",
                     text: result,
                     icon: "success",
                     button: "OK",
