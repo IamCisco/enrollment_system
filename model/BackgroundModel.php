@@ -16,7 +16,7 @@ class BackgroundModel extends Connection
     public function get_background($where = null)
     {
         try {
-            $sql = "Select  id, name, background from backgrounds $where order by id";
+            $sql = "Select  * from backgrounds $where order by id";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();
         } catch (\Throwable $th) {

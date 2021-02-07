@@ -1,7 +1,7 @@
 <?php
 require "../model/AnnouncementModel.php";
 
-class announcementController
+class AnnouncementController
 {
     public $announcement;
     public function __construct()

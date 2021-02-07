@@ -51,7 +51,7 @@
 
             </div>
         </section><!-- End About Section -->
-        
+
         <!-- ======= Portfolio Section ======= -->
         <section id="portfolio" class="portfolio">
             <div class="container" data-aos="fade-up">
@@ -140,13 +140,117 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-
-                        <button type="submit" class="btn btn-success pull-right" id="btn_login">Save</button>
+                        <button type="button" data-toggle="modal" data-target="#modal_register_form" class="btn btn-primary pull-right">Register</button>
+                        <button type="submit" class="btn btn-success pull-right" id="btn_login">Login</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>
                 </form>
             </div>
 
+        </div>
+    </div>
+    <div id="modal_register_form" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-sm">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form id="form_register">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Register Form</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <!-- Default inline 1-->
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="rdb_student" name="user_type" required>
+                            <label class="custom-control-label" for="rdb_student">Student</label>
+                        </div>
+
+                        <!-- Default inline 2-->
+                        <div class="custom-control custom-radio custom-control-inline">
+                            <input type="radio" class="custom-control-input" id="rdb_teacher" name="user_type" required>
+                            <label class="custom-control-label" for="rdb_teacher">Teacher</label>
+                        </div>
+                        <br>
+
+
+                        <div class="form-group">
+                            <label for="txt_username_register">Username</label>
+                            <input type="text" class="form-control" id="txt_id_number" name="username" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_password_register">Password</label>
+                            <input type="password" class="form-control" id="txt_password_register" name="password" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_password_register">Re Enter Password</label>
+                            <input type="password" class="form-control" id="txt_confirm_password" name="confirm_password" required>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+
+                        <button type="submit" class="btn btn-success pull-right" id="btn_register">Register</button>
+                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div id="modal_comments" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    Comments
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="panel panel-default widget">
+                        <div class="panel-body">
+                            <ul class="list-group" id="list_comment">
+
+
+                            </ul>
+                            <br>
+                            <div class="form-row justify-content">
+                                <div class="col-md-10 mb-6">
+                                    <input type="text" class="form-control" id="txt_comment" placeholder="Input your comment here">
+                                </div>
+                                <div class="col-md-2 mb-6">
+                                    <a href="#portfolio" class="btn btn-primary btn-sm " onclick="INDEX.insertComment()" role="button"><span class="fas fa-paper-plane"></span> Send</a>
+                                </div>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+    <div id="modal_comment_update" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    Edit Comment
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class="col-md-12 mb-12">
+                        <textarea type="text" rows=7 class="form-control" id="txt_comment_update" placeholder="Input your comment here"></textarea>
+                    </div>
+                </div>
+                <div class="modal-footer">
+
+                    <button type="button" class="btn btn-success pull-right" id="btn_update_comment">Update Comment</button>
+                </div>
+
+            </div>
         </div>
     </div>
 

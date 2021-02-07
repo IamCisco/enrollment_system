@@ -149,7 +149,7 @@ if ($action == "getPassedEnrollee") {
     }
     else
     {
-        $title = "Ooopss!";
+        $title = "Warning!";
         $status = "info";
         $message = "You already have a pending application. Please wait for check your email regularly for any updates";
     }

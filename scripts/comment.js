@@ -1,11 +1,8 @@
 
 $(document).ready(function () {
     USER.checkSession();
-    STUDENT.getStudents();
-    STUDENT.loadEntranceExamPassers();
-    $('#txt_passers').on('change', function() {
-        STUDENT.getSpecificPasser( this );
-    });
+    COMMENT.getComments();
+    COMMENT.loadEntranceExamPassers();
     $('#frm_student_add').submit(function(event) {
         event.preventDefault();
         var post_data = {
@@ -20,14 +17,14 @@ $(document).ready(function () {
             program      : $("#txt_program").val(),
             grade_level  : $("#txt_grade").val()
         }
-        STUDENT.insertStudent(post_data)
+        COMMENT.insertComment(post_data)
     });
 
     
     $('#frm_student_update').submit(function(event) {
         event.preventDefault();
         var post_data = {
-            id           : STUDENT.id,
+            id           : COMMENT.id,
             first_name   : $("#txt_fname_update").val(),
             middle_name  : $("#txt_mname_update").val(),
             last_name    : $("#txt_lname_update").val(),
@@ -38,18 +35,18 @@ $(document).ready(function () {
             program      : $("#txt_program_update").val(),
             grade_level  : $("#txt_grade").val()
         }
-        console.log(STUDENT.id)
-        STUDENT.updateStudent(post_data)
+        console.log(COMMENT.id)
+        COMMENT.updateComment(post_data)
     });
 });
 
-let STUDENT = {
+let COMMENT = {
 
     //method 
     id : 0,
-    getStudents: function () {
+    getComments: function () {
         $.ajax({
-            url: "../data/StudentData.php?action=getStudents",
+            url: "../data/CommentData.php?action=getComments",
             dataType: "json",
             success: function (result) {
                 console.log(result)
@@ -69,13 +66,13 @@ let STUDENT = {
                         <td>${data["program"]}</td>
                         <td>${data["grade_level"]}</td>
                         <td>
-                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="STUDENT.getSpecificStudent(${data["id"]})">
+                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="COMMENT.getSpecificComment(${data["id"]})">
                             
                                 <i class='far fa-save'></i>
                             </button>
                         </td>
                         <td>
-                            <button type="button"class="btn btn-danger btn-sm "style='font-size:24px' onclick="STUDENT.removeStudent(${data["id"]})">
+                            <button type="button"class="btn btn-danger btn-sm "style='font-size:24px' onclick="COMMENT.removeComment(${data["id"]})">
                               
                                 <i class='fas fa-trash'></i>
                             </button>
@@ -131,9 +128,8 @@ let STUDENT = {
             }
         });
     },
-    removeStudent: function (id) {
-        // STUDENT.reset();
-        swal("Hello world!");
+    removeComment: function (id) {
+        // COMMENT.reset();
         swal({
             title: "Are you sure?",
             text: "Once deleted, you will not be able to recover this data!",
@@ -144,7 +140,7 @@ let STUDENT = {
           .then((willDelete) => {
             if (willDelete) {
                 $.ajax({
-                    url: "../data/StudentData.php?action=removeStudent",
+                    url: "../data/CommentData.php?action=removeComment",
                     data:
                     {
                         id: id
@@ -153,7 +149,7 @@ let STUDENT = {
                     dataType: "json",
                     assync : false, 
                     success: function (result) {
-                        STUDENT.getStudents();
+                        COMMENT.getComments();
                         swal("Data has been deleted!", {
                             title: "Success!",
                             text: result,
@@ -173,16 +169,16 @@ let STUDENT = {
             }
           });
     },
-    insertStudent : function(post_data) {
+    insertComment : function(post_data) {
         
         $.ajax({
-            url: "../data/StudentData.php?action=insertStudent",
+            url: "../data/CommentData.php?action=insertComment",
             data: post_data,
             type: "post",
             dataType: "json",
             assync : false, 
             success: function (result) {
-                STUDENT.getStudents();
+                COMMENT.getComments();
 
                 $("#txt_fname").val("");
                 $("#txt_mname").val(""),
@@ -201,9 +197,9 @@ let STUDENT = {
             }
         });
     },
-    getSpecificStudent : function(id){
+    getSpecificComment : function(id){
         $.ajax({
-            url: "../data/StudentData.php?action=getSpecificStudent",
+            url: "../data/CommentData.php?action=getSpecificComment",
             dataType: "json",
             data :
             {
@@ -213,7 +209,7 @@ let STUDENT = {
             assync: false,
             success: function (result) {
                 console.log(result)
-                STUDENT.id = id;
+                COMMENT.id = id;
                 $("#modal_student_form_update").modal("show");
                 $("#txt_fname_update").val(result.first_name);
                 $("#txt_mname_update").val(result.middle_name);
@@ -227,15 +223,15 @@ let STUDENT = {
             }
         });
     },
-    updateStudent : function(post_data){
+    updateComment : function(post_data){
         $.ajax({
-            url: "../data/StudentData.php?action=updateStudent",
+            url: "../data/CommentData.php?action=updateComment",
             data: post_data,
             type: "post",
             dataType: "json",
             assync : false, 
             success: function (result) {
-                STUDENT.getStudents();
+                COMMENT.getComments();
 
                 
                 swal(result, {

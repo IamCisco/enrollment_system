@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 04, 2021 at 02:30 PM
+-- Generation Time: Feb 07, 2021 at 10:15 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -43,7 +43,9 @@ CREATE TABLE `announcements` (
 INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
 (8, 'Test', 'test', '2021-02-06', 'CONAN.jpg', 'News'),
 (10, 'Test', 'a', '2021-01-31', 'CONAN.jpg', 'Events'),
-(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'download.jpg', 'Events');
+(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'download.jpg', 'Events'),
+(13, 'test', 'test', '2021-02-08', '144297458_480554249611690_8783220417743537839_n.jpg', 'Announcements'),
+(14, 'asdf', 'asdf', '2021-02-08', '144599785_254393849379573_5111434071169039997_n.jpg', 'News');
 
 -- --------------------------------------------------------
 
@@ -72,10 +74,27 @@ INSERT INTO `backgrounds` (`id`, `name`, `background`) VALUES
 
 CREATE TABLE `comments` (
   `id` int(11) NOT NULL,
-  `announcement_id` int(11) NOT NULL,
   `user_id` int(11) NOT NULL,
-  `comment` varchar(1000) NOT NULL
+  `announcement_id` int(11) NOT NULL,
+  `comment` varchar(1000) NOT NULL,
+  `comment_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `comments`
+--
+
+INSERT INTO `comments` (`id`, `user_id`, `announcement_id`, `comment`, `comment_date`) VALUES
+(1, 1, 11, 'The quick brown fox jumps over the head of the lazy dog.', '2021-02-06'),
+(2, 1, 11, 'The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.', '2021-02-06'),
+(5, 1, 10, 'asdfb', '2021-02-07'),
+(6, 1, 10, 'aa', '2021-02-07'),
+(8, 2, 10, 'test', '2021-02-07'),
+(9, 2, 10, 'sdfsdf', '2021-02-07'),
+(10, 1, 10, 'test', '2021-02-07'),
+(11, 3, 10, 'test', '2021-02-07'),
+(12, 3, 10, 'test23434242', '2021-02-07'),
+(13, 3, 10, 'test123', '2021-02-07');
 
 -- --------------------------------------------------------
 
@@ -160,7 +179,7 @@ INSERT INTO `exam_schedule` (`id`, `date`) VALUES
 
 CREATE TABLE `students` (
   `id` int(11) NOT NULL,
-  `student_number` int(11) NOT NULL,
+  `student_number` varchar(100) NOT NULL,
   `first_name` varchar(20) NOT NULL,
   `middle_name` varchar(20) NOT NULL,
   `last_name` varchar(20) NOT NULL,
@@ -179,9 +198,9 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
-(23, 2157148, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 11),
-(25, 2177349, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
-(26, 2175498, 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
+(23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 11),
+(25, '2177349', 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
+(26, '2175498', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -190,7 +209,7 @@ INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `la
 --
 
 CREATE TABLE `teachers` (
-  `id_number` int(11) NOT NULL,
+  `id_number` varchar(11) NOT NULL,
   `first_name` varchar(100) NOT NULL,
   `middle_name` varchar(100) NOT NULL,
   `last_name` varchar(100) NOT NULL,
@@ -207,9 +226,11 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id_number`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `teacher_level`) VALUES
-(12345, 'john francis', 'CONSIGO', 'cabral', 'a', 'jhnfranciscabral@gmail.com', '2021-02-05', '123', 'team-1.jpg', 'Teacher 1'),
-(123451, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-02-04', '09399395763', 'team-3.jpg', 'Principal'),
-(123456, 'RAQUEL', 'Alviola', 'Lachica', 'a', 'raquellachicacoe@gmail.com', '2021-02-04', '09399395763', 'team-4.jpg', 'Teacher 2');
+('111111', 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-03-13', '1', 'team-2.jpg', 'Principal'),
+('12345', 'john francis', 'CONSIGO', 'cabral', 'a', 'jhnfranciscabral@gmail.com', '2021-02-05', '123', 'team-1.jpg', 'Teacher 1'),
+('123451', 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-02-04', '09399395763', 'team-3.jpg', 'Principal'),
+('123456', 'RAQUEL', 'Alviola', 'Lachica', 'a', 'raquellachicacoe@gmail.com', '2021-02-04', '09399395763', 'team-4.jpg', 'Teacher 2'),
+('1234566666', 'asfasf', 'asdfasdf', 'asdfasdf', 'asdfasdf', 'asdf', '2021-02-17', 'asdfasdf', 'CONAN.jpg', 'asdfad');
 
 -- --------------------------------------------------------
 
@@ -225,15 +246,18 @@ CREATE TABLE `users` (
   `middle_name` varchar(50) NOT NULL,
   `last_name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
-  `user_level` varchar(20) NOT NULL
+  `user_level` varchar(20) NOT NULL,
+  `image` varchar(100) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `email`, `user_level`) VALUES
-(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', '', 'admin');
+INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `email`, `user_level`, `image`) VALUES
+(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', '', 'admin', 'admin.png'),
+(2, '2157148', 'masterkey', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'jhnfranciscabral@gmail.com', 'student', 'CONAN.jpg'),
+(3, '12345', 'test', 'john francis', 'CONSIGO', 'cabral', 'jhnfranciscabral@gmail.com', 'teacher', 'team-1.jpg');
 
 --
 -- Indexes for dumped tables
@@ -249,6 +273,12 @@ ALTER TABLE `announcements`
 -- Indexes for table `backgrounds`
 --
 ALTER TABLE `backgrounds`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `comments`
+--
+ALTER TABLE `comments`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -295,13 +325,19 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `backgrounds`
 --
 ALTER TABLE `backgrounds`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
+-- AUTO_INCREMENT for table `comments`
+--
+ALTER TABLE `comments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
 
 --
 -- AUTO_INCREMENT for table `contents`
@@ -331,7 +367,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

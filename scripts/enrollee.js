@@ -134,7 +134,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForAccept();
                         ENROLLEE.getEnrolleesForExam();
                         swal("Data has been deleted!", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",
@@ -176,7 +176,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForAccept();
                         ENROLLEE.getEnrolleesForExam();
                         swal("You accepted this student", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",
@@ -211,7 +211,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForAccept();
                         ENROLLEE.getEnrolleesForExam();
                         swal("You reject this student", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",
@@ -246,7 +246,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForAccept();
                         ENROLLEE.getEnrolleesForExam();
                         swal("You pass this examinee", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",
@@ -281,7 +281,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForAccept();
                         ENROLLEE.getEnrolleesForExam();
                         swal("You pass this examinee", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",

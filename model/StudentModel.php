@@ -16,7 +16,7 @@ class StudentModel extends Connection
     public function get_student_masterlist($where = null)
     {
         try {
-            $sql = "Select  id, student_number, first_name, middle_name, last_name, address, birthdate, email, phone_number, program, status, image, grade_level from students $where";
+            $sql = "Select  * from students $where";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();
         } catch (\Throwable $th) {

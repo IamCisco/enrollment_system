@@ -7,36 +7,252 @@ $(document).ready(function () {
     INDEX.getBackgroundMain();
     INDEX.getTeachers();
 
+    
+    $('#btn_update_comment').on("click", function(e){
+        INDEX.updateComment();
+    }); 
+
+
 });
 
 let INDEX = {
     vmgo_icons: ["bx bx-list-ul", "bx bx-show", "bx bx-target-lock"],
     contact_icons: ["bx bx-map", "bx bx-envelope", "bx bx-phone-call"],
-    getAnnouncements: function () {
+    username : "",
+    user_id : 0,
+    user_level : "",
+    announcement_id : 0,
+    comment_id : 0,
+    setAnnouncementId: function (id){
+        this.announcement_id = id
+        this.getComments(id);
+    },
+    getAnnouncements: function (){
         $.ajax({
             url: "../data/AnnouncementData.php?action=getAnnouncements",
             dataType: "json",
             assync: false,
             success: function (result) {
                 var row = ``;
-
-                console.log(result);
                 for (var x = 0; x < result.length; x++) {
+                    btn_add_comment = "";
                     data = result[x];
+                    if(INDEX.user_id != 0)
+                    {
+                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]})"class="preview-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></button>`;
+                    }
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
                         <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>${data["title"]}</h4>
                             <p>${data["announcement"]}</p>
-                            <a href="#" data-gall="portfolioGallery" class="venobox preview-link" title="More Details"><i class="bx bx-plus"></i></a>
-                            <a href="../assets/img/announcements/${data["image"]}" class="details-link" title="${data["title"]}"><i class="bx bx-link"></i></a>
+                            ${btn_add_comment}
+                            <a href="../assets/img/announcements/${data["image"]}" target="_blank"class="details-link" title="${data["title"]}"><i class="bx bx-link"></i></a>
                         </div>
                     </div>
                     `;
                 }
 
                 $("#div_portfolio").html(row);
+                
+                $('.comment_button').on("click", function(e){
+                    $("#modal_comments").modal();
+                }); 
+            }
+        });
+    },
+    getComments: function (announcement_id) {
+        $.ajax({
+            url: "../data/CommentData.php?action=getComments",
+            dataType: "json",
+            data :
+            {
+                announcement_id: announcement_id
+            },
+            type : "post",
+            success: function (result) {
+                console.log(result)
+                var row = ``;
+                for (var x = 0; x < result.length; x++) {
+
+                    var image_url ="../assets/img"
+                    data = result[x];
+                    if(data["user_level"] == "admin")
+                    {
+                        image_url += `/admins/${data["image"]}`
+                    }
+                    if(data["user_level"] == "student")
+                    {
+                        image_url += `/students/${data["image"]}`
+                    }
+                    if(data["user_level"] == "teacher")
+                    {
+                        image_url += `/teachers/${data["image"]}`
+                    }
+                    var ation_buttons ="";
+                    console.log(`${INDEX.user_id} == ${data["user_id"]}`)
+                    if(INDEX.user_id == data["user_id"])
+                    {
+                        ation_buttons =
+                        `
+                            <a class="preview-link" onclick="INDEX.getSpecificComment(${data["id"]})" title="Edit">
+                                <span class="fas fa-edit"></span>
+                            </a>
+                            <a type="button" class="preview-link" onclick="INDEX.removeComment(${data["id"]})" title="Delete">
+                                <span class="fas fa-trash"></span>
+                            </a>
+                        `;
+                    }
+                    row += `
+                    <li class="list-group-item">
+                        <div class="row">
+                            <div class="col-xs-1 col-md-1">
+                                <img src="${image_url}" class="avatar" alt="" />
+                            </div>
+                            <div class="col-xs-11 col-md-11">
+                                <div>
+                                    
+                                    <div class="mic-info">
+                                        By: <a href="#">${data["name"]}</a> on ${data["comment_date"]}
+                                    </div>
+                                </div>
+                                <div class="comment-text">
+                                    <h6>${data["comment"]}</h6>
+                                </div>
+                                <div class="action">
+                                    ${ation_buttons}
+                                </div>
+                            </div>
+                        </div>
+                    </li>
+                    `;
+                }
+
+                $("#list_comment").html(row);
+                
+            }
+        });
+    },
+    insertComment: function () {
+        var date = new Date();  
+        var cDay = date.getDate();
+        var cMonth = date.getMonth() + 1;
+        var cYear = date.getFullYear();
+        var comment = $("#txt_comment").val();
+        var post_data = {
+            user_id         : this.user_id,
+            announcement_id : this.announcement_id,
+            comment         : comment,
+            comment_date    : `${cYear}-${cMonth}-${cDay}`
+        }
+        // console.log(post_data)
+        $.ajax({
+            url: "../data/CommentData.php?action=insertComment",
+            dataType: "json",
+            data :post_data,
+            type : "post",
+            success: function (result) {
+                console.log(result)
+                swal(result, {
+                    title: "Success",
+                    text: result,
+                    icon: "info",
+                    button: "OK",
+                });
+                INDEX.getComments(INDEX.announcement_id)
+                $("#txt_comment").val("");
+                
+            }
+        });
+    },
+    removeComment: function (id) {
+        swal({
+            title: "Are you sure?",
+            text: "Once deleted, you will not be able to recover this data!",
+            icon: "warning",
+            buttons: true,
+            dangerMode: true,
+          })
+          .then((willDelete) => {
+            if (willDelete) {
+                $.ajax({
+                    url: "../data/CommentData.php?action=removeComment",
+                    data:
+                    {
+                        id: id
+                    },
+                    type: "post",
+                    dataType: "json",
+                    assync : false, 
+                    success: function (result) {
+                        INDEX.getComments(INDEX.announcement_id);
+                        swal("Data has been deleted!", {
+                            title: "Success!",
+                            text: result,
+                            icon: "success",
+                            button: "OK",
+                        });
+                    }
+                });
+              
+            } else {
+                swal("Data not deleted!", {
+                    title: "Cancel",
+                    text: "Data no deleted",
+                    icon: "info",
+                    button: "OK",
+                });
+            }
+          });
+    },
+    getSpecificComment : function(id){
+        $.ajax({
+            url: "../data/commentData.php?action=getSpecificComment",
+            dataType: "json",
+            data :
+            {
+                id: id
+            },
+            type : "post",
+            assync: false,
+            success: function (result) {
+                console.log(result)
+                INDEX.comment_id = id;
+                
+                $("#txt_comment_update").val(result["comment"]);
+                $("#modal_comment_update").modal("show");
+            }
+        });
+    },
+    updateComment : function(){
+        var date = new Date();  
+        var cDay = date.getDate();
+        var cMonth = date.getMonth() + 1;
+        var cYear = date.getFullYear();
+        post_data = 
+        {
+            id : INDEX.comment_id,
+            comment : $("#txt_comment_update").val(),
+            comment_date :`${cYear}-${cMonth}-${cDay}`
+        }
+        $.ajax({
+            url: "../data/CommentData.php?action=updateComment",
+            data: post_data,
+            type: "post",
+            dataType: "json",
+            assync : false, 
+            success: function (result) {
+                INDEX.getComments(INDEX.announcement_id);
+
+                
+                swal(result, {
+                    title: "Success!!",
+                    text: result,
+                    icon: "info",
+                    button: "OK",
+                });
+                $("#modal_comment_update").modal("hide");
             }
         });
     },
@@ -45,7 +261,6 @@ let INDEX = {
             url: "../data/TeacherData.php?action=getTeachers",
             dataType: "json",
             success: function (result) {
-                console.log(result)
                 var row = ``;
                 count = 1;
                 for (var x = 0; x < result.length; x++) {
@@ -86,7 +301,6 @@ let INDEX = {
             success: function (result) {
                 var x = 0;
 
-                console.log(result);
                 let row = '';
                 $.each(result, function (index, value) {
                     row += `
@@ -110,25 +324,8 @@ let INDEX = {
             dataType: "json",
             assync: false,
             success: function (result) {
-                console.log(result);
                 // var x=0;
                 $("#hero").css("background-image", `url('../assets/img/background/${result.background1}')`);
-                // console.log(result);
-                // let row = '';
-                // $.each(result, function (index, value) {
-                //     row +=`
-                //         <div class="col-lg-4 col-md-6">
-                //             <div class="info-box  mb-4">
-                //                 <i class="${INDEX.contact_icons[x]}"></i>
-                //                 <h3>${index}</h3>
-                //                 <p>${value}</p>
-                //             </div>
-                //         </div>
-                //         `;
-                //     x++;
-                // });
-                // console.log(result)
-                // $("#div_contacts").html(row)
             }
         });
     }, getContentContact: function () {////VMGO = vision mission g
@@ -138,8 +335,6 @@ let INDEX = {
             assync: false,
             success: function (result) {
                 var x = 0;
-
-                console.log(result);
                 let row = '';
                 $.each(result, function (index, value) {
                     row += `
@@ -153,7 +348,6 @@ let INDEX = {
                         `;
                     x++;
                 });
-                console.log(result)
                 $("#div_contacts").html(row)
             }
         });
@@ -168,24 +362,30 @@ let INDEX = {
                 if (result.length == 0) {
                     $("#btn_content").hide();
                     $("#btn_student").hide();
+                    $("#btn_teacher").hide();
                     $("#btn_announcement").hide();
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
+                    $("#btn_stats").hide();
                     $("#btn_login").show();
+                    INDEX.user_id = 0;
                 }
                 else {
                     $("#btn_content").show();
                     $("#btn_student").show();
+                    $("#btn_teacher").show();
                     $("#btn_announcement").show();
                     $("#btn_addmission").show();
                     $("#btn_logout").show();
+                    $("#btn_stats").show();
                     $("#btn_login").hide();
-                    this.fullname = result.fullname;
-                    this.username = result.username;
-                    this.user_level = result.user_level;
+                    INDEX.fullname = result.fullname;
+                    INDEX.username = result.username;
+                    INDEX.user_level = result.user_level;
+                    INDEX.user_id = result.id;
 
 
-                    $("#txt_name").html(this.fullname);
+                    $("#txt_name").html(INDEX.fullname);
                 }
 
 

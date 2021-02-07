@@ -92,13 +92,13 @@ let TEACHER = {
             }
         });
     },
-    getSpecificPasser : function(this_){
+    getSpecificTeacher : function(id){
         $.ajax({
             url: "../data/EnrolleeData.php?action=getSpecificEnrollee",
             dataType: "json",
             data :
             {
-                id: this_.value
+                id: id
             },
             type : "post",
             assync: false,
@@ -142,7 +142,7 @@ let TEACHER = {
                     success: function (result) {
                         TEACHER.getTeachers();
                         swal("Data has been deleted!", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",

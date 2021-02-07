@@ -1,6 +1,7 @@
 
 $(document).ready(function () {
     
+    USER.checkSession();
     ENROLLEE_STATISTICS.getEnrolleeStats();
     
 });

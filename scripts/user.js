@@ -8,13 +8,51 @@ $(document).ready(function () {
         }
 
         USER.login(form_data);
- 
+        
+    });
+    $('#form_register').submit(function(event) {
+        event.preventDefault();
+        var username = $("#txt_id_number").val();
+        var password = $("#txt_password_register").val();
+        var confirm_password = $("#txt_confirm_password").val();
+        var user_level = ""
+
+        if(password == confirm_password)
+        {
+            if($('#rdb_student').is(':checked'))
+            {
+                user_level = "student";
+            }
+            else if($('#rdb_teacher').is(':checked'))
+            {
+                user_level = "teacher";
+            }
+            var post_data = {
+                username   : username,
+                password   : password,
+                user_level : user_level,
+            };
+            
+            USER.register(post_data);
+        }
+        else
+        {
+            
+            swal("Password dont match", {
+                title: "Error!",
+                text: "Password dont match",
+                icon: "error",
+                button: "OK",
+            });
+        }
+        
     });
  
 });
 
 let USER = {
     username : "",
+    user_id : 0,
     user_level : "",
     fullname : "",
     login : function(formData) {
@@ -25,19 +63,66 @@ let USER = {
             dataType:"json",
             assync : false,
             success: function (result) {
-                swal(result, {
-                    title: "Success",
-                    text: result,
-                    icon: "success",
-                    button: "OK",
-                });
+                if(result == "success")
+                {
+                    swal("Login Successful", {
+                        title: "Success",
+                        text: "Login Successful",
+                        icon: "success",
+                        button: "OK",
+                    });
+    
+                    var protocol = window.location.protocol;
+                    var host = window.location.host;
+                    setTimeout(function(){
+                        window.location.href = `${protocol}//${host}/website/view/Index.php`
+                        
+                    }, 1000);s
+                }
+                else
+                {
+                    swal("Login Failed", {
+                        title: "Error",
+                        text: "Login Failed",
+                        icon: "error",
+                        button: "OK",
+                    });
+                }
+                
+                
+            },
+            error: function (e) {
 
-                var protocol = window.location.protocol;
-                var host = window.location.host;
-                setTimeout(function(){
-                    window.location.href = `${protocol}//${host}/enrollment-system/view/Index.php`
-                    
-                }, 1000);
+            }
+        });
+    }, 
+    register : function(formData) {
+        $.ajax({
+            type: "POST",
+            url: "../data/UserData.php?action=register",
+            data: formData,
+            dataType:"json",
+            assync : false,
+            success: function (result) {
+                if(result["type"] == "success")
+                {
+                    swal(result["type"], {
+                        title: "Success",
+                        text: result["type"],
+                        icon: "success",
+                        button: "OK",
+                    });
+                }
+                else if(result["type"] == "error")
+                {
+                    swal(result["message"], {
+                        title: "Error",
+                        text: result["message"],
+                        icon: "error",
+                        button: "OK",
+                    });
+                }
+                
                 
             },
             error: function (e) {
@@ -62,7 +147,7 @@ let USER = {
                 var protocol = window.location.protocol;
                 var host = window.location.host;
                 setTimeout(function(){
-                    window.location.href = `${protocol}//${host}/enrollment-system/view/Index.php`
+                    window.location.href = `${protocol}//${host}/website/view/Index.php`
                     
                 }, 1000);
             },
@@ -82,6 +167,7 @@ let USER = {
                 {
                     $("#btn_content").hide();
                     $("#btn_student").hide();
+                    $("#btn_teacher").hide();
                     $("#btn_announcement").hide();
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
@@ -89,12 +175,13 @@ let USER = {
                     $("#btn_login").show();
                     var protocol = window.location.protocol;
                     var host = window.location.host;
-                    window.location.href = `${protocol}//${host}/enrollment-system/view/Index.php`
+                    window.location.href = `${protocol}//${host}/website/view/Index.php`
                 }
                 else
                 {
                     $("#btn_content").show();
                     $("#btn_student").show();
+                    $("#btn_teacher").show();
                     $("#btn_announcement").show();
                     $("#btn_addmission").show();
                     $("#btn_logout").show();
@@ -103,6 +190,7 @@ let USER = {
                     this.fullname = result.fullname;
                     this.username = result.username;
                     this.user_level = result.user_level;
+                    this.user_id = result.id;
                     
                     
                     $("#txt_name").html(this.fullname);

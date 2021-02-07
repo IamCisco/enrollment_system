@@ -83,7 +83,7 @@ let ANNOUNCEMENT = {
                     success: function (result) {
                         ANNOUNCEMENT.getAnnouncements();
                         swal("Data has been deleted!", {
-                            title: "Good job!",
+                            title: "Success!",
                             text: result,
                             icon: "success",
                             button: "OK",
@@ -118,7 +118,7 @@ let ANNOUNCEMENT = {
                 $("#txt_announcement").val("")
                 $("#txt_validity").val("")
                 swal("Data has been successfully added!", {
-                    title: "Good job!",
+                    title: "Success!",
                     text: result,
                     icon: "success",
                     button: "OK",

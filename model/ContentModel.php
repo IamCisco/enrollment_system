@@ -16,7 +16,7 @@ class ContentModel extends Connection
     public function get_content($where = null)
     {
         try {
-            $sql = "Select  id, name, details from contents $where order by id";
+            $sql = "Select  * from contents $where order by id";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();
         } catch (\Throwable $th) {

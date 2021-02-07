@@ -41,7 +41,10 @@ let CONTENT = {
                     `;
                 }
                 $("#tbl_content_body").html(row);
-                $('#tbl_content').DataTable();
+                $('#tbl_content').DataTable({
+                    "searching" : false,
+                    "lengthChange" : false
+                });
             }
         });
     },
