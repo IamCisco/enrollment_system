@@ -1,13 +1,14 @@
 -- phpMyAdmin SQL Dump
--- version 5.0.4
+-- version 4.9.0.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 07, 2021 at 10:15 AM
--- Server version: 10.4.17-MariaDB
--- PHP Version: 7.4.13
+-- Generation Time: Feb 08, 2021 at 09:46 AM
+-- Server version: 10.4.6-MariaDB
+-- PHP Version: 7.3.8
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -41,11 +42,11 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
-(8, 'Test', 'test', '2021-02-06', 'CONAN.jpg', 'News'),
-(10, 'Test', 'a', '2021-01-31', 'CONAN.jpg', 'Events'),
-(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'download.jpg', 'Events'),
-(13, 'test', 'test', '2021-02-08', '144297458_480554249611690_8783220417743537839_n.jpg', 'Announcements'),
-(14, 'asdf', 'asdf', '2021-02-08', '144599785_254393849379573_5111434071169039997_n.jpg', 'News');
+(8, 'Test', 'test', '2021-02-06', 'portfolio-3.jpg', 'News'),
+(10, 'Test', 'a', '2021-01-31', 'portfolio-9.jpg', 'Events'),
+(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'portfolio-1.jpg', 'Events'),
+(13, 'test', 'test', '2021-02-08', 'portfolio-details-2.jpg', 'Announcements'),
+(14, 'asdf', 'asdf', '2021-02-08', 'portfolio-6.jpg', 'News');
 
 -- --------------------------------------------------------
 
@@ -64,7 +65,7 @@ CREATE TABLE `backgrounds` (
 --
 
 INSERT INTO `backgrounds` (`id`, `name`, `background`) VALUES
-(1, 'background1', 'hero-bg.jpg');
+(1, 'homepage', 'john-schaidler-yX6neJq4HgM-unsplash.jpg');
 
 -- --------------------------------------------------------
 
@@ -94,7 +95,8 @@ INSERT INTO `comments` (`id`, `user_id`, `announcement_id`, `comment`, `comment_
 (10, 1, 10, 'test', '2021-02-07'),
 (11, 3, 10, 'test', '2021-02-07'),
 (12, 3, 10, 'test23434242', '2021-02-07'),
-(13, 3, 10, 'test123', '2021-02-07');
+(13, 3, 10, 'test123', '2021-02-07'),
+(14, 1, 10, 'test comment', '2021-02-08');
 
 -- --------------------------------------------------------
 
@@ -198,7 +200,7 @@ CREATE TABLE `students` (
 --
 
 INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
-(23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 11),
+(23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 12),
 (25, '2177349', 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
 (26, '2175498', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
@@ -226,11 +228,10 @@ CREATE TABLE `teachers` (
 --
 
 INSERT INTO `teachers` (`id_number`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `teacher_level`) VALUES
-('111111', 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-03-13', '1', 'team-2.jpg', 'Principal'),
+('111111', 'a', 'a', 'a', 'ab', 'jhnfranciscabral@gmail.com', '2021-03-13', '1', 'team-2.jpg', 'Principal'),
 ('12345', 'john francis', 'CONSIGO', 'cabral', 'a', 'jhnfranciscabral@gmail.com', '2021-02-05', '123', 'team-1.jpg', 'Teacher 1'),
 ('123451', 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-02-04', '09399395763', 'team-3.jpg', 'Principal'),
-('123456', 'RAQUEL', 'Alviola', 'Lachica', 'a', 'raquellachicacoe@gmail.com', '2021-02-04', '09399395763', 'team-4.jpg', 'Teacher 2'),
-('1234566666', 'asfasf', 'asdfasdf', 'asdfasdf', 'asdfasdf', 'asdf', '2021-02-17', 'asdfasdf', 'CONAN.jpg', 'asdfad');
+('123456', 'RAQUEL', 'Alviola', 'Lachica', 'a', 'raquellachicacoe@gmail.com', '2021-02-04', '09399395763', 'team-4.jpg', 'Teacher 2');
 
 -- --------------------------------------------------------
 
@@ -337,7 +338,7 @@ ALTER TABLE `backgrounds`
 -- AUTO_INCREMENT for table `comments`
 --
 ALTER TABLE `comments`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
 
 --
 -- AUTO_INCREMENT for table `contents`
