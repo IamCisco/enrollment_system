@@ -31,7 +31,7 @@ let INDEX = {
         $.ajax({
             url: "../data/AnnouncementData.php?action=getAnnouncements",
             dataType: "json",
-            // assync: false,
+            assync: false,
             success: function (result) {
                 var row = ``;
                 for (var x = 0; x < result.length; x++) {
@@ -55,8 +55,9 @@ let INDEX = {
                 }
 
                 $(".portfolio-container").html(row);
+
                 var portfolioIsotope = $('.portfolio-container').isotope({
-                itemSelector: '.portfolio-item'
+                    itemSelector: '.portfolio-item'
                 });
             
                 $('#portfolio-flters li').on('click', function() {

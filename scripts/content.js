@@ -30,7 +30,12 @@ let CONTENT = {
             dataType: "json",
             success: function (result) {
                 var row = ``;
+                rowCount = $('#tbl_content_body tr').length;
 
+                if(rowCount > 0)
+                {
+                    $('#tbl_content').DataTable().destroy();
+                }
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
                     row += `
