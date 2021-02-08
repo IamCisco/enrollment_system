@@ -26,20 +26,20 @@ $(document).ready(function () {
     
     $('#frm_student_update').submit(function(event) {
         event.preventDefault();
-        var post_data = {
-            id           : STUDENT.id,
-            first_name   : $("#txt_fname_update").val(),
-            middle_name  : $("#txt_mname_update").val(),
-            last_name    : $("#txt_lname_update").val(),
-            address      : $("#txt_address_update").val(),
-            birthdate    : $("#txt_bday_update").val(),
-            email        : $("#txt_email_update").val(),
-            phone_number : $("#txt_phonenumber_update").val(),
-            program      : $("#txt_program_update").val(),
-            grade_level  : $("#txt_grade").val()
-        }
-        console.log(STUDENT.id)
-        STUDENT.updateStudent(post_data)
+        // var post_data = {
+        //     id           : STUDENT.id,
+        //     first_name   : $("#txt_fname_update").val(),
+        //     middle_name  : $("#txt_mname_update").val(),
+        //     last_name    : $("#txt_lname_update").val(),
+        //     address      : $("#txt_address_update").val(),
+        //     birthdate    : $("#txt_bday_update").val(),
+        //     email        : $("#txt_email_update").val(),
+        //     phone_number : $("#txt_phonenumber_update").val(),
+        //     program      : $("#txt_program_update").val(),
+        //     grade_level  : $("#txt_grade").val()
+        // }
+        // console.log(STUDENT.id)
+        STUDENT.updateStudent(this)
     });
 });
 
@@ -52,7 +52,7 @@ let STUDENT = {
             url: "../data/StudentData.php?action=getStudents",
             dataType: "json",
             success: function (result) {
-                console.log(result)
+                // console.log(result)
                 var row = ``;
 
                 for (var x = 0; x < result.length; x++) {
@@ -116,7 +116,7 @@ let STUDENT = {
             type : "post",
             assync: false,
             success: function (result) {
-                console.log(result)
+                // console.log(result)
                 
                 $("#txt_image").val(result.image);
                 $("#txt_fname").val(result.first_name);
@@ -200,6 +200,7 @@ let STUDENT = {
                 $("#modal_student_form").modal("hide");
             }
         });
+        
     },
     getSpecificStudent : function(id){
         $.ajax({
@@ -212,9 +213,10 @@ let STUDENT = {
             type : "post",
             assync: false,
             success: function (result) {
-                console.log(result)
+                // console.log(result)
                 STUDENT.id = id;
                 $("#modal_student_form_update").modal("show");
+                $("#txt_id").val(id);
                 $("#txt_fname_update").val(result.first_name);
                 $("#txt_mname_update").val(result.middle_name);
                 $("#txt_lname_update").val(result.last_name);
@@ -227,11 +229,16 @@ let STUDENT = {
             }
         });
     },
-    updateStudent : function(post_data){
+    updateStudent : function(_this){
+        var data = new FormData( _this );
+        // data.append('id', STUDENT.id)
+        console.log(data)
         $.ajax({
             url: "../data/StudentData.php?action=updateStudent",
-            data: post_data,
             type: "post",
+            data: new FormData( _this ),
+            processData: false,
+            contentType: false,
             dataType: "json",
             assync : false, 
             success: function (result) {

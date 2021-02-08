@@ -22,34 +22,14 @@
             <div class="container">
 
                 <div class="d-flex justify-content-between align-items-center">
-                    <h2>Content Management</h2>
+                    <h2>Homepage Background</h2>
                 </div>
 
             </div>
         </section><!-- End Breadcrumbs -->
-
-        <section class="inner-page">
-            <div class="container">
-                <br>
-                <div class="row">
-                    <div class="col-lg-12">
-                        <table class="table table-bordered table-striped table-hover" id="tbl_content">
-                            <thead>
-                                <tr>
-                                    <td>Name</td>
-                                    <td>Details</td>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            <tbody id="tbl_content_body"></tbody>
-                        </table>
-                    </div>
-                </div>
-
-                <div>
-                <img src="../assets/img/hero-bg.jpg" class="img-responsive" alt="Responsive image">
-                </div>
-            </div>
+        
+        <center><button class="btn btn-success" data-toggle="modal" data-target="#modal_update_background">Change Homepage Background</button></center><br>
+        <section class="inner-page" id="hero">
         </section>
 
     </main><!-- End #main -->
@@ -57,29 +37,24 @@
     <div id="preloader"></div>
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>
     <!-- Modal -->
-    <div id="modal_content_form_update" class="modal fade" role="dialog">
+    <div id="modal_update_background" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
 
             <!-- Modal content-->
             <div class="modal-content">
-                <form id="frm_content_update">
+                <form id="frm_background_update" enctype="multipart/form-data">
                     <div class="modal-header">
-                        <h4 class="modal-title">Update Content</h4>
+                        <h4 class="modal-title">Update Background Image</h4>
                         <button type="button" class="close" data-dismiss="modal">&times;</button>
                     </div>
                     <div class="modal-body">
-
                         <div class="form-group">
-                            <label for="txt_name_update">Name</label>
-                            <input type="text" class="form-control" id="txt_name_update" disabled>
-                        </div>
-                        <div class="form-group">
-                            <label for="txt_detail">Details</label>
-                            <textarea type="text" class="form-control" id="txt_detail_update" rows="5" required></textarea>
+                            <label for="file_image">Image</label>
+                            <input type="file" name="input_file" class="form-control-file border" id="file_image_update" required >
                         </div>
                     </div>
                     <div class="modal-footer">
-                        
+
                         <button type="submit" class="btn btn-success pull-right">Save</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>

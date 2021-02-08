@@ -10,13 +10,13 @@ $(document).ready(function () {
     
     $('#frm_announcement_update').submit(function(event) {
         event.preventDefault();
-        var post_data = {
-            id               : ANNOUNCEMENT.id,
-            title            : $("#txt_title_update").val(),
-            announcement     : $("#txt_announcement_update").val(),
-            validity_date    : $("#txt_validity_update").val(),
-        }
-        ANNOUNCEMENT.updateAnnouncement(post_data)
+        // var post_data = {
+        //     id               : ANNOUNCEMENT.id,
+        //     title            : $("#txt_title_update").val(),
+        //     announcement     : $("#txt_announcement_update").val(),
+        //     validity_date    : $("#txt_validity_update").val(),
+        // }
+        ANNOUNCEMENT.updateAnnouncement(this)
     });
 });
 
@@ -141,17 +141,21 @@ let ANNOUNCEMENT = {
                 ANNOUNCEMENT.id = id;
 
                 $("#modal_announcement_form_update").modal("show");
+                $("#txt_id").val(id);
                 $("#txt_title_update").val(result.title);
                 $("#txt_announcement_update").val(result.announcement);
                 $("#txt_validity_update").val(result.validity_date);
+                $("#txt_type_update").val(result.type);
             }
         });
     },
-    updateAnnouncement : function(post_data){
+    updateAnnouncement : function(_this){
         $.ajax({
             url: "../data/AnnouncementData.php?action=updateAnnouncement",
-            data: post_data,
             type: "post",
+            data: new FormData( _this ),
+            processData: false,
+            contentType: false,
             dataType: "json",
             assync : false, 
             success: function (result) {
@@ -167,5 +171,6 @@ let ANNOUNCEMENT = {
                 $("#modal_announcement_form_update").modal("hide");
             }
         });
+        
     }
 } 

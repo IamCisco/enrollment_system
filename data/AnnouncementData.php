@@ -68,7 +68,8 @@ if ($action == "getAnnouncements") {
             "id"                   => $announcement["id"],
             "title"                => $announcement["title"],
             "announcement"         => $announcement["announcement"],
-            "validity_date"        => $announcement["validity_date"]
+            "validity_date"        => $announcement["validity_date"],
+            "type"                 => $announcement["type"]
         ];
     }
     echo json_encode($datastorage);
@@ -84,7 +85,28 @@ if ($action == "getAnnouncements") {
         }
     }
 
-    $columns = substr_replace($columns, "", -1);
+    
+    $name = $_FILES['input_file']['name'];
+    $tmp_name = $_FILES['input_file']['tmp_name'];
+    if (isset($name)) {
+
+        $path = '../assets/img/announcements/';
+
+        if (!empty($name)) {
+            $announcement_list = $announcement->load_all_announcements("where id=$id");
+            foreach ($announcement_list as $announcement_value) {
+                $image = $announcement_value["image"];
+                unlink("../assets/img/announcements/$image");
+            }
+            $values[] = $name;
+            $columns .= "image= ?";
+            if (move_uploaded_file($tmp_name, $path . $name)) {
+            }
+        }
+    }
+    
+
+    // $columns = substr_replace($columns, "", -1);
     $announcement->update_announcement($id, $columns, $values);
     echo json_encode("Data Successfully Updated");
 }

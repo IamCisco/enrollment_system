@@ -163,8 +163,9 @@ let USER = {
             dataType:"json",
             assync : false,
             success: function (result) {
-                if(result.length == 0)
-                {
+                var user_type = result.user_type
+                if (result.length == 0) {
+
                     $("#btn_content").hide();
                     $("#btn_student").hide();
                     $("#btn_teacher").hide();
@@ -172,28 +173,40 @@ let USER = {
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
                     $("#btn_stats").hide();
+                    $("#btn_background").hide();
                     $("#btn_login").show();
-                    var protocol = window.location.protocol;
-                    var host = window.location.host;
-                    window.location.href = `${protocol}//${host}/website/view/Index.php`
+                    INDEX.user_id = 0;
+                    
                 }
-                else
-                {
-                    $("#btn_content").show();
-                    $("#btn_student").show();
-                    $("#btn_teacher").show();
-                    $("#btn_announcement").show();
-                    $("#btn_addmission").show();
-                    $("#btn_logout").show();
-                    $("#btn_stats").show();
-                    $("#btn_login").hide();
-                    this.fullname = result.fullname;
-                    this.username = result.username;
-                    this.user_level = result.user_level;
-                    this.user_id = result.id;
+                else {
+                    if(user_type == "admin")
+                    {
+                        $("#btn_content").show();
+                        $("#btn_student").show();
+                        $("#btn_teacher").show();
+                        $("#btn_announcement").show();
+                        $("#btn_addmission").show();
+                        $("#btn_stats").show();
+                        $("#btn_background").show();
+                        $("#btn_login").hide();
+                        $("#btn_logout").show();
+                        
+                        this.fullname = result.fullname;
+                        this.username = result.username;
+                        this.user_level = result.user_level;
+                        this.user_id = result.id;
+                        $("#txt_name").html(this.fullname);
+                    }
+                    else
+                    {
+                        var protocol = window.location.protocol;
+                        var host = window.location.host;
+                            window.location.href = `${protocol}//${host}/website/view/Index.php`
+                           
+                    }
                     
-                    
-                    $("#txt_name").html(this.fullname);
+
+
                 }
                 
  

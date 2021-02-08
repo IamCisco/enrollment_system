@@ -39,7 +39,7 @@
     <main id="main">
 
         <!-- ======= About Section ======= -->
-        <section id="featured-services" class="featured-services">
+        <section id="featured-services" class="featured-services section-bg">
             <div class="container" data-aos="fade-up">
                 <div class="section-title">
                     <h2>About</h2>

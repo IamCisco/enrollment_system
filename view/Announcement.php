@@ -129,15 +129,31 @@
 
                         <div class="form-group">
                             <label for="txt_title_update">Title</label>
-                            <input type="text" class="form-control" id="txt_title_update" required>
+                            <input type="hidden" class="form-control" id="txt_id"  name="id" required>
+                            <input type="text" class="form-control" id="txt_title_update" name="title" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_announcement">Announcement</label>
-                            <textarea type="text" class="form-control" id="txt_announcement_update" rows="5" required></textarea>
+                            <textarea type="text" class="form-control" id="txt_announcement_update" name="announcement" rows="5" required></textarea>
                         </div>
                         <div class="form-group">
                             <label for="txt_bday">Validity Date</label>
-                            <input type="date" class="form-control" id="txt_validity_update" required>
+                            <input type="date" class="form-control" id="txt_validity_update" name="validity_date" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="txt_type">Type</label>
+                            <select class="form-control" id="txt_type_update" name="type" name="type" required>
+                                <option value="" disabled selected>Please select a announcement type</option>
+                                <option value="News">News</option>
+                                <option value="Events">Events</option>
+                                <option value="Announcements">Announcements</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="file_image">Image</label>
+                            <input type="file" name="input_file" class="form-control-file border" id="file_image_update" >
                         </div>
                     </div>
                     <div class="modal-footer">

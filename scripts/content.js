@@ -2,6 +2,7 @@
 $(document).ready(function () {
     USER.checkSession();
     CONTENT.getContents();
+    CONTENT.getBackgroundMain();
 
     
     $('#frm_content_update').submit(function(event) {
@@ -12,6 +13,11 @@ $(document).ready(function () {
             details        : $("#txt_detail_update").val()
         }
         CONTENT.updateContent(post_data)
+    });
+    
+    $('#frm_background_update').submit(function(event) {
+        event.preventDefault();
+        CONTENT.updateBackgroundMain(this)
     });
 });
 
@@ -45,6 +51,18 @@ let CONTENT = {
                     "searching" : false,
                     "lengthChange" : false
                 });
+            }
+        });
+    },
+    getBackgroundMain: function () {////VMGO = vision mission g
+        $.ajax({
+            url: "../data/BackgroundData.php?action=getBackgroundMain",
+            dataType: "json",
+            assync: false,
+            success: function (result) {
+                // var x=0;
+                $("#hero").css("background-image", `url('../assets/img/background/${result.homepage}')`);
+                $("#hero").css("background-position", "absolute");
             }
         });
     },
@@ -86,6 +104,30 @@ let CONTENT = {
                     button: "OK",
                 });
                 $("#modal_content_form_update").modal("hide");
+            }
+        });
+    },
+    updateBackgroundMain : function(_this){
+        alert(1)
+        $.ajax({
+            url: "../data/BackgroundData.php?action=updateBackgroundMain",
+            type: "post",
+            data: new FormData( _this ),
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            assync : false, 
+            success: function (result) {
+                CONTENT.getBackgroundMain();
+
+                $("#file_image_update").val("");
+                swal(result.message, {
+                    title: result.title,
+                    text: result.message,
+                    icon: result.status,
+                    button: "OK",
+                });
+                $("#modal_update_background").modal("hide");
             }
         });
     }

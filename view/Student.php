@@ -119,7 +119,7 @@
                         </div>
                         <div class="form-group">
                             <label for="txt_program">Program</label>
-                            <select class="form-control" id="txt_program" required readonly>
+                            <select class="form-control" id="txt_program" required disabled>
                                 <option value="" disabled selected>Please select a program</option>
                                 <option value="ABM">ABM</option>
                                 <option value="STEM">STEM</option>
@@ -128,7 +128,7 @@
                         </div>
                         <div class="form-group">
                             <label for="txt_grade">Grade</label>
-                            <select class="form-control" id="txt_grade" required  readonly>
+                            <select class="form-control" id="txt_grade" required  disabled>
                                 <option value="" disabled selected>Please select a grade</option>
                                 <option value="11">XI</option>
                                 <option value="12">XII</option>
@@ -160,35 +160,36 @@
 
                         <div class="form-group">
                             <label for="txt_fname_update">First Name</label>
-                            <input type="text" class="form-control" id="txt_fname_update" required>
+                            <input type="hidden" class="form-control" id="txt_id" name="id" required>
+                            <input type="text" class="form-control" id="txt_fname_update" name="first_name" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_mname_update">Middle Name</label>
-                            <input type="text" class="form-control" id="txt_mname_update" required>
+                            <input type="text" class="form-control" id="txt_mname_update" name="middle_name" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_lname_update">Last Name</label>
-                            <input type="text" class="form-control" id="txt_lname_update" required >
+                            <input type="text" class="form-control" id="txt_lname_update" name="last_name"  required >
                         </div>
                         <div class="form-group">
                             <label for="txt_address_update">Address</label>
-                            <input type="text" class="form-control" id="txt_address_update" required>
+                            <input type="text" class="form-control" id="txt_address_update" name="address" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_email_update">Email</label>
-                            <input type="text" class="form-control" id="txt_email_update" required>
+                            <input type="text" class="form-control" id="txt_email_update" name="email" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_bday_update">Birthdate</label>
-                            <input type="date" class="form-control" id="txt_bday_update" required>
+                            <input type="date" class="form-control" id="txt_bday_update" name="birthdate" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_phonenumber_update">Contact Number</label>
-                            <input type="text" class="form-control" id="txt_phonenumber_update" required>
+                            <input type="text" class="form-control" id="txt_phonenumber_update" name="phone_number" required>
                         </div>
                         <div class="form-group">
                             <label for="txt_program_update">Program</label>
-                            <select class="form-control" id="txt_program_update" required>
+                            <select class="form-control" id="txt_program_update" name="program" required>
                                 <option value="" disabled selected>Please select a program</option>
                                 <option value="ABM">ABM</option>
                                 <option value="STEM">STEM</option>
@@ -197,7 +198,7 @@
                         </div>
                         <div class="form-group">
                             <label for="txt_grade">Grade</label>
-                            <select class="form-control" id="txt_grade_update" required  readonly>
+                            <select class="form-control" id="txt_grade_update" name="grade_level" required>
                                 <option value="" disabled selected>Please select a grade</option>
                                 <option value="11">XI</option>
                                 <option value="12">XII</option>

@@ -31,7 +31,7 @@ let INDEX = {
         $.ajax({
             url: "../data/AnnouncementData.php?action=getAnnouncements",
             dataType: "json",
-            assync: false,
+            // assync: false,
             success: function (result) {
                 var row = ``;
                 for (var x = 0; x < result.length; x++) {
@@ -39,7 +39,7 @@ let INDEX = {
                     data = result[x];
                     if(INDEX.user_id != 0)
                     {
-                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]})"class="preview-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></button>`;
+                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]})"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></button>`;
                     }
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
@@ -48,18 +48,37 @@ let INDEX = {
                             <h4>${data["title"]}</h4>
                             <p>${data["announcement"]}</p>
                             ${btn_add_comment}
-                            <a href="../assets/img/announcements/${data["image"]}" target="_blank"class="details-link" title="${data["title"]}"><i class="bx bx-link"></i></a>
+                            <a href="../assets/img/announcements/${data["image"]}" class="venobox preview-link vbox-item" title="${data["title"]}"><i class="bx bx-link"></i></a>
                         </div>
                     </div>
                     `;
                 }
 
-                $("#div_portfolio").html(row);
-                
+                $(".portfolio-container").html(row);
+                var portfolioIsotope = $('.portfolio-container').isotope({
+                itemSelector: '.portfolio-item'
+                });
+            
+                $('#portfolio-flters li').on('click', function() {
+                $("#portfolio-flters li").removeClass('filter-active');
+                $(this).addClass('filter-active');
+            
+                portfolioIsotope.isotope({
+                    filter: $(this).data('filter')
+                });
+                INDEX.aos_init();
+                });
+                $('.venobox').venobox();
                 $('.comment_button').on("click", function(e){
                     $("#modal_comments").modal();
                 }); 
             }
+        });
+    },
+    aos_init :function() {
+        AOS.init({
+            duration: 1000,
+            once: true
         });
     },
     getComments: function (announcement_id) {
@@ -99,7 +118,7 @@ let INDEX = {
                             <a class="preview-link" onclick="INDEX.getSpecificComment(${data["id"]})" title="Edit">
                                 <span class="fas fa-edit"></span>
                             </a>
-                            <a type="button" class="preview-link" onclick="INDEX.removeComment(${data["id"]})" title="Delete">
+                            <a class="preview-link" onclick="INDEX.removeComment(${data["id"]})" title="Delete">
                                 <span class="fas fa-trash"></span>
                             </a>
                         `;
@@ -325,7 +344,7 @@ let INDEX = {
             assync: false,
             success: function (result) {
                 // var x=0;
-                $("#hero").css("background-image", `url('../assets/img/background/${result.background1}')`);
+                $("#hero").css("background-image", `url('../assets/img/background/${result.homepage}')`);
             }
         });
     }, getContentContact: function () {////VMGO = vision mission g
@@ -359,7 +378,9 @@ let INDEX = {
             dataType: "json",
             assync: false,
             success: function (result) {
+                var user_type = result.user_type
                 if (result.length == 0) {
+
                     $("#btn_content").hide();
                     $("#btn_student").hide();
                     $("#btn_teacher").hide();
@@ -367,18 +388,30 @@ let INDEX = {
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
                     $("#btn_stats").hide();
+                    $("#btn_background").hide();
                     $("#btn_login").show();
                     INDEX.user_id = 0;
+                    
                 }
                 else {
-                    $("#btn_content").show();
-                    $("#btn_student").show();
-                    $("#btn_teacher").show();
-                    $("#btn_announcement").show();
-                    $("#btn_addmission").show();
-                    $("#btn_logout").show();
-                    $("#btn_stats").show();
-                    $("#btn_login").hide();
+                    if(user_type == "admin")
+                    {
+                        $("#btn_content").show();
+                        $("#btn_student").show();
+                        $("#btn_teacher").show();
+                        $("#btn_announcement").show();
+                        $("#btn_addmission").show();
+                        $("#btn_stats").show();
+                        $("#btn_background").show();
+                        $("#btn_login").hide();
+                        $("#btn_logout").show();
+                    }
+                    else
+                    {
+                        $("#btn_login").hide();
+                        $("#btn_logout").show();
+                    }
+                    
                     INDEX.fullname = result.fullname;
                     INDEX.username = result.username;
                     INDEX.user_level = result.user_level;
