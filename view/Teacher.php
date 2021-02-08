@@ -118,7 +118,7 @@
                             <label for="txt_teacher_level">Position</label>
                             <input type="text" class="form-control" id="txt_teacher_level" name="teacher_level" required>
                         </div>
-                            <div class="form-group">
+                        <div class="form-group">
                             <label for="file_image">Image</label>
                             <input type="file" name="input_file" class="form-control-file border" id="file_image" required>
                         </div>
@@ -126,6 +126,63 @@
                     <div class="modal-footer">
                         
                         <button type="submit" class="btn btn-success pull-right">Save</button>
+                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
+    <div id="modal_teacher_form_update" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form id="frm_teacher_update">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Update Student</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+
+                        <div class="form-group">
+                            <label for="txt_fname">First Name</label>
+                            <input type="text" class="form-control" id="txt_fname_update" name="first_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_mname">Middle Name</label>
+                            <input type="text" class="form-control" id="txt_mname_update" name="middle_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_lname">Last Name</label>
+                            <input type="text" class="form-control" id="txt_lname_update" name="last_name" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_address">Address</label>
+                            <input type="text" class="form-control" id="txt_address_update" name="address" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_email">Email</label>
+                            <input type="text" class="form-control" id="txt_email_update" name="email" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_bday">Birthdate</label>
+                            <input type="date" class="form-control" id="txt_bday_update" name="birthdate" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_phonenumber">Contact Number</label>
+                            <input type="text" class="form-control" id="txt_phonenumber_update" name="contact_number" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="txt_teacher_level">Position</label>
+                            <input type="text" class="form-control" id="txt_teacher_level_update" name="teacher_level" required>
+                        </div>
+                        
+
+                    </div>
+                    <div class="modal-footer">
+                        
+                        <button type="submit" class="btn btn-info pull-right">Update</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>
                 </form>

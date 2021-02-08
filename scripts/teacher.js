@@ -16,18 +16,17 @@ $(document).ready(function () {
     $('#frm_teacher_update').submit(function(event) {
         event.preventDefault();
         var post_data = {
-            id           : TEACHER.id,
-            first_name   : $("#txt_fname_update").val(),
-            middle_name  : $("#txt_mname_update").val(),
-            last_name    : $("#txt_lname_update").val(),
-            address      : $("#txt_address_update").val(),
-            birthdate    : $("#txt_bday_update").val(),
-            email        : $("#txt_email_update").val(),
-            phone_number : $("#txt_phonenumber_update").val(),
-            program      : $("#txt_program_update").val(),
-            grade_level  : $("#txt_grade").val()
+            id_number     : TEACHER.teacher_id,
+            first_name    : $("#txt_fname_update").val(),
+            middle_name   : $("#txt_mname_update").val(),
+            last_name     : $("#txt_lname_update").val(),
+            address       : $("#txt_address_update").val(),
+            birthdate     : $("#txt_bday_update").val(),
+            email         : $("#txt_email_update").val(),
+            contact_number: $("#txt_phonenumber_update").val(),
+            teacher_level : $("#txt_teacher_level_update").val()
         }
-        console.log(TEACHER.id)
+        console.log(post_data)
         TEACHER.updateTeacher(post_data)
     });
 });
@@ -35,7 +34,7 @@ $(document).ready(function () {
 let TEACHER = {
 
     //method 
-    id : 0,
+    teacher_id : 0,
     getTeachers: function () {
         $.ajax({
             url: "../data/TeacherData.php?action=getTeachers",
@@ -56,13 +55,13 @@ let TEACHER = {
                         <td>${data["contact_number"]}</td>
                         <td>${data["teacher_level"]}</td>
                         <td>
-                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="TEACHER.getSpecificTeacher(${data["id"]})">
+                            <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="TEACHER.getSpecificTeacher(${data["id_number"]})">
                             
                                 <i class='far fa-save'></i>
                             </button>
                         </td>
                         <td>
-                            <button type="button"class="btn btn-danger btn-sm "style='font-size:24px' onclick="TEACHER.removeTeacher(${data["id"]})">
+                            <button type="button"class="btn btn-danger btn-sm "style='font-size:24px' onclick="TEACHER.removeTeacher(${data["id_number"]})">
                               
                                 <i class='fas fa-trash'></i>
                             </button>
@@ -92,29 +91,29 @@ let TEACHER = {
             }
         });
     },
-    getSpecificTeacher : function(id){
+    getSpecificTeacher : function(id_number){
         $.ajax({
-            url: "../data/EnrolleeData.php?action=getSpecificEnrollee",
+            url: "../data/TeacherData.php?action=getSpecificTeacher",
             dataType: "json",
             data :
             {
-                id: id
+                id_number : id_number
             },
             type : "post",
             assync: false,
             success: function (result) {
                 console.log(result)
                 
-                $("#txt_image").val(result.image);
-                $("#txt_fname").val(result.first_name);
-                $("#txt_mname").val(result.middle_name);
-                $("#txt_lname").val(result.last_name);
-                $("#txt_address").val(result.address);
-                $("#txt_bday").val(result.birthdate);
-                $("#txt_email").val(result.email);
-                $("#txt_phonenumber").val(result.phone_number);
-                $("#txt_program").val(result.program);
-                $("#txt_grade").val(result.grade_level);
+                $("#txt_fname_update").val(result.first_name);
+                $("#txt_mname_update").val(result.middle_name);
+                $("#txt_lname_update").val(result.last_name);
+                $("#txt_address_update").val(result.address);
+                $("#txt_bday_update").val(result.birthdate);
+                $("#txt_email_update").val(result.email);
+                $("#txt_phonenumber_update").val(result.contact_number);
+                $("#txt_teacher_level_update").val(result.teacher_level);
+                $("#modal_teacher_form_update").modal();
+                TEACHER.teacher_id = id_number
             }
         });
     },
@@ -134,7 +133,7 @@ let TEACHER = {
                     url: "../data/TeacherData.php?action=removeTeacher",
                     data:
                     {
-                        id: id
+                        id_number: id
                     },
                     type: "post",
                     dataType: "json",
@@ -200,32 +199,6 @@ let TEACHER = {
                 }
                 
                 
-            }
-        });
-    },
-    getSpecificTeacher : function(id){
-        $.ajax({
-            url: "../data/TeacherData.php?action=getSpecificTeacher",
-            dataType: "json",
-            data :
-            {
-                id: id
-            },
-            type : "post",
-            assync: false,
-            success: function (result) {
-                console.log(result)
-                TEACHER.id = id;
-                $("#modal_teacher_form_update").modal("show");
-                $("#txt_fname_update").val(result.first_name);
-                $("#txt_mname_update").val(result.middle_name);
-                $("#txt_lname_update").val(result.last_name);
-                $("#txt_address_update").val(result.address);
-                $("#txt_bday_update").val(result.birthdate);
-                $("#txt_email_update").val(result.email);
-                $("#txt_phonenumber_update").val(result.phone_number);
-                $("#txt_program_update").val(result.program);
-                $("#txt_grade_update").val(result.grade_level);
             }
         });
     },

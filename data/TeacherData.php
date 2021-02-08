@@ -24,8 +24,8 @@ if ($action == "getTeachers") {
     }
     echo json_encode($datastorage);
 } else if ($action == "removeTeacher") {
-    $id = $_POST["id"];
-    $teacher->delete_teacher($id);
+    $id_number = $_POST["id_number"];
+    $teacher->delete_teacher($id_number);
     echo json_encode("Successfully Deleted");
 } else if ($action == "insertTeacher") {
     $post_data = $_POST;
@@ -72,38 +72,36 @@ if ($action == "getTeachers") {
     ////////////////////////////////////
     
 } else if($action == "getSpecificTeacher"){
-    $id = $_POST["id"];
-    $teacher_list = $teacher->load_all_teachers("where id=$id");
+    $id_number = $_POST["id_number"];
+    $teacher_list = $teacher->load_all_teachers("where id_number=$id_number");
 
     foreach ($teacher_list as $teacher) {
         $datastorage = [
-            "id"            => $teacher["id"],
+            "id_number"     => $teacher["id_number"],
             "first_name"    => $teacher["first_name"],
             "middle_name"   => $teacher["middle_name"],
             "last_name"     => $teacher["last_name"],
             "address"       => $teacher["address"],
             "email"         => $teacher["email"],
             "birthdate"     => $teacher["birthdate"],
-            "phone_number"  => $teacher["phone_number"],
-            "program"       => $teacher["program"],
-            "image"         => $teacher["image"],
-            "grade_level"   => $teacher["grade_level"],
+            "contact_number"=> $teacher["contact_number"],
+            "teacher_level" => $teacher["teacher_level"],
         ];
     }
     echo json_encode($datastorage);
 } else if($action == "updateTeacher"){
-    $id = $_POST["id"];
+    $id_number = $_POST["id_number"];
     $columns = "";
     $values =[];
     $value_string = "";
     foreach ($_POST as $key => $value) {
-        if($key != "id"){
+        if($key != "id_number"){
             $values[] = $value;
             $columns .= $key."=?,";
         }
     }
 
     $columns = substr_replace($columns, "", -1);
-    $teacher->update_teacher($id, $columns, $values);
+    $teacher->update_teacher($id_number, $columns, $values);
     echo json_encode("Data Successfully Updated");
 }

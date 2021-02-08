@@ -39,7 +39,7 @@ class TeacherModel extends Connection
     public function update_teacher($id, $columns, $values)
     {
         try {
-            $sql = "UPDATE teachers  SET $columns WHERE id=$id";
+            $sql = "UPDATE teachers  SET $columns WHERE id_number=$id";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($values);
             return "success";
@@ -50,7 +50,7 @@ class TeacherModel extends Connection
     public function delete_teacher($id)
     {
         try {
-            $sql = "Delete from teachers WHERE id=$id";
+            $sql = "Delete from teachers WHERE id_number=$id";
             $this->conn->exec($sql);
             return "success";
         } catch (\Throwable $th) {
