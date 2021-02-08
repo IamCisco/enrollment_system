@@ -31,7 +31,7 @@ let INDEX = {
         $.ajax({
             url: "../data/AnnouncementData.php?action=getAnnouncements",
             dataType: "json",
-            assync: false,
+            // assync: false,
             success: function (result) {
                 var row = ``;
                 for (var x = 0; x < result.length; x++) {
@@ -55,20 +55,22 @@ let INDEX = {
                 }
 
                 $(".portfolio-container").html(row);
-
-                var portfolioIsotope = $('.portfolio-container').isotope({
+                setTimeout(function(){
+                    var portfolioIsotope = $('.portfolio-container').isotope({
                     itemSelector: '.portfolio-item'
-                });
-            
-                $('#portfolio-flters li').on('click', function() {
-                $("#portfolio-flters li").removeClass('filter-active');
-                $(this).addClass('filter-active');
-            
-                portfolioIsotope.isotope({
-                    filter: $(this).data('filter')
-                });
-                INDEX.aos_init();
-                });
+                    });
+                
+                    $('#portfolio-flters li').on('click', function() {
+                    $("#portfolio-flters li").removeClass('filter-active');
+                    $(this).addClass('filter-active');
+                
+                    portfolioIsotope.isotope({
+                        filter: $(this).data('filter')
+                    });
+                    INDEX.aos_init();
+                    });
+                }, 1000);
+                
                 $('.venobox').venobox();
                 $('.comment_button').on("click", function(e){
                     $("#modal_comments").modal();

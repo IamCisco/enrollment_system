@@ -77,7 +77,7 @@ let USER = {
                     setTimeout(function(){
                         window.location.href = `${protocol}//${host}/website/view/Index.php`
                         
-                    }, 1000);s
+                    }, 1000);
                 }
                 else
                 {
