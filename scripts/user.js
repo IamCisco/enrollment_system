@@ -175,7 +175,11 @@ let USER = {
                     $("#btn_stats").hide();
                     $("#btn_background").hide();
                     $("#btn_login").show();
-                    INDEX.user_id = 0;
+                    USER.user_id = 0;
+
+                    var protocol = window.location.protocol;
+                    var host = window.location.host;
+                    window.location.href = `${protocol}//${host}/website/view/Index.php`
                     
                 }
                 else {
@@ -201,7 +205,7 @@ let USER = {
                     {
                         var protocol = window.location.protocol;
                         var host = window.location.host;
-                            window.location.href = `${protocol}//${host}/website/view/Index.php`
+                        window.location.href = `${protocol}//${host}/website/view/Index.php`
                            
                     }
                     
