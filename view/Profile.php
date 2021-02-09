@@ -70,7 +70,7 @@
                         </div>
                         <div class="form-group">
                             <label for="file_image">Image</label>
-                            <input type="file" name="input_file" class="form-control-file border" id="file_image" required>
+                            <input type="file" name="input_file" class="form-control-file border" id="file_image">
                         </div>
                         
                         <button type ="submit" class="btn btn-success">

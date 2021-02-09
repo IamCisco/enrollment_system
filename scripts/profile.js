@@ -61,13 +61,13 @@ let PROFILE = {
                 $("#txt_lname").val("");
                 $("#txt_email").val("");
                 $("#file_image").val("");
-                swal(result.message, {
-                    title: result.title,
-                    text: result.message,
-                    icon: result.status,
+                swal(result, {
+                    title: "Profile Updated",
+                    text: result,
+                    icon: "success",
                     button: "OK",
                 });
-                $("#modal_enrollee_form").modal("hide");
+                $("#frm_update_profile").modal("hide");
             }
         });
     }

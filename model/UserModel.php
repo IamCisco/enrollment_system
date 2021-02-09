@@ -64,9 +64,11 @@ class UserModel extends Connection
         try {
             if($table != null)
             {
-                $sql = "UPDATE $table  SET $columns WHERE id_number=$id_number";
+                $sql = "UPDATE $table  SET $columns WHERE $column='$id_number'";
                 $stmt = $this->conn->prepare($sql);
                 $stmt->execute($values);
+                
+                return "success";
             } 
         }catch (\Throwable $th) {
             return $th->getMessage();

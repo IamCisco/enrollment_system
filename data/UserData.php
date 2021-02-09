@@ -247,18 +247,45 @@ if ($action == "login") {
         }
     }
 
-    $columns = substr_replace($columns, "", -1);
     $table = null;
+    $path = '../assets/img/admins/';
     if($user_type == "student")
     {
         $table = "students";
         $column = "student_number";
+        $path = '../assets/img/students/';
     }else if($user_type == "teacher")
     {
         $table = "teachers";
         $column = "id_number";
+        $path = '../assets/img/teachers/';
     }
+
+    $name = $_FILES['input_file']['name'];
+    $tmp_name = $_FILES['input_file']['tmp_name'];
+    if (isset($name)) {
+
+
+        if (!empty($name)) {
+            
+            $values[] = $name;
+            $columns .= "image= ?";
+            if (move_uploaded_file($tmp_name, $path . $name)) {
+            }
+        }
+    }
+    else
+    {
+        $columns = substr_replace($columns, "", -1);
+    }
+
+    
     
     $user->update_user($id, $columns, $values);
-    $user->update_person($id, $columns, $values,$table, $column);
+    if($table != null)
+    {
+        $user->update_person($id_number, $columns, $values,$table, $column);
+    }
+    echo json_encode("Successfully Updatedd");
+    
 }
