@@ -195,10 +195,10 @@ let USER = {
                         $("#btn_login").hide();
                         $("#btn_logout").show();
                         
-                        this.fullname = result.fullname;
-                        this.username = result.username;
-                        this.user_level = result.user_level;
-                        this.user_id = result.id;
+                        USER.fullname = result.fullname;
+                        USER.username = result.username;
+                        USER.user_level = result.user_level;
+                        USER.user_id = result.id;
                         $("#txt_name").html(this.fullname);
                     }
                     else

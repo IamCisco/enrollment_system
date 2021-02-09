@@ -37,25 +37,40 @@ class UserModel extends Connection
         }
     }
 
-    public function getStudents($where)
+    public function getPersons($where, $tablename)
     {
         try {
-            $sql = "Select  * from students $where";
+            $sql = "Select  * from $tablename $where";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();
         } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+    public function update_user($id, $columns, $values)
+    {
+        try {
+            
+            $sql = "UPDATE users  SET $columns WHERE id=$id";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($values);
+            return "success";
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+    public function update_person($id_number, $columns, $values, $table, $column)
+    {
+        try {
+            if($table != null)
+            {
+                $sql = "UPDATE $table  SET $columns WHERE id_number=$id_number";
+                $stmt = $this->conn->prepare($sql);
+                $stmt->execute($values);
+            } 
+        }catch (\Throwable $th) {
             return $th->getMessage();
         }
     }
 
-    public function getTeachers($where)
-    {
-        try {
-            $sql = "Select  * from teachers $where";
-            $stmt = $this->conn->query($sql);
-            return $stmt->fetchAll();
-        } catch (\Throwable $th) {
-            return $th->getMessage();
-        }
-    }
 }

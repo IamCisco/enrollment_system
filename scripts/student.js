@@ -182,22 +182,36 @@ let STUDENT = {
             dataType: "json",
             assync : false, 
             success: function (result) {
-                STUDENT.getStudents();
-
-                $("#txt_fname").val("");
-                $("#txt_mname").val(""),
-                $("#txt_lname").val(""),
-                $("#txt_address").val(""),
-                $("#txt_bday").val(""),
-                $("#txt_email").val(""),
-                $("#txt_phonenumber").val("")
-                swal("Data has been successfully added!", {
-                    title: "Success!",
-                    text: result,
-                    icon: "success",
-                    button: "OK",
-                });
-                $("#modal_student_form").modal("hide");
+                if(result == "duplicate")
+                {
+                    swal("Student Already Existing", {
+                        title: "Error!",
+                        text: result,
+                        icon: "warning",
+                        button: "OK",
+                    });
+                }
+                else
+                {
+                    STUDENT.getStudents();
+                    $("#txt_fname").val("");
+                    $("#txt_mname").val("");
+                    $("#txt_lname").val("");
+                    $("#txt_address").val("");
+                    $("#txt_bday").val("");
+                    $("#txt_email").val("");
+                    $("#txt_phonenumber").val("");
+                    $("#txt_grade").val("");
+                    $("#txt_program").val("");
+                    swal("Data has been successfully added!", {
+                        title: "Success!",
+                        text: result,
+                        icon: "success",
+                        button: "OK",
+                    });
+                    $("#modal_student_form").modal("hide");
+                }
+                
             }
         });
         

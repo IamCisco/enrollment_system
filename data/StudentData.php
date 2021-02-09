@@ -36,31 +36,37 @@ if ($action == "getStudents") {
     $prepare = "";
     $values = [];
     foreach ($post_data as $key => $value) {
+        $$key = $value;
         $values[] = $value;
         $columns .= $key . ",";
         $prepare .= "?,";
     }
-
-    $path_from = '../assets/img/enrollees/';
-    $path_to = '../assets/img/students/';
-    copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
-
-    //generating of uniquestudent number
-    $year = date("y");  
-    $random_number = mt_rand(10000, 99999);
-    $student_number = $year.$random_number;
-    
-
-    while (count($student->load_all_students("where student_number=$student_number"))  !=0) {
-        $student_number = $year.$random_number;
+    if(count($student->load_all_students("where first_name='$first_name' and middle_name='$middle_name' and last_name='$last_name'")) != 0)
+    {
+        echo json_encode("duplicate");
     }
-    ////////////////////////////////////
-    $values[] = $student_number;
-    $columns .= "student_number";
-    $prepare .= "?";
-
-    $student->insert_student($columns, $values,$prepare);
-    echo json_encode("Successfully Inserted");
+    else{
+        $path_from = '../assets/img/enrollees/';
+        $path_to = '../assets/img/students/';
+        copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
+    
+        //generating of uniquestudent number
+        $year = date("y");  
+        $random_number = mt_rand(10000, 99999);
+        $student_number = $year.$random_number;
+        
+    
+        while (count($student->load_all_students("where student_number=$student_number"))  !=0) {
+            $student_number = $year.$random_number;
+        }
+        ////////////////////////////////////
+        $values[] = $student_number;
+        $columns .= "student_number";
+        $prepare .= "?";
+        $student->insert_student($columns, $values,$prepare);
+        echo json_encode("Successfully Inserted");
+    }
+   
 } else if($action == "getSpecificStudent"){
     $id = $_POST["id"];
     $student_list = $student->load_all_students("where id=$id");
