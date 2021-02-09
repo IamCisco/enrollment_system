@@ -174,6 +174,7 @@ let USER = {
                     $("#btn_logout").hide();
                     $("#btn_stats").hide();
                     $("#btn_background").hide();
+                    $("#btn_profile").hide();
                     $("#btn_login").show();
                     USER.user_id = 0;
 
@@ -192,6 +193,7 @@ let USER = {
                         $("#btn_addmission").show();
                         $("#btn_stats").show();
                         $("#btn_background").show();
+                        $("#btn_profile").show();
                         $("#btn_login").hide();
                         $("#btn_logout").show();
                         

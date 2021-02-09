@@ -391,6 +391,7 @@ let INDEX = {
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
                     $("#btn_stats").hide();
+                    $("#btn_profile").hide();
                     $("#btn_background").hide();
                     $("#btn_login").show();
                     INDEX.user_id = 0;
@@ -406,6 +407,7 @@ let INDEX = {
                         $("#btn_addmission").show();
                         $("#btn_stats").show();
                         $("#btn_background").show();
+                        $("#btn_profile").show();
                         $("#btn_login").hide();
                         $("#btn_logout").show();
                     }
@@ -413,6 +415,7 @@ let INDEX = {
                     {
                         $("#btn_login").hide();
                         $("#btn_logout").show();
+                        $("#btn_profile").show();
                     }
                     
                     INDEX.fullname = result.fullname;
