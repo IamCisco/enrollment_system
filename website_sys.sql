@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 08, 2021 at 09:46 AM
+-- Generation Time: Feb 18, 2021 at 09:37 AM
 -- Server version: 10.4.6-MariaDB
 -- PHP Version: 7.3.8
 
@@ -42,10 +42,10 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
-(8, 'Test', 'test', '2021-02-06', 'portfolio-3.jpg', 'News'),
-(10, 'Test', 'a', '2021-01-31', 'portfolio-9.jpg', 'Events'),
-(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'portfolio-1.jpg', 'Events'),
-(13, 'test', 'test', '2021-02-08', 'portfolio-details-2.jpg', 'Announcements'),
+(8, 'Test', 'test', '2021-02-28', 'portfolio-3.jpg', 'News'),
+(10, 'Test', 'a', '2021-02-27', 'portfolio-9.jpg', 'Events'),
+(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-02-23', 'portfolio-1.jpg', 'Events'),
+(13, 'test', 'test', '2021-02-18', 'portfolio-details-2.jpg', 'Announcements'),
 (14, 'asdf', 'asdf', '2021-02-08', 'portfolio-6.jpg', 'News');
 
 -- --------------------------------------------------------
@@ -142,18 +142,20 @@ CREATE TABLE `enrollees` (
   `accepted` tinyint(1) DEFAULT NULL,
   `passed` tinyint(1) DEFAULT NULL,
   `program` varchar(20) NOT NULL,
-  `grade_level` int(11) NOT NULL
+  `grade_level` int(11) NOT NULL,
+  `exam_result` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `enrollees`
 --
 
-INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`) VALUES
-(11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11),
-(12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11),
-(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11),
-(14, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2020-01-30', -1, -1, 'ABM', 11);
+INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`, `exam_result`) VALUES
+(11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11, 0),
+(12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11, 0),
+(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11, 0),
+(14, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2020-01-30', -1, -1, 'ABM', 11, 0),
+(15, 'ab', 'as', 'asdf', 'asdf', 'jhnfranciscabral@gmail.com', '2021-02-10', 'asdf', 'Capture1.PNG', '2021-02-09', -1, -1, 'STEM', 12, 0);
 
 -- --------------------------------------------------------
 
@@ -202,7 +204,7 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
 (23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 12),
 (25, '2177349', 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
-(26, '2175498', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
+(31, '2180658', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -350,7 +352,7 @@ ALTER TABLE `contents`
 -- AUTO_INCREMENT for table `enrollees`
 --
 ALTER TABLE `enrollees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `exam_schedule`
@@ -362,7 +364,7 @@ ALTER TABLE `exam_schedule`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=27;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
 
 --
 -- AUTO_INCREMENT for table `users`
