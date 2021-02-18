@@ -69,11 +69,76 @@ let ENROLLEE_STATISTICS = {
 							},
 							title: {
 								display: true,
-								text: 'Chart.js Bar Chart'
+								text: 'Enrollee Statistics per Year'
 							}
 						}
 					}
 				});
+				document.getElementById("cnv_enrollee_stats").onclick = function (evt) {
+					var activePoints = window.myBar.getElementsAtEvent(evt);
+					var firstPoint = activePoints[0];
+					//alert(firstPoint);
+					
+					if (firstPoint !== undefined) {
+						year = window.myBar.data.labels[firstPoint._index];
+						
+						// console.log(label)
+						
+   						ENROLLEE_STATISTICS.getEnrolleesPassed(year);
+						
+					}
+				};
+				
+            }
+        });
+	},
+	getEnrolleesPassed: function (year) {
+
+        $.ajax({
+            url: "../data/EnrolleeData.php?action=getEnrolleesPassed",
+			dataType: "json",
+			type : 'POST',
+			data : {
+				year : year
+			},
+            assync: false,
+            success: function (result) {
+				
+				rowCount = $('#tbl_enrollee_passed_body tr').length;
+
+                if(rowCount > 0)
+                {
+                    $('#tbl_enrollee_passed').DataTable().destroy();
+                }
+				row = '';
+				for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row += `
+                    <tr>
+                   		<td><a href="../assets/img/enrollees/${data.image}" target="_blank"><img src="../assets/img/students/${data.image}" alt="Avatar" class="avatar"></a></td>
+                        <td>${data.name}</td>
+                        <td>${data.address}</td>
+                        <td>${data.email}</td>
+                        <td>${data.phone_number}</td>
+                        <td>${data.program}</td>
+                        <td>${data.exam_result}</td>
+                    </tr>
+                    `;
+                }
+				
+                $("#tbl_enrollee_passed_body").html(row);
+                $('#tbl_enrollee_passed').DataTable( {
+					dom: 'Bfrtip',
+					buttons: [
+						{
+							extend: 'csv',
+							sheetName: 'Exported data'
+						}
+					],
+					"autoWidth": false
+				} );
+				$('#modal_enrollee_passed').modal()
+				
             }
         });
     },

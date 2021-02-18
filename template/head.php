@@ -20,6 +20,7 @@
   <link href="../assets/vendor/venobox/venobox.css" rel="stylesheet">
   <link href="../assets/vendor/aos/aos.css" rel="stylesheet">
   <link href="../assets/vendor/datatables/dataTables.min.css" rel="stylesheet">
+  <link href="../assets/vendor/datatables/buttons.dataTables.min.css" rel="stylesheet">
 	<link href="../assets/vendor/alertify/alertify.core.css" />
 	<link href="../assets/vendor/alertify/alertify.default.css" id="toggleCSS" />
   <!-- Template Main CSS File -->

@@ -84,6 +84,29 @@ if ($action == "getPassedEnrollee") {
         ];
     }
     echo json_encode($datastorage);
+} else if ($action == "getEnrolleesPassed") {
+    foreach ($_POST as $key => $value) {
+        $$key = $value;
+    }
+    $enrollee_list = $enrollee->load_all_enrollees("where passed=1 and substr(date_registered,1,4) = '$year'");
+
+    $datastorage = [];
+    foreach ($enrollee_list as $enrollee) {
+        $datastorage[] = [
+            "id"              => $enrollee["id"],
+            "name"            => $enrollee["first_name"] . " " . $enrollee["middle_name"] . " " . $enrollee["last_name"],
+            "address"         => $enrollee["address"],
+            "email"           => $enrollee["email"],
+            "birthdate"       => $enrollee["birthdate"],
+            "phone_number"    => $enrollee["contact_number"],
+            "image"           => $enrollee["image"],
+            "date_registered" => $enrollee["date_registered"],
+            "grade_level"     => $enrollee["grade_level"],
+            "program"         => $enrollee["program"],
+            "exam_result"     => $enrollee["exam_result"]
+        ];
+    }
+    echo json_encode($datastorage);
 } else if ($action == "removeEnrollee") {
     $id = $_POST["id"];
     $enrollee->delete_enrollee($id);

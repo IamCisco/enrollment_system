@@ -8,7 +8,7 @@
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
-                <li class="active"><a href="index.php#">Home</a></li>
+                <li class="active"><a href="Index.php#">Home</a></li>
                 <li><a href="Index.php#featured-services">About</a></li>
                 <li><a href="Index.php#announcement">Announcement</a></li>
                 <li><a href="Index.php#team">Team</a></li>
@@ -17,7 +17,7 @@
                     <ul>
                         <li><a href="Content.php" id ="btn_content" style="display:none">Content Management</a></li>
                         <li><a href="Student.php"id ="btn_student" style="display:none">Student</a></li>
-                        <li><a href="Teacher.php"id ="btn_teacher" style="display:none">Teacher</a></li>
+                        <!-- <li><a href="Teacher.php"id ="btn_teacher" style="display:none">Teacher</a></li> -->
                         <li><a href="Announcement.php" id ="btn_announcement" style="display:none">Announcements</a></li>
                         <li><a href="AdmissionManagement.php"id ="btn_addmission" style="display:none">Addmission</a></li>
                         <li><a href="Background.php"id ="btn_background" style="display:none">Background</a></li>

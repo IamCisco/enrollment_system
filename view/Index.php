@@ -44,7 +44,6 @@
                 <div class="section-title">
                     <h2>About</h2>
                     <h3>Find Out More <span>About Us</span></h3>
-                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
                 </div>
                 <div class="row" id="div_vmgo">
                 </div>
@@ -59,10 +58,19 @@
                 <div class="section-title">
                     <h2>Portfolio</h2>
                     <h3>Check our <span>Portfolio</span></h3>
-                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
+                </div>
+                    <form id="frm_search_announcement">
+                <div class="input-group mb-3">
+                        <input type="text" class="form-control" name="search_text" id="txt_search_announcement" placeholder="Search announcement" aria-label="Search Announcement" aria-describedby="basic-addon2">
+                        <div class="input-group-append">
+                            <button class="btn btn-outline-secondary" type="submit">Search</button>
+                        </div>
+                    </form>
+                    
                 </div>
 
                 <div class="row" data-aos="fade-up" data-aos-delay="100">
+                
                     <div class="col-lg-12 d-flex justify-content-center">
                         <ul id="portfolio-flters">
                             <li data-filter="*" class="filter-active">All</li>
@@ -83,30 +91,29 @@
 
 
         <!-- ======= Team Section ======= -->
-        <section id="team" class="team section-bg">
+        <!-- <section id="team" class="team section-bg">
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
                     <h2>Team</h2>
                     <h3>Our Hardworking <span>Team</span></h3>
-                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
                 </div>
 
                 <div class="row" id="div_teachers">
                 </div>
 
             </div>
-        </section><!-- End Team Section -->
+        </section> -->
+        <!-- End Team Section -->
 
 
         <!-- ======= Contact Section ======= -->
-        <section id="contact" class="contact">
+        <section id="contact" class="contact section-bg">
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
                     <h2>Contact</h2>
                     <h3><span>Contact Us</span></h3>
-                    <p>Ut possimus qui ut temporibus culpa velit eveniet modi omnis est adipisci expedita at voluptas atque vitae autem.</p>
                 </div>
 
                 <div class="row" data-aos="fade-up" data-aos-delay="100" id="div_contacts">

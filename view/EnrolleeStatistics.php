@@ -76,6 +76,40 @@
 
         </div>
     </div>
+    <div id="modal_enrollee_passed" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-xl">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <form id="frm_teacher_add">
+                    <div class="modal-header">
+                        <h4 class="modal-title">Passed Students</h4>
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    </div>
+                    <div class="modal-body">
+                        <table class="table table-bordered table-striped table hover" id="tbl_enrollee_passed">
+                            <thead>
+                                <tr>
+                                    <td>Image</td>
+                                    <td>Name</td>
+                                    <td>Address</td>
+                                    <td>Email</td>
+                                    <td>Contact Number</td>
+                                    <td>Program</td>
+                                    <td>Rate</td>
+                                </tr>
+                            </thead>
+                            <tbody id="tbl_enrollee_passed_body"></tbody>
+                        </table>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+
+        </div>
+    </div>
     <?php include "../template/scripts.php"; ?>
     
     <script src="../scripts/user.js"></script>

@@ -21,6 +21,39 @@ if ($action == "getAnnouncements") {
         ];
     }
     echo json_encode($datastorage);
+} else if ($action == "getAnnouncementsToDate") {
+    $date = date("Y-m-d");
+    $announcement_list = $announcement->load_all_announcements("where validity_date >= '$date'");
+
+    $datastorage = [];
+    foreach($announcement_list as $announcement) {
+        $datastorage[] = [
+            "id"                   => $announcement["id"],
+            "title"                => $announcement["title"],
+            "announcement"         => $announcement["announcement"],
+            "validity_date"        => $announcement["validity_date"],
+            "image"                => $announcement["image"],
+            "type"                 => $announcement["type"]
+        ];
+    }
+    echo json_encode($datastorage);
+} else if ($action == "searchAnnouncements") {
+    $date = date("Y-m-d");
+    $search_text = $_POST["search_text"];
+    $announcement_list = $announcement->load_all_announcements("where validity_date >= '$date' and (title like '%$search_text%' or announcement like '%$search_text%')");
+
+    $datastorage = [];
+    foreach($announcement_list as $announcement) {
+        $datastorage[] = [
+            "id"                   => $announcement["id"],
+            "title"                => $announcement["title"],
+            "announcement"         => $announcement["announcement"],
+            "validity_date"        => $announcement["validity_date"],
+            "image"                => $announcement["image"],
+            "type"                 => $announcement["type"]
+        ];
+    }
+    echo json_encode($datastorage);
 } else if ($action == "removeAnnouncement") {
     $id = $_POST["id"];
     $announcement->delete_announcement($id);

@@ -10,15 +10,20 @@
   <script src="../assets/vendor/venobox/venobox.min.js"></script>
   <script src="../assets/vendor/aos/aos.js"></script>
   <script src="../assets/vendor/datatables/dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.5/js/dataTables.buttons.min.js"></script>
   <script src="../assets/vendor/font-awesome/fontawesome.min.js"></script>
   <script src="../assets/vendor/sweetalert/dist/sweetalert.min.js"></script>
   <script src="../assets/vendor/charts/chart.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js"></script>
+  <script src="https://cdn.datatables.net/buttons/1.6.5/js/buttons.html5.min.js"></script>
 
   <!-- Template Main JS File -->
   <script src="../assets/js/main.js"></script>
   <!-- Load Facebook SDK for JavaScript -->
   <div id="fb-root"></div>
-      <script>
+      <!-- <script>
         window.fbAsyncInit = function() {
           FB.init({
             xfbml            : true,
@@ -33,7 +38,7 @@
         js.src = 'https://connect.facebook.net/en_US/sdk/xfbml.customerchat.js';
         fjs.parentNode.insertBefore(js, fjs);
       }(document, 'script', 'facebook-jssdk'));
-      </script>
+      </script> -->
 
       <!-- Your Chat Plugin code -->
       <div class="fb-customerchat"
