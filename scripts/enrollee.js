@@ -36,12 +36,19 @@ let ENROLLEE = {
             url: "../data/EnrolleeData.php?action=getEnrolleesForAccept",
             dataType: "json",
             success: function (result) {
+                rowCount = $('#tbl_enrollee_accept_body tr').length;
+
+                if(rowCount > 0)
+                {
+                    $('#tbl_enrollee_accept').DataTable().destroy();
+                }
                 var row = ``;
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
                     row += `
                     <tr>
                         <td><a href="../assets/img/enrollees/${data["image"]}" target="_blank"><img src="../assets/img/enrollees/${data["image"]}" alt="Avatar" class="avatar"></a></td>
+                        <td><a href="../assets/img/requirements/${data["requirements"]}" target="_blank"><img src="../assets/img/requirements/${data["requirements"]}" alt="Requirement" class="avatar"></a></td>
                         <td>${data["name"]}</td>
                         <td>${data["address"]}</td>
                         <td>${data["birthdate"]}</td>
@@ -66,7 +73,9 @@ let ENROLLEE = {
                     `;
                 }
                 $("#tbl_enrollee_accept_body").html(row);
-                $('#tbl_enrollee_accept').DataTable();
+                $('#tbl_enrollee_accept').DataTable({
+                    autoWidth : false
+                });
             }
         });
     },
@@ -75,12 +84,19 @@ let ENROLLEE = {
             url: "../data/EnrolleeData.php?action=getEnrolleesForExam",
             dataType: "json",
             success: function (result) {
+                rowCount = $('#tbl_enrollee_for_exam_body tr').length;
+
+                if(rowCount > 0)
+                {
+                    $('#tbl_enrollee_for_exam').DataTable().destroy();
+                }
                 var row = ``;
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
                     row += `
                     <tr>
                         <td><a href="../assets/img/enrollees/${data["image"]}" target="_blank"><img src="../assets/img/enrollees/${data["image"]}" alt="Avatar" class="avatar"></a></td>
+                        <td><a href="../assets/img/enrollees/${data["requirements"]}" target="_blank"><img src="../assets/img/requirements/${data["requirements"]}" alt="Requirement" class="avatar"></a></td>
                         <td>${data["name"]}</td>
                         <td>${data["address"]}</td>
                         <td>${data["birthdate"]}</td>
@@ -105,7 +121,9 @@ let ENROLLEE = {
                     `;
                 }
                 $("#tbl_enrollee_for_exam_body").html(row);
-                $('#tbl_enrollee_for_exam').DataTable();
+                $('#tbl_enrollee_for_exam').DataTable({
+                    autoWidth : false
+                });
             }
         });
     },
@@ -223,21 +241,23 @@ let ENROLLEE = {
           });
     },
     passEnrollee: function (id) {
-        swal("Hello world!");
+        // swal("Hello world!");
         swal({
             title: "Are you sure?",
-            text: "You want to pass this examinee?",
+            content: "input",
+            text: "You want to pass this examinee? Please input grade.",
             icon: "info",
             buttons: true,
             dangerMode: true,
           })
-          .then((willDelete) => {
-            if (willDelete) {
+          .then((grade) => {
+            if (grade !=null) {
                 $.ajax({
                     url: "../data/EnrolleeData.php?action=passEnrollee",
                     data:
                     {
-                        id: id
+                        id: id,
+                        exam_result : grade
                     },
                     type: "post",
                     dataType: "json",
@@ -258,21 +278,25 @@ let ENROLLEE = {
           });
     },
     failEnrollee: function (id) {
-        swal("Hello world!");
+        // swal("Hello world!");
+        
         swal({
             title: "Are you sure?",
-            text: "You want to pass this examinee?",
+            content: "input",
+            text: "You want to fail this examinee? Please input grade.",
             icon: "info",
             buttons: true,
             dangerMode: true,
           })
-          .then((willDelete) => {
-            if (willDelete) {
+          .then((grade) => {
+              
+            if (grade != null) {
                 $.ajax({
-                    url: "../data/EnrolleeData.php?action=passEnrollee",
+                    url: "../data/EnrolleeData.php?action=failEnrollee",
                     data:
                     {
-                        id: id
+                        id: id,
+                        exam_result : grade
                     },
                     type: "post",
                     dataType: "json",

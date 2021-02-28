@@ -1,14 +1,13 @@
 -- phpMyAdmin SQL Dump
--- version 4.9.0.1
+-- version 5.0.4
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 18, 2021 at 09:37 AM
--- Server version: 10.4.6-MariaDB
--- PHP Version: 7.3.8
+-- Generation Time: Feb 28, 2021 at 12:38 PM
+-- Server version: 10.4.17-MariaDB
+-- PHP Version: 7.4.13
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
-SET AUTOCOMMIT = 0;
 START TRANSACTION;
 SET time_zone = "+00:00";
 
@@ -42,10 +41,10 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
-(8, 'Test', 'test', '2021-02-28', 'portfolio-3.jpg', 'News'),
-(10, 'Test', 'a', '2021-02-27', 'portfolio-9.jpg', 'Events'),
-(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-02-23', 'portfolio-1.jpg', 'Events'),
-(13, 'test', 'test', '2021-02-18', 'portfolio-details-2.jpg', 'Announcements'),
+(8, 'Test', 'test', '2021-02-06', 'portfolio-3.jpg', 'News'),
+(10, 'Test', 'a', '2021-01-31', 'portfolio-9.jpg', 'Events'),
+(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'portfolio-1.jpg', 'Events'),
+(13, 'test', 'test', '2021-02-08', 'portfolio-details-2.jpg', 'Announcements'),
 (14, 'asdf', 'asdf', '2021-02-08', 'portfolio-6.jpg', 'News');
 
 -- --------------------------------------------------------
@@ -118,7 +117,7 @@ INSERT INTO `contents` (`id`, `name`, `details`) VALUES
 (1, 'Mission', 'To provide relevant, quality, and innovate industry-based education with equal emphasis on values formation and character building of its students.'),
 (3, 'Vision', 'A leading technological institution driven by industry demands to produce highly skilled, value-laden, and globally-competitive graduates.'),
 (4, 'Core Values', 'CI Tech will develop and nurture these personal and Industry-desired values:<br>\n1. Honesty and Integrity<br>\n2. Adaptability and Responsibility<br>\n3. Respect and Honour<br>\n4. Positive Attitude<br>'),
-(5, 'Address', 'A108 Adam Street, New York, NY 535022'),
+(5, 'Address', 'A108 Adam Street, New York, NY 53502245'),
 (6, 'Email', 'example@email.com'),
 (7, 'Contact Number', '+1 5589 55488 55');
 
@@ -143,6 +142,7 @@ CREATE TABLE `enrollees` (
   `passed` tinyint(1) DEFAULT NULL,
   `program` varchar(20) NOT NULL,
   `grade_level` int(11) NOT NULL,
+  `requirements` varchar(100) NOT NULL,
   `exam_result` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
@@ -150,12 +150,12 @@ CREATE TABLE `enrollees` (
 -- Dumping data for table `enrollees`
 --
 
-INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`, `exam_result`) VALUES
-(11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11, 0),
-(12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11, 0),
-(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11, 0),
-(14, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2020-01-30', -1, -1, 'ABM', 11, 0),
-(15, 'ab', 'as', 'asdf', 'asdf', 'jhnfranciscabral@gmail.com', '2021-02-10', 'asdf', 'Capture1.PNG', '2021-02-09', -1, -1, 'STEM', 12, 0);
+INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`, `requirements`, `exam_result`) VALUES
+(11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11, '', 90),
+(12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11, '', 88),
+(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11, '', 90),
+(14, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2020-01-30', 1, 1, 'ABM', 11, '', 85),
+(15, 'sdf', 'a', 'a', 'adfsasdf', 'jhnfranciscabral@gmail.com', '2021-02-26', '123', 'Gaming_5000x3125.jpg', '2021-02-26', 1, 0, 'HUMMS', 12, 'Gaming_5000x3125.jpg', 74);
 
 -- --------------------------------------------------------
 
@@ -204,7 +204,7 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
 (23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 12),
 (25, '2177349', 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
-(31, '2180658', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
+(27, '2119649', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -231,7 +231,7 @@ CREATE TABLE `teachers` (
 
 INSERT INTO `teachers` (`id_number`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `teacher_level`) VALUES
 ('111111', 'a', 'a', 'a', 'ab', 'jhnfranciscabral@gmail.com', '2021-03-13', '1', 'team-2.jpg', 'Principal'),
-('12345', 'john francis', 'CONSIGO', 'cabral', 'a', 'jhnfranciscabral@gmail.com', '2021-02-05', '123', 'team-1.jpg', 'Teacher 1'),
+('12345', 'john francis', 'consigo', 'cabral', 'a', 'jhnfranciscabral@gmail.com', '2021-02-05', '123', 'CONAN.jpg', 'Teacher 1'),
 ('123451', 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-02-04', '09399395763', 'team-3.jpg', 'Principal'),
 ('123456', 'RAQUEL', 'Alviola', 'Lachica', 'a', 'raquellachicacoe@gmail.com', '2021-02-04', '09399395763', 'team-4.jpg', 'Teacher 2');
 
@@ -258,9 +258,9 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `email`, `user_level`, `image`) VALUES
-(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', '', 'admin', 'admin.png'),
+(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', 'asdf', 'admin', 'CONAN.jpg'),
 (2, '2157148', 'masterkey', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'jhnfranciscabral@gmail.com', 'student', 'CONAN.jpg'),
-(3, '12345', 'test', 'john francis', 'CONSIGO', 'cabral', 'jhnfranciscabral@gmail.com', 'teacher', 'team-1.jpg');
+(3, '12345', 'test', 'john francis', 'consigo', 'cabral', 'jhnfranciscabral@gmail.com', 'teacher', 'CONAN.jpg');
 
 --
 -- Indexes for dumped tables
@@ -364,7 +364,7 @@ ALTER TABLE `exam_schedule`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=32;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
 
 --
 -- AUTO_INCREMENT for table `users`

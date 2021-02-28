@@ -39,10 +39,11 @@
                 <br>
                 <div class="row">
                     <div class="col-lg-12">
-                        <table class="table table-bordered table-striped table-hover" id="tbl_enrollee_accept">
+                        <table class="table table-bordered table-striped table-hover  table-responsive" id="tbl_enrollee_accept">
                             <thead>
                                 <tr>
                                     <td>Image</td>
+                                    <td>TOR</td>
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Birthday</td>
@@ -70,10 +71,11 @@
                 <br>
                 <div class="row">
                     <div class="col-lg-12">
-                        <table class="table table-bordered table-striped table-hover" id="tbl_enrollee_for_exam">
+                        <table class="table table-bordered table-striped table-hover table-responsive" id="tbl_enrollee_for_exam">
                             <thead>
                                 <tr>
                                     <td>Image</td>
+                                    <td>TOR</td>
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Birthday</td>

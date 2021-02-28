@@ -97,6 +97,7 @@
                                     <td>Contact Number</td>
                                     <td>Program</td>
                                     <td>Rate</td>
+                                    <td>Remarks</td>
                                 </tr>
                             </thead>
                             <tbody id="tbl_enrollee_passed_body"></tbody>

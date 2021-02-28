@@ -81,8 +81,12 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="txt_number">Image</label>
+                                <label for="file_image">Image</label>
                                 <input type="file" name="input_file" class="form-control-file border" id="file_image"required>
+                            </div>
+                            <div class="form-group">
+                                <label for="txt_number">Requirement <strong>Note : Please upload your scanned TOR(Form 137)</strong></label>
+                                <input type="file" name="input_file_requirement" class="form-control-file border" id="file_requirement"required>
                             </div>
                             <button type="submit" class="btn btn-primary pull-right">Submit</button>
                         </form>

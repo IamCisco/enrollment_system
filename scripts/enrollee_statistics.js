@@ -95,7 +95,7 @@ let ENROLLEE_STATISTICS = {
 	getEnrolleesPassed: function (year) {
 
         $.ajax({
-            url: "../data/EnrolleeData.php?action=getEnrolleesPassed",
+            url: "../data/EnrolleeData.php?action=getEnrolleeScores",
 			dataType: "json",
 			type : 'POST',
 			data : {
@@ -122,6 +122,7 @@ let ENROLLEE_STATISTICS = {
                         <td>${data.phone_number}</td>
                         <td>${data.program}</td>
                         <td>${data.exam_result}</td>
+                        <td>${data.remarks}</td>
                     </tr>
                     `;
                 }

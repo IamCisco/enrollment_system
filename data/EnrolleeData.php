@@ -33,7 +33,8 @@ if ($action == "getPassedEnrollee") {
             "image"           => $enrollee["image"],
             "date_registered" => $enrollee["date_registered"],
             "grade_level"     => $enrollee["grade_level"],
-            "program"         => $enrollee["program"]
+            "program"         => $enrollee["program"],
+            "requirements"    => $enrollee["requirements"]
         ];
     }
     echo json_encode($datastorage);
@@ -80,18 +81,28 @@ if ($action == "getPassedEnrollee") {
             "image"           => $enrollee["image"],
             "date_registered" => $enrollee["date_registered"],
             "grade_level"     => $enrollee["grade_level"],
-            "program"         => $enrollee["program"]
+            "program"         => $enrollee["program"],
+            "requirements"    => $enrollee["requirements"]
         ];
     }
     echo json_encode($datastorage);
-} else if ($action == "getEnrolleesPassed") {
+} else if ($action == "getEnrolleeScores") {
     foreach ($_POST as $key => $value) {
         $$key = $value;
     }
-    $enrollee_list = $enrollee->load_all_enrollees("where passed=1 and substr(date_registered,1,4) = '$year'");
+    $enrollee_list = $enrollee->load_all_enrollees("where accepted=1 and substr(date_registered,1,4) = '$year'");
 
     $datastorage = [];
     foreach ($enrollee_list as $enrollee) {
+        $remarks = "";
+        if($enrollee["passed"] == 1)
+        {
+            $remarks = "PASSED";
+        }
+        else if($enrollee["passed"] == 0)
+        {
+            $remarks = "FAILED";
+        }
         $datastorage[] = [
             "id"              => $enrollee["id"],
             "name"            => $enrollee["first_name"] . " " . $enrollee["middle_name"] . " " . $enrollee["last_name"],
@@ -103,7 +114,8 @@ if ($action == "getPassedEnrollee") {
             "date_registered" => $enrollee["date_registered"],
             "grade_level"     => $enrollee["grade_level"],
             "program"         => $enrollee["program"],
-            "exam_result"     => $enrollee["exam_result"]
+            "exam_result"     => $enrollee["exam_result"],
+            "remarks"         => $remarks
         ];
     }
     echo json_encode($datastorage);
@@ -144,12 +156,14 @@ if ($action == "getPassedEnrollee") {
 
 
     $name = $_FILES['input_file']['name'];
+    $requirement = $_FILES['input_file_requirement']['name'];
     $values[] = $name;
+    $values[] = $requirement;
     $values[] = date('Y-m-d');
     $values[] = -1;
     $values[] = -1;
-    $columns .= " image, date_registered,accepted, passed";
-    $prepare .= " ?, ?, ?, ?";
+    $columns .= " image, requirements, date_registered,accepted, passed";
+    $prepare .= " ?, ?, ?, ?, ?";
 
     $count_enrollee = count($enrollee->load_all_enrollees("where first_name='$first_name' and middle_name='$middle_name' and last_name='$last_name'"));
     if($count_enrollee == 0)
@@ -161,6 +175,16 @@ if ($action == "getPassedEnrollee") {
 
             if (!empty($name)) {
                 if (move_uploaded_file($tmp_name, $path . $name)) {
+                }
+            }
+        }
+        $tmp_requirements = $_FILES['input_file_requirement']['tmp_name'];
+        if (isset($name)) {
+
+            $path_requirements = '../assets/img/requirements/';
+
+            if (!empty($name)) {
+                if (move_uploaded_file($tmp_requirements, $path_requirements . $requirement)) {
                 }
             }
         }
@@ -270,6 +294,7 @@ if ($action == "getPassedEnrollee") {
     echo json_encode("Person successfully rejected");
 } else if ($action == "passEnrollee"){
     $id = $_POST["id"];
+    $exam_result = $_POST["exam_result"];
     
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
     $first_name = $enrollee_list[0]["first_name"];
@@ -286,8 +311,8 @@ if ($action == "getPassedEnrollee") {
         CITech
         </html>";
 
-    $columns = "passed=?";
-    $values = [1];
+    $columns = "passed=?, exam_result=?";
+    $values = [1,$exam_result];
     
 
     $enrollee->update_enrollee($id, $columns, $values);
@@ -296,6 +321,7 @@ if ($action == "getPassedEnrollee") {
     echo json_encode("Enrollee Passed");
 } else if ($action == "failEnrollee"){
     $id = $_POST["id"];
+    $exam_result = $_POST["exam_result"];
     
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
     $first_name = $enrollee_list[0]["first_name"];
@@ -312,8 +338,8 @@ if ($action == "getPassedEnrollee") {
         CITech
         </html>";
 
-    $columns = "passed=?";
-    $values = [0];
+    $columns = "passed=?, exam_result=?";
+    $values = [0, $exam_result];
 
     $enrollee->update_enrollee($id, $columns, $values);
     echo json_encode("Enrollee Failed");
