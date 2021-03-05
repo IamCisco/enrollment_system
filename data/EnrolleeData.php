@@ -165,7 +165,7 @@ if ($action == "getPassedEnrollee") {
     $columns .= " image, requirements, date_registered,accepted, passed";
     $prepare .= " ?, ?, ?, ?, ?";
 
-    $count_enrollee = count($enrollee->load_all_enrollees("where first_name='$first_name' and middle_name='$middle_name' and last_name='$last_name'"));
+    $count_enrollee = count($enrollee->load_all_enrollees("where email='$email'"));
     if($count_enrollee == 0)
     {
         $tmp_name = $_FILES['input_file']['tmp_name'];
@@ -198,7 +198,7 @@ if ($action == "getPassedEnrollee") {
     {
         $title = "Warning!";
         $status = "info";
-        $message = "You already have a pending application. Please wait for check your email regularly for any updates";
+        $message = "Email already used by other applicants";
     }
     $datastorage=[
         "title"   => $title,

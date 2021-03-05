@@ -40,7 +40,7 @@
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="txt_mname">Middle Name</label>
-                                    <input type="text" class="form-control" id="txt_mname" name="middle_name" placeholder="Middle Name"required>
+                                    <input type="text" class="form-control" id="txt_mname" name="middle_name" placeholder="Middle Name">
                                 </div>
                                 <div class="form-group col-md-4">
                                     <label for="txt_lname">Last Name</label>
