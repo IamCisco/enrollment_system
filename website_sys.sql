@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 28, 2021 at 12:38 PM
+-- Generation Time: Mar 07, 2021 at 12:50 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -178,6 +178,27 @@ INSERT INTO `exam_schedule` (`id`, `date`) VALUES
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `programs`
+--
+
+CREATE TABLE `programs` (
+  `id` int(11) NOT NULL,
+  `program` varchar(255) NOT NULL,
+  `abbreviation` varchar(50) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `programs`
+--
+
+INSERT INTO `programs` (`id`, `program`, `abbreviation`) VALUES
+(3, 'Humanities and Social Sciences', 'HUMMS'),
+(4, 'Accountancy, Business and Management', 'ABM'),
+(5, 'Science, Technology, Engineering, and Mathematics', 'STEM');
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `students`
 --
 
@@ -204,7 +225,7 @@ CREATE TABLE `students` (
 INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
 (23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 12),
 (25, '2177349', 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
-(27, '2119649', 'test', 'test', 'test', 'A', '2021-01-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
+(27, '2119649', 'test', 'test', 'test', 'A', '2021-01-30', 'abctest018@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -250,17 +271,19 @@ CREATE TABLE `users` (
   `last_name` varchar(50) NOT NULL,
   `email` varchar(100) NOT NULL,
   `user_level` varchar(20) NOT NULL,
-  `image` varchar(100) NOT NULL
+  `image` varchar(100) NOT NULL,
+  `verify_token` varchar(255) NOT NULL,
+  `verified` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `email`, `user_level`, `image`) VALUES
-(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', 'asdf', 'admin', 'CONAN.jpg'),
-(2, '2157148', 'masterkey', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'jhnfranciscabral@gmail.com', 'student', 'CONAN.jpg'),
-(3, '12345', 'test', 'john francis', 'consigo', 'cabral', 'jhnfranciscabral@gmail.com', 'teacher', 'CONAN.jpg');
+INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `email`, `user_level`, `image`, `verify_token`, `verified`) VALUES
+(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', 'asdf', 'admin', 'CONAN.jpg', '', 1),
+(2, '2157148', 'masterkey', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'jhnfranciscabral@gmail.com', 'student', 'CONAN.jpg', '', 1),
+(24, '2119649', '12345', 'test', 'test', 'test', 'abctest018@gmail.com', 'student', 'CONAN.jpg', 'c9a26efc796074f1d85e3434e7641adce480bf2fe615d26d681db2b8f1d7dcbface56a47b628f84036aa2ca1d8ce84b94b2aa3c4e88a541a2ffe107ea6abd6569f736bbc1d0d63232e58966333cf', 0);
 
 --
 -- Indexes for dumped tables
@@ -300,6 +323,12 @@ ALTER TABLE `enrollees`
 -- Indexes for table `exam_schedule`
 --
 ALTER TABLE `exam_schedule`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `programs`
+--
+ALTER TABLE `programs`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -361,6 +390,12 @@ ALTER TABLE `exam_schedule`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
+-- AUTO_INCREMENT for table `programs`
+--
+ALTER TABLE `programs`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+
+--
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
@@ -370,7 +405,7 @@ ALTER TABLE `students`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
