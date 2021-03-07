@@ -196,9 +196,20 @@ if ($action == "getPassedEnrollee") {
     }
     else
     {
-        $title = "Warning!";
-        $status = "info";
-        $message = "Email already used by other applicants";
+        $count_enrollee1 = count($enrollee->load_all_enrollees("where email='$email' and first_name='$first_name' and middle_name = '$middle_name' and last_name='$last_name'"));
+        if($count_enrollee1 == 0)
+        {
+            $title = "Warning!";
+            $status = "info";
+            $message = "Email already used by other applicants";
+        }
+        else
+        {
+            $title = "Warning!";
+            $status = "info";
+            $message = "You have a pending application. Please wait for the response of the school admin.";
+        }
+        
     }
     $datastorage=[
         "title"   => $title,

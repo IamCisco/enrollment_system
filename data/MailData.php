@@ -15,7 +15,7 @@ function sendMail($email, $subject, $body)
     $mail->Host = 'smtp.elasticemail.com';
     $mail->SMTPAuth = true;
     $mail->Username = 'abctest018@gmail.com';
-    $mail->Password = '1B0881FF29B2934CF5231C1F9AFBC8250B44';
+    $mail->Password = '1CA39D21FC00973C3CF410AC31A85DBC66C0';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 2525;
     $mail->setFrom('abctest018@gmail.com', 'CITech Website');

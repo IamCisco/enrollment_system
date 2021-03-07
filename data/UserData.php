@@ -56,7 +56,7 @@ if ($action == "login") {
     foreach ($_POST as $key => $value) {
         $$key = $value;
     }
-    $users = $user->getUsers(" where username='$username'");
+    $users = $user->getUsers(" where username='$username' and verified=1");
     if(count($users) != 0)
     {
         $return = [
@@ -66,7 +66,9 @@ if ($action == "login") {
     }
     else
     {
-
+        $host = $_SERVER["REQUEST_SCHEME"]."://".$_SERVER["HTTP_HOST"];
+        $users = $user->getUsers(" where username='$username'");
+        $token = bin2hex(random_bytes(78));
         $subject = 'Successful!';
         $body = "
             <html>
@@ -77,10 +79,15 @@ if ($action == "login") {
             Here are your credentials :
             Username : $username
             Password : $password
+            Click link to verify   : $host/website/data/VerifyToken.php?token=$token
             
             Thank you,
             CITech
             </html>";
+        if(count($users) !=0)
+        {
+            $user->delete_user($users[0]["username"]);
+        }
         if($user_level == "student")
         {
             $students = $user->getPersons(" where student_number='$username'", "students");
@@ -97,7 +104,8 @@ if ($action == "login") {
                     "last_name"   => $students["last_name"],
                     "email"       => $students["email"],
                     "user_level"  => $user_level,
-                    "image"       => $students["image"]
+                    "image"       => $students["image"],
+                    "verify_token"=> $token
                 ];
 
                 
@@ -116,7 +124,7 @@ if ($action == "login") {
                 $user->insert_user($columns, $values,$prepare);
                 $return = [
                     "type"    => "success",
-                    "message" => "User Successfully Registered",
+                    "message" => "User Successfully Registered. Please check your email to verify user",
                 ];
                 $email = $students["email"];
                 sendMail($email,$subject,$body);
@@ -145,7 +153,8 @@ if ($action == "login") {
                     "last_name"   => $teachers["last_name"],
                     "email"       => $teachers["email"],
                     "user_level"  => $user_level,
-                    "image"       => $teachers["image"]
+                    "image"       => $teachers["image"],
+                    "verify_token"=> $token
                 ];
 
                 

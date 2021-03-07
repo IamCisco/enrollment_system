@@ -74,5 +74,15 @@ class UserModel extends Connection
             return $th->getMessage();
         }
     }
+    public function delete_user($id)
+    {
+        try {
+            $sql = "Delete from users WHERE username=$id";
+            $this->conn->exec($sql);
+            return "success";
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
 
 }

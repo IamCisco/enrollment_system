@@ -32,4 +32,8 @@ class UserController
     {
         return $this->user->update_person($id, $columns, $values, $table, $column);
     }
+    public function delete_user($id)
+    {
+        return $this->user->delete_user($id);
+    }
 }

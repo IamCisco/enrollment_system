@@ -108,7 +108,7 @@ let USER = {
                 {
                     swal(result["type"], {
                         title: "Success",
-                        text: result["type"],
+                        text: result["message"],
                         icon: "success",
                         button: "OK",
                     });
