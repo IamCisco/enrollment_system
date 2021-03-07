@@ -79,12 +79,21 @@ let USER = {
                         
                     }, 1000);
                 }
-                else
+                else if(result == "error")
                 {
                     swal("Login Failed", {
                         title: "Error",
                         text: "Login Failed",
                         icon: "error",
+                        button: "OK",
+                    });
+                }
+                else
+                {
+                    swal("Email not yet verified", {
+                        title: "Warning",
+                        text: "Email not yet verified",
+                        icon: "warning",
                         button: "OK",
                     });
                 }

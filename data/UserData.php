@@ -18,11 +18,18 @@ if ($action == "login") {
     if(count($user) != 0)
     {
         $user = $user[0];
-        $_SESSION["id"] = $user["id"];
-        $_SESSION["fullname"] = $user["first_name"] . " " . $user["middle_name"] . " " . $user["last_name"];
-        $_SESSION["username"] = $user["username"];
-        $_SESSION["user_type"] = $user["user_level"];
-        echo json_encode("success");
+        if($user["verified"] == 0)
+        {
+            echo json_encode("warning");
+        }
+        else
+        {
+            $_SESSION["id"] = $user["id"];
+            $_SESSION["fullname"] = $user["first_name"] . " " . $user["middle_name"] . " " . $user["last_name"];
+            $_SESSION["username"] = $user["username"];
+            $_SESSION["user_type"] = $user["user_level"];
+            echo json_encode("success");
+        }
     }
     else
     {

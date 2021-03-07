@@ -2,6 +2,7 @@
 $(document).ready(function () {
     USER.checkSession();
     STUDENT.getStudents();
+    STUDENT.getPrograms();
     STUDENT.loadEntranceExamPassers();
     $('#txt_passers').on('change', function() {
         STUDENT.getSpecificPasser( this );
@@ -268,5 +269,23 @@ let STUDENT = {
                 $("#modal_student_form_update").modal("hide");
             }
         });
-    }
+    },
+    getPrograms: function () {
+        $.ajax({
+            url: "../data/ProgramData.php?action=getPrograms",
+            dataType: "json",
+            success: function (result) {
+                var row = `<option value="" disabled selected>Please select a program</option>`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row += `
+                        <option value="${data["abbreviation"]}">${data["abbreviation"]}</option>
+                    `;
+                }
+                $("#txt_program_update").html(row);
+                $("#txt_program").html(row);
+            }
+        });
+    },
 } 
