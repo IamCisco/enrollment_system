@@ -29,7 +29,9 @@ let INDEX = {
     user_level : "",
     announcement_id : 0,
     comment_id : 0,
-    setAnnouncementId: function (id){
+    setAnnouncementId: function (id, title, details) {
+        $("#announcement_title").html(`<b>Announcement Title : </b>${title}`);
+        $("#announcement_details").html(`<b>Announcement Detail : </b>${details}`);
         this.announcement_id = id
         this.getComments(id);
     },
@@ -46,16 +48,16 @@ let INDEX = {
                     data = result[x];
                     if(INDEX.user_id != 0)
                     {
-                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]})"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></button>`;
+                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
                     }
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
                         <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>${data["title"]}</h4>
-                            <p>${data["announcement"]}</p>
-                            ${btn_add_comment}
-                            <a href="../assets/img/announcements/${data["image"]}" class="venobox preview-link vbox-item" title="${data["title"]}"><i class="bx bx-link"></i></a>
+                            ${btn_add_comment} 
+                            <a href="../assets/img/announcements/${data["image"]}" class="venobox preview-link vbox-item" title="${data["title"]}"><i class="bx bx-link"></i></a><br>
+                            
                         </div>
                     </div>
                     `;
@@ -150,6 +152,8 @@ let INDEX = {
         });
     },
     getComments: function (announcement_id) {
+        
+        $("#modal_announcement_detail").modal("hide");
         $.ajax({
             url: "../data/CommentData.php?action=getComments",
             dataType: "json",

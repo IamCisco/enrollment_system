@@ -51,6 +51,7 @@
                                     <td>Phone Number</td>
                                     <td>Program</td>
                                     <td>Grade</td>
+                                    <td>Enabled</td>
                                     <td></td>
                                     <td></td>
                                 </tr>

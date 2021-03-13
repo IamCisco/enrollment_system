@@ -22,6 +22,7 @@ if ($action == "getStudents") {
             "program"        => $student["program"],
             "image"          => $student["image"],
             "grade_level"    => $student["grade_level"],
+            "status"         => $student["status"],
         ];
     }
     echo json_encode($datastorage);
@@ -61,8 +62,8 @@ if ($action == "getStudents") {
         }
         ////////////////////////////////////
         $values[] = $student_number;
-        $columns .= "student_number";
-        $prepare .= "?";
+        $columns .= "student_number,status";
+        $prepare .= "?,?";
         $student->insert_student($columns, $values,$prepare);
         echo json_encode("Successfully Inserted");
     }
@@ -88,6 +89,21 @@ if ($action == "getStudents") {
     }
     echo json_encode($datastorage);
 } else if($action == "updateStudent"){
+    $id = $_POST["id"];
+    $columns = "";
+    $values =[];
+    $value_string = "";
+    foreach ($_POST as $key => $value) {
+        if($key != "id"){
+            $values[] = $value;
+            $columns .= $key."=?,";
+        }
+    }
+
+    $columns = substr_replace($columns, "", -1);
+    $student->update_student($id, $columns, $values);
+    echo json_encode("Data Successfully Updated");
+} else if($action == "updateStudentStatus"){
     $id = $_POST["id"];
     $columns = "";
     $values =[];

@@ -132,14 +132,14 @@ if ($action == "getAnnouncements") {
                 unlink("../assets/img/announcements/$image");
             }
             $values[] = $name;
-            $columns .= "image= ?";
+            $columns .= "image= ?,";
             if (move_uploaded_file($tmp_name, $path . $name)) {
             }
         }
     }
     
 
-    // $columns = substr_replace($columns, "", -1);
+    $columns = substr_replace($columns, "", -1);
     $announcement->update_announcement($id, $columns, $values);
     echo json_encode("Data Successfully Updated");
 }

@@ -12,40 +12,45 @@ if ($action == "login") {
     foreach ($_POST as $key => $value) {
         $$key = $value;
     }
-    $user = $user->getUsers(" where username='$username' and password='$password'");
-    
+    $users = $user->getUsers(" where username='$username' and password='$password'");
 
-    if(count($user) != 0)
+    $stop = 0;
+    if($username != 'admin')
     {
-        $user = $user[0];
-        if($user["verified"] == 0)
+        $user_status = $user->getPersons(" where student_number ='$username'", "students")[0]["status"];
+        if($user_status == 0)
         {
-            echo json_encode("warning");
+            echo json_encode("disabled");
+            $stop = 1;
+        }
+        
+    }
+    
+    if($stop == 0)
+    {
+        if(count($users) != 0)
+        {
+
+            $users = $users[0];
+            if($users["verified"] == 0)
+            {
+                echo json_encode("warning");
+            }
+            else
+            {
+                $_SESSION["id"] = $users["id"];
+                $_SESSION["fullname"] = $users["first_name"] . " " . $users["middle_name"] . " " . $users["last_name"];
+                $_SESSION["username"] = $users["username"];
+                $_SESSION["user_type"] = $users["user_level"];
+                echo json_encode("success");
+            }
         }
         else
         {
-            $_SESSION["id"] = $user["id"];
-            $_SESSION["fullname"] = $user["first_name"] . " " . $user["middle_name"] . " " . $user["last_name"];
-            $_SESSION["username"] = $user["username"];
-            $_SESSION["user_type"] = $user["user_level"];
-            echo json_encode("success");
+            echo json_encode("error");
         }
     }
-    else
-    {
-        echo json_encode("error");
-    }
-} else if ($action == "login") {
-    foreach ($_POST as $key => $value) {
-        $$key = $value;
-    }
-    $user = $user->getUsers(" where id=$id")[0];
-    $datastorage =[
-        "image"      => $user["image"],
-        "user_level" => $user["user_level"],
-        "name"       => $user["first_name"] . " " .$user["last_name"],
-    ];
-    echo json_encode($user);
+    
 } else if ($action == "checkSession") {
     $datastorage = [];
     if (isset($_SESSION["username"])) {

@@ -63,6 +63,7 @@ let USER = {
             dataType:"json",
             assync : false,
             success: function (result) {
+                // alert(result)
                 if(result == "success")
                 {
                     swal("Login Successful", {
@@ -88,8 +89,19 @@ let USER = {
                         button: "OK",
                     });
                 }
+                else if(result == "disabled")
+                {
+                    // alert(result)
+                    swal("You are disabled by system admin", {
+                        title: "Info",
+                        text: "You are disabled by system admin",
+                        icon: "warning",
+                        button: "OK",
+                    });
+                }
                 else
                 {
+                    alert(1)
                     swal("Email not yet verified", {
                         title: "Warning",
                         text: "Email not yet verified",

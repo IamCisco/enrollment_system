@@ -58,6 +58,11 @@ let STUDENT = {
 
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
+                    var checked = "";
+                    if(data["status"] == 1)
+                    {
+                        checked = "checked"
+                    }
                     row += `
                     <tr>
                     <td><a href="../assets/img/enrollees/${data["image"]}" target="_blank"><img src="../assets/img/students/${data["image"]}" alt="Avatar" class="avatar"></a></td>
@@ -70,6 +75,12 @@ let STUDENT = {
                         <td>${data["program"]}</td>
                         <td>${data["grade_level"]}</td>
                         <td>
+                            <label class="switch ">
+                                <input type="checkbox" class="primary radio_student_status" onchange="STUDENT.updateStudentStatus(${data["id"]})" ${checked}>
+                                <span class="slider round"></span>
+                            </label>
+                        </td>
+                        <td>
                             <button type="button"class="btn btn-info btn-sm" style='font-size:24px' onclick="STUDENT.getSpecificStudent(${data["id"]})">
                             
                                 <i class='far fa-save'></i>
@@ -81,6 +92,7 @@ let STUDENT = {
                                 <i class='fas fa-trash'></i>
                             </button>
                         </td>
+                        
                     </tr>
                     `;
                 }
@@ -267,6 +279,33 @@ let STUDENT = {
                     button: "OK",
                 });
                 $("#modal_student_form_update").modal("hide");
+            }
+        });
+    },
+    updateStudentStatus : function(id){
+        // data.append('id', STUDENT.id)
+        var student_status = 0;
+        if($('.radio_student_status').is(':checked')) { student_status = 1; }
+        console.log(data)
+        $.ajax({
+            url: "../data/StudentData.php?action=updateStudentStatus",
+            type: "post",
+            data: {
+                id : id,
+                status : student_status
+            },
+            dataType: "json",
+            assync : false, 
+            success: function (result) {
+                // STUDENT.getStudents();
+
+                
+                swal(result, {
+                    title: "Success!!",
+                    text: result,
+                    icon: "info",
+                    button: "OK",
+                });
             }
         });
     },
