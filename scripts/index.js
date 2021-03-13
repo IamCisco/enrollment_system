@@ -41,9 +41,14 @@ let INDEX = {
             dataType: "json",
             // assync: false,
             success: function (result) {
-                console.log(result)
+                // console.log(result)
+                var result_length = result.length;
+                if(result_length > 5)
+                {
+                    result_length = 5
+                } 
                 var row = ``;
-                for (var x = 0; x < result.length; x++) {
+                for (var x = 0; x < result_length; x++) {
                     btn_add_comment = "";
                     data = result[x];
                     if(INDEX.user_id != 0)
@@ -97,32 +102,34 @@ let INDEX = {
             dataType: "json",
             assync : false, 
             success: function (result) {
-                console.log(result)
+                var result_length = result.length;
+                if(result_length > 5)
+                {
+                    result_length = 5
+                } 
                 var row = ``;
-                for (var x = 0; x < result.length; x++) {
+                for (var x = 0; x < result_length; x++) {
                     btn_add_comment = "";
                     data = result[x];
                     if(INDEX.user_id != 0)
                     {
-                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]})"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></button>`;
+                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
                     }
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
                         <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">
                         <div class="portfolio-info">
                             <h4>${data["title"]}</h4>
-                            <p>${data["announcement"]}</p>
-                            ${btn_add_comment}
-                            <a href="../assets/img/announcements/${data["image"]}" class="venobox preview-link vbox-item" title="${data["title"]}"><i class="bx bx-link"></i></a>
+                            ${btn_add_comment} 
+                            <a href="../assets/img/announcements/${data["image"]}" class="venobox preview-link vbox-item" title="${data["title"]}"><i class="bx bx-link"></i></a><br>
+                            
                         </div>
                     </div>
                     `;
                 }
 
                 $(".portfolio-container").html(row);
-                $('.portfolio-container').isotope('destroy');
                 setTimeout(function(){
-
                     var portfolioIsotope = $('.portfolio-container').isotope({
                     itemSelector: '.portfolio-item'
                     });
@@ -136,7 +143,7 @@ let INDEX = {
                     });
                     INDEX.aos_init();
                     });
-                }, 10);
+                }, 1000);
                 
                 $('.venobox').venobox();
                 $('.comment_button').on("click", function(e){
