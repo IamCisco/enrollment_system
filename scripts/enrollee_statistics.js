@@ -2,18 +2,26 @@
 $(document).ready(function () {
     
     USER.checkSession();
-    ENROLLEE_STATISTICS.getEnrolleeStats();
+    
+	$('#frm_search_stats').submit(function(event) {
+        event.preventDefault();
+        ENROLLEE_STATISTICS.getEnrolleeStats(this);
+    });
     
 });
 
 let ENROLLEE_STATISTICS = {
 
     
-    getEnrolleeStats: function () {
+    getEnrolleeStats: function (_this) {
         $.ajax({
             url: "../data/EnrolleeData.php?action=getEnrolleeStats",
+            type: "post",
+            data: new FormData( _this ),
+            processData: false,
+            contentType: false,
             dataType: "json",
-            assync: false,
+            assync : false, 
             success: function (result) {
 				var barChartData = {
 					labels: result.year,

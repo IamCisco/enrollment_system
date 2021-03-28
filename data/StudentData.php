@@ -23,6 +23,7 @@ if ($action == "getStudents") {
             "image"          => $student["image"],
             "grade_level"    => $student["grade_level"],
             "status"         => $student["status"],
+            "enrollee_id"    => $student["enrollee_id"],
         ];
     }
     echo json_encode($datastorage);
@@ -49,7 +50,7 @@ if ($action == "getStudents") {
     else{
         $path_from = '../assets/img/enrollees/';
         $path_to = '../assets/img/students/';
-        copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
+        // copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
     
         //generating of uniquestudent number
         $year = date("y");  
@@ -62,6 +63,7 @@ if ($action == "getStudents") {
         }
         ////////////////////////////////////
         $values[] = $student_number;
+        $values[] = 1;
         $columns .= "student_number,status";
         $prepare .= "?,?";
         $student->insert_student($columns, $values,$prepare);
@@ -85,10 +87,24 @@ if ($action == "getStudents") {
             "program"       => $student["program"],
             "image"         => $student["image"],
             "grade_level"   => $student["grade_level"],
+            "enrollee_id"   => $student["enrollee_id"],
         ];
     }
     echo json_encode($datastorage);
-} else if($action == "updateStudent"){
+}  else if ($action == "getSpecificEnrollee") {
+    $enrollee_id = $_POST["enrollee_id"];
+    $enrollee_list = $enrollee->load_student_info("where enrollee_id=$enrollee_id");
+    $datastorage = [];
+    foreach ($enrollee_list as $enrollee) {
+        foreach ($enrollee as $enrollee_key => $enrollee_value) {
+            if(!is_numeric($enrollee_key)){
+                $datastorage[$enrollee_key] = $enrollee_value;
+            }
+            
+        }
+    }
+    echo json_encode($datastorage);
+}  else if($action == "updateStudent"){
     $id = $_POST["id"];
     $columns = "";
     $values =[];

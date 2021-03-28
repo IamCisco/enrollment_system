@@ -39,7 +39,8 @@ if ($action == "getPassedEnrollee") {
     }
     echo json_encode($datastorage);
 } else if ($action == "getEnrolleeStats") {
-    $enrollee_list = $enrollee->load_enrollee_stats();
+    $year = $_POST["year"];
+    $enrollee_list = $enrollee->load_enrollee_stats("where a.year=$year");
 
     $datastorage          = [];
     $total_count_array    = [];
@@ -220,22 +221,14 @@ if ($action == "getPassedEnrollee") {
 } else if ($action == "getSpecificEnrollee") {
     $id = $_POST["id"];
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
-
+    $datastorage = [];
     foreach ($enrollee_list as $enrollee) {
-        $datastorage = [
-            "id"              => $enrollee["id"],
-            "first_name"      => $enrollee["first_name"],
-            "middle_name"     => $enrollee["middle_name"],
-            "last_name"       => $enrollee["last_name"],
-            "address"         => $enrollee["address"],
-            "email"           => $enrollee["email"],
-            "birthdate"       => $enrollee["birthdate"],
-            "phone_number"    => $enrollee["contact_number"],
-            "image"           => $enrollee["image"],
-            "date_registered" => $enrollee["date_registered"],
-            "program"         => $enrollee["program"],
-            "grade_level"     => $enrollee["grade_level"],
-        ];
+        foreach ($enrollee as $enrollee_key => $enrollee_value) {
+            if(!is_numeric($enrollee_key)){
+                $datastorage[$enrollee_key] = $enrollee_value;
+            }
+            
+        }
     }
     echo json_encode($datastorage);
 } else if ($action == "updateEnrollee") {

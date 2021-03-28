@@ -24,7 +24,7 @@ class EnrolleeModel extends Connection
         }
     }
 
-    public function get_enrollee_stats()
+    public function get_enrollee_stats($where = null)
     {
         try {
             $sql = "
@@ -88,6 +88,7 @@ class EnrolleeModel extends Connection
                     group by substr(cast(date_registered as char), 1,4)
                 )e
                 on a.year=e.year
+                $where
             ";
             $stmt = $this->conn->query($sql);
             return $stmt->fetchAll();

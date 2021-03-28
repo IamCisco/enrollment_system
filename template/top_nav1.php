@@ -23,6 +23,7 @@
                         <li><a href="AdmissionManagement.php"id ="btn_addmission" style="display:none">Addmission</a></li>
                         <li><a href="Background.php"id ="btn_background" style="display:none">Background</a></li>
                         <li><a href="EnrolleeStatistics.php"id ="btn_stats" style="display:none">Stats</a></li>
+                        <li><a href="ProgramManagement.php"id ="btn_program" style="display:none">Stats</a></li>
                         <li><a href="Profile.php"id ="btn_profile" style="display:none">Profile</a></li>
                         <li><a href="#" data-toggle="modal" data-target="#modal_login_form" id ="btn_login">Login</a></li>
                         <li><a href="#" id="btn_logout" style="display:none" onclick="USER.logout()">Logout</a></li>

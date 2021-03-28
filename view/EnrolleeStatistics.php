@@ -32,6 +32,15 @@
             <div class="container">
                 <br>
                 <div class="row">
+                <form class="form-inline" id="frm_search_stats">
+                    <div class="form-group mx-sm-3 mb-2">
+                        <label for="inputPassword2" class="sr-only">Password</label>
+                        <input type="number" class="form-control" id="txt_year" name="year" min=1990 placeholder="Select Year" required>
+                    </div>
+                    <button type="submit" class="btn btn-primary mb-2">Search</button>
+                </form>
+                </div>
+                <div class="row">
                     <div class="col-lg-12">
                         <canvas id="cnv_enrollee_stats"></canvas>
                     </div>

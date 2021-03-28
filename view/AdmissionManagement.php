@@ -42,6 +42,9 @@
                         <table class="table table-bordered table-striped table-hover  table-responsive" id="tbl_enrollee_accept">
                             <thead>
                                 <tr>
+                                    <td>View</td>
+                                    <td>Accept</td>
+                                    <td>Reject</td>
                                     <td>Image</td>
                                     <td>TOR</td>
                                     <td>Name</td>
@@ -52,8 +55,6 @@
                                     <td>Date Registered</td>
                                     <td>Grade Level</td>
                                     <td>Program</td>
-                                    <td>Accept</td>
-                                    <td>Reject</td>
                                 </tr>
                             </thead>
                             <tbody id="tbl_enrollee_accept_body"></tbody>
@@ -74,6 +75,9 @@
                         <table class="table table-bordered table-striped table-hover table-responsive" id="tbl_enrollee_for_exam">
                             <thead>
                                 <tr>
+                                    <td>View</td>
+                                    <td>Accept</td>
+                                    <td>Reject</td>
                                     <td>Image</td>
                                     <td>TOR</td>
                                     <td>Name</td>
@@ -84,8 +88,6 @@
                                     <td>Date Registered</td>
                                     <td>Grade Level</td>
                                     <td>Program</td>
-                                    <td>Passed</td>
-                                    <td>Failed</td>
                                 </tr>
                             </thead>
                             <tbody id="tbl_enrollee_for_exam_body"></tbody>
@@ -96,6 +98,64 @@
         </section>
 
     </main><!-- End #main -->
+    <div id="modal_enrollee_info" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-xl">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    Enrollee Info
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+                <div class="modal-body">
+                    <div class ="row">
+                        <div class="col-md-12">
+                            <table class="" width="100%" border="none">
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Basic Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_basic_info_body">
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Contact Information</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_contact_info_body">
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Educational Background</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_education_info_body">
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Family Background</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_family_background_body">
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Course</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_course_body">
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    
+                </div>
+
+            </div>
+        </div>
+    </div>
 
     <div id="preloader"></div>
     <a href="#" class="back-to-top"><i class="icofont-simple-up"></i></a>

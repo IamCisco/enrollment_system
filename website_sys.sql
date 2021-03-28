@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 07, 2021 at 12:50 PM
+-- Generation Time: Mar 28, 2021 at 12:50 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -41,11 +41,12 @@ CREATE TABLE `announcements` (
 --
 
 INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
-(8, 'Test', 'test', '2021-02-06', 'portfolio-3.jpg', 'News'),
-(10, 'Test', 'a', '2021-01-31', 'portfolio-9.jpg', 'Events'),
-(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-01-23', 'portfolio-1.jpg', 'Events'),
-(13, 'test', 'test', '2021-02-08', 'portfolio-details-2.jpg', 'Announcements'),
-(14, 'asdf', 'asdf', '2021-02-08', 'portfolio-6.jpg', 'News');
+(8, 'Test', 'test', '2021-03-20', 'portfolio-3.jpg', 'News'),
+(10, 'Test', 'a', '2021-04-03', 'portfolio-9.jpg', 'Events'),
+(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-03-27', 'portfolio-1.jpg', 'Events'),
+(13, 'test', 'test', '2021-04-24', 'portfolio-details-2.jpg', 'Announcements'),
+(14, 'asdf', 'asdf', '2021-04-24', 'portfolio-6.jpg', 'News'),
+(15, 'test', 'testadfgasdfa asdfas ara eadfaef asdf adfaentav d ba f adfad f ', '2021-03-20', 'Gaming_5000x3125.jpg', 'Announcements');
 
 -- --------------------------------------------------------
 
@@ -143,19 +144,53 @@ CREATE TABLE `enrollees` (
   `program` varchar(20) NOT NULL,
   `grade_level` int(11) NOT NULL,
   `requirements` varchar(100) NOT NULL,
-  `exam_result` int(11) NOT NULL
+  `exam_result` int(11) NOT NULL,
+  `learning_reference_number` text NOT NULL,
+  `voucher` text NOT NULL,
+  `voucher_number` text NOT NULL,
+  `place_of_birth` text NOT NULL,
+  `citizenship` text NOT NULL,
+  `religion` text NOT NULL,
+  `sex` text NOT NULL,
+  `registered_voter` text NOT NULL,
+  `registered_at` text NOT NULL,
+  `registered_since` text NOT NULL,
+  `last_school` text NOT NULL,
+  `school_type` text NOT NULL,
+  `telephone_number` text NOT NULL,
+  `junior_school` text NOT NULL,
+  `junior_year_graduated` int(11) NOT NULL,
+  `honors_junior` text NOT NULL,
+  `junior_school_address` text NOT NULL,
+  `elementary_school` text NOT NULL,
+  `elementary_year_graduated` int(11) NOT NULL,
+  `honors_elementary` text NOT NULL,
+  `elementary_school_address` text NOT NULL,
+  `civil_status` text NOT NULL,
+  `spouse_name` text NOT NULL,
+  `spouse_residence` text NOT NULL,
+  `father_name` text NOT NULL,
+  `highest_educ_father` text NOT NULL,
+  `father_birthday` date NOT NULL,
+  `father_contact_no` text NOT NULL,
+  `father_occupation` text NOT NULL,
+  `father_income` text NOT NULL,
+  `father_company` text NOT NULL,
+  `father_company_address` text NOT NULL,
+  `father_status` text NOT NULL,
+  `mother_name` text NOT NULL,
+  `highest_educ_mother` text NOT NULL,
+  `mother_birthday` date NOT NULL,
+  `mother_contact_no` text NOT NULL,
+  `mother_occupation` text NOT NULL,
+  `mother_income` text NOT NULL,
+  `mother_company` text NOT NULL,
+  `mother_company_address` text NOT NULL,
+  `mother_status` text NOT NULL,
+  `program2` text NOT NULL,
+  `whose_choice1` text NOT NULL,
+  `whose_choice2` text NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `enrollees`
---
-
-INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`, `requirements`, `exam_result`) VALUES
-(11, 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', 'jhnfranciscabral@gmail.com', '1994-12-14', '09285029090', 'CONAN.jpg', '2021-01-29', 1, 1, 'STEM', 11, '', 90),
-(12, 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', 'jhnfranciscabral@gmail.com', '1993-09-30', '09399395763', 'OIP.jpg', '2021-01-29', 1, 1, 'STEM', 11, '', 88),
-(13, 'test', 'test', 'test', 'A', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2021-01-30', 1, 1, 'STEM', 11, '', 90),
-(14, 'a', 'a', 'a', 'a', 'jhnfranciscabral@gmail.com', '2021-01-30', '09399395763', 'CONAN.jpg', '2020-01-30', 1, 1, 'ABM', 11, '', 85),
-(15, 'sdf', 'a', 'a', 'adfsasdf', 'jhnfranciscabral@gmail.com', '2021-02-26', '123', 'Gaming_5000x3125.jpg', '2021-02-26', 1, 0, 'HUMMS', 12, 'Gaming_5000x3125.jpg', 74);
 
 -- --------------------------------------------------------
 
@@ -215,17 +250,9 @@ CREATE TABLE `students` (
   `status` varchar(20) NOT NULL,
   `image` varchar(50) NOT NULL,
   `program` varchar(20) NOT NULL,
-  `grade_level` int(11) NOT NULL
+  `grade_level` int(11) NOT NULL,
+  `enrollee_id` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `students`
---
-
-INSERT INTO `students` (`id`, `student_number`, `first_name`, `middle_name`, `last_name`, `address`, `birthdate`, `email`, `phone_number`, `status`, `image`, `program`, `grade_level`) VALUES
-(23, '2157148', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'PALINCARO TUY BATANGAS', '1994-12-14', 'jhnfranciscabral@gmail.com', '09285029090', '', 'CONAN.jpg', 'STEM', 12),
-(25, '2177349', 'RAQUEL', 'ALVIOLA', 'LACHICA', 'SALA CABUYAO LAGUNA', '1993-09-30', 'jhnfranciscabral@gmail.com', '09399395763', '', 'OIP.jpg', 'STEM', 11),
-(27, '2119649', 'test', 'test', 'test', 'A', '2021-01-30', 'abctest018@gmail.com', '09399395763', '', 'CONAN.jpg', 'STEM', 11);
 
 -- --------------------------------------------------------
 
@@ -281,9 +308,7 @@ CREATE TABLE `users` (
 --
 
 INSERT INTO `users` (`id`, `username`, `password`, `first_name`, `middle_name`, `last_name`, `email`, `user_level`, `image`, `verify_token`, `verified`) VALUES
-(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', 'asdf', 'admin', 'CONAN.jpg', '', 1),
-(2, '2157148', 'masterkey', 'JOHN FRANCIS', 'CONSIGO', 'CABRAL', 'jhnfranciscabral@gmail.com', 'student', 'CONAN.jpg', '', 1),
-(24, '2119649', '12345', 'test', 'test', 'test', 'abctest018@gmail.com', 'student', 'CONAN.jpg', 'c9a26efc796074f1d85e3434e7641adce480bf2fe615d26d681db2b8f1d7dcbface56a47b628f84036aa2ca1d8ce84b94b2aa3c4e88a541a2ffe107ea6abd6569f736bbc1d0d63232e58966333cf', 0);
+(1, 'admin', 'masterkey', 'Admin', 'Is', 'Trator', 'asdf', 'admin', 'CONAN.jpg', '', 1);
 
 --
 -- Indexes for dumped tables
@@ -357,7 +382,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `backgrounds`
@@ -381,7 +406,7 @@ ALTER TABLE `contents`
 -- AUTO_INCREMENT for table `enrollees`
 --
 ALTER TABLE `enrollees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
 
 --
 -- AUTO_INCREMENT for table `exam_schedule`
@@ -399,7 +424,7 @@ ALTER TABLE `programs`
 -- AUTO_INCREMENT for table `students`
 --
 ALTER TABLE `students`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=28;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `users`

@@ -42,6 +42,10 @@
                         <table class="table table-bordered table-striped table-hover" id="tbl_student">
                             <thead>
                                 <tr>
+                                    <td>View</td>
+                                    <td>Enabled</td>
+                                    <td></td>
+                                    <td></td>
                                     <td>Image</td>
                                     <td>Student No.</td>
                                     <td>Name</td>
@@ -51,9 +55,6 @@
                                     <td>Phone Number</td>
                                     <td>Program</td>
                                     <td>Grade</td>
-                                    <td>Enabled</td>
-                                    <td></td>
-                                    <td></td>
                                 </tr>
                             </thead>
                             <tbody id="tbl_student_body"></tbody>
