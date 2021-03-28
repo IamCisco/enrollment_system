@@ -353,14 +353,6 @@ let STUDENT = {
                     <td><img src="../assets/img/enrollees/${result.image}" alt="Avatar" class="rounded mx-auto d-block"></td>
                 </tr>
                 <tr>
-                    <td><b>Learning Reference Number</b></td>
-                    <td>${result.learning_reference_number}</td>
-                </tr>
-                <tr>
-                    <td><b>Voucher</b></td>
-                    <td>${result.voucher_number}</td>
-                </tr>
-                <tr>
                     <td><b>Fullname</b></td>
                     <td>${result.last_name}, ${result.first_name} ${result.middle_name}</td>
                 </tr>
