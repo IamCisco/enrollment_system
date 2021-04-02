@@ -2,6 +2,7 @@
 $(document).ready(function () {
     
     USER.checkSession();
+	ENROLLEE_STATISTICS.getPrograms();
     
 	$('#frm_search_stats').submit(function(event) {
         event.preventDefault();
@@ -23,6 +24,10 @@ let ENROLLEE_STATISTICS = {
             dataType: "json",
             assync : false, 
             success: function (result) {
+				if(window.myBar){
+					window.myBar.destroy();
+				}
+				
 				var barChartData = {
 					labels: result.year,
 					datasets: [{
@@ -101,13 +106,14 @@ let ENROLLEE_STATISTICS = {
         });
 	},
 	getEnrolleesPassed: function (year) {
-
+		var program = $("#txt_program").val();
         $.ajax({
             url: "../data/EnrolleeData.php?action=getEnrolleeScores",
 			dataType: "json",
 			type : 'POST',
 			data : {
-				year : year
+				year : year,
+				program : program
 			},
             assync: false,
             success: function (result) {
@@ -148,6 +154,26 @@ let ENROLLEE_STATISTICS = {
 				} );
 				$('#modal_enrollee_passed').modal()
 				
+            }
+        });
+    },
+	getPrograms: function () {
+        $.ajax({
+            url: "../data/ProgramData.php?action=getPrograms",
+            dataType: "json",
+            success: function (result) {
+                var row = `
+					<option value="" disabled selected>Please select a program to filter</option>
+					<option value="0" >All</option>
+					`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row += `
+                        <option value="${data["abbreviation"]}">${data["program"]}</option>
+                    `;
+                }
+                $("#txt_program").html(row);
             }
         });
     },

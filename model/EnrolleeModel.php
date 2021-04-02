@@ -24,7 +24,7 @@ class EnrolleeModel extends Connection
         }
     }
 
-    public function get_enrollee_stats($where = null)
+    public function get_enrollee_stats($where = null, $where_strand1 = null, $where_strand2 = null)
     {
         try {
             $sql = "
@@ -42,6 +42,7 @@ class EnrolleeModel extends Connection
                     count(first_name) as total_count, 
                     substr(cast(date_registered as char), 1,4) as year
                     from enrollees
+                    $where_strand1
                     group by substr(cast(date_registered as char), 1,4)
                 )a
                 
@@ -52,6 +53,7 @@ class EnrolleeModel extends Connection
                     substr(cast(date_registered as char), 1,4) as year
                     from enrollees
                     where accepted=1
+                    $where_strand2
                     group by substr(cast(date_registered as char), 1,4)
                 )b
                 on a.year=b.year
@@ -63,6 +65,7 @@ class EnrolleeModel extends Connection
                     substr(cast(date_registered as char), 1,4) as year 
                     from enrollees
                     where accepted=0
+                    $where_strand2
                     group by substr(cast(date_registered as char), 1,4)
                 )c
                 on a.year=c.year
@@ -74,6 +77,7 @@ class EnrolleeModel extends Connection
                     substr(cast(date_registered as char), 1,4) as year 
                     from enrollees
                     where passed=1
+                    $where_strand2
                     group by substr(cast(date_registered as char), 1,4)
                 )d
                 on a.year=d.year
@@ -85,6 +89,7 @@ class EnrolleeModel extends Connection
                     substr(cast(date_registered as char), 1,4) as year 
                     from enrollees
                     where passed=0
+                    $where_strand2
                     group by substr(cast(date_registered as char), 1,4)
                 )e
                 on a.year=e.year
@@ -104,7 +109,6 @@ class EnrolleeModel extends Connection
             $sql = "INSERT INTO enrollees ($columns) VALUES ($prepare)";
             $stmt = $this->conn->prepare($sql);
             return   $stmt->execute($values);
-            return "success";
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

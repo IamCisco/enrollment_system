@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Mar 28, 2021 at 12:50 PM
+-- Generation Time: Apr 02, 2021 at 10:38 AM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -35,18 +35,6 @@ CREATE TABLE `announcements` (
   `image` varchar(100) NOT NULL,
   `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `announcements`
---
-
-INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
-(8, 'Test', 'test', '2021-03-20', 'portfolio-3.jpg', 'News'),
-(10, 'Test', 'a', '2021-04-03', 'portfolio-9.jpg', 'Events'),
-(11, 'Test', 'The quick brown fox jumps over the head of the lazy dog', '2021-03-27', 'portfolio-1.jpg', 'Events'),
-(13, 'test', 'test', '2021-04-24', 'portfolio-details-2.jpg', 'Announcements'),
-(14, 'asdf', 'asdf', '2021-04-24', 'portfolio-6.jpg', 'News'),
-(15, 'test', 'testadfgasdfa asdfas ara eadfaef asdf adfaentav d ba f adfad f ', '2021-03-20', 'Gaming_5000x3125.jpg', 'Announcements');
 
 -- --------------------------------------------------------
 
@@ -81,23 +69,6 @@ CREATE TABLE `comments` (
   `comment_date` date NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
---
--- Dumping data for table `comments`
---
-
-INSERT INTO `comments` (`id`, `user_id`, `announcement_id`, `comment`, `comment_date`) VALUES
-(1, 1, 11, 'The quick brown fox jumps over the head of the lazy dog.', '2021-02-06'),
-(2, 1, 11, 'The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.The quick brown fox jumps over the head of the lazy dog.', '2021-02-06'),
-(5, 1, 10, 'asdfb', '2021-02-07'),
-(6, 1, 10, 'aa', '2021-02-07'),
-(8, 2, 10, 'test', '2021-02-07'),
-(9, 2, 10, 'sdfsdf', '2021-02-07'),
-(10, 1, 10, 'test', '2021-02-07'),
-(11, 3, 10, 'test', '2021-02-07'),
-(12, 3, 10, 'test23434242', '2021-02-07'),
-(13, 3, 10, 'test123', '2021-02-07'),
-(14, 1, 10, 'test comment', '2021-02-08');
-
 -- --------------------------------------------------------
 
 --
@@ -130,66 +101,66 @@ INSERT INTO `contents` (`id`, `name`, `details`) VALUES
 
 CREATE TABLE `enrollees` (
   `id` int(11) NOT NULL,
-  `first_name` varchar(50) NOT NULL,
-  `middle_name` varchar(50) NOT NULL,
-  `last_name` varchar(50) NOT NULL,
-  `address` varchar(500) NOT NULL,
-  `email` varchar(100) NOT NULL,
-  `birthdate` date NOT NULL,
-  `contact_number` varchar(50) NOT NULL,
-  `image` varchar(100) NOT NULL,
-  `date_registered` date NOT NULL,
+  `first_name` text DEFAULT NULL,
+  `middle_name` text DEFAULT NULL,
+  `last_name` text DEFAULT NULL,
+  `address` text DEFAULT NULL,
+  `email` text DEFAULT NULL,
+  `birthdate` date DEFAULT NULL,
+  `contact_number` text DEFAULT NULL,
+  `image` text DEFAULT NULL,
+  `date_registered` date DEFAULT NULL,
   `accepted` tinyint(1) DEFAULT NULL,
   `passed` tinyint(1) DEFAULT NULL,
-  `program` varchar(20) NOT NULL,
-  `grade_level` int(11) NOT NULL,
-  `requirements` varchar(100) NOT NULL,
-  `exam_result` int(11) NOT NULL,
-  `learning_reference_number` text NOT NULL,
-  `voucher` text NOT NULL,
-  `voucher_number` text NOT NULL,
-  `place_of_birth` text NOT NULL,
-  `citizenship` text NOT NULL,
-  `religion` text NOT NULL,
-  `sex` text NOT NULL,
-  `registered_voter` text NOT NULL,
-  `registered_at` text NOT NULL,
-  `registered_since` text NOT NULL,
-  `last_school` text NOT NULL,
-  `school_type` text NOT NULL,
-  `telephone_number` text NOT NULL,
-  `junior_school` text NOT NULL,
-  `junior_year_graduated` int(11) NOT NULL,
-  `honors_junior` text NOT NULL,
-  `junior_school_address` text NOT NULL,
-  `elementary_school` text NOT NULL,
-  `elementary_year_graduated` int(11) NOT NULL,
-  `honors_elementary` text NOT NULL,
-  `elementary_school_address` text NOT NULL,
-  `civil_status` text NOT NULL,
-  `spouse_name` text NOT NULL,
-  `spouse_residence` text NOT NULL,
-  `father_name` text NOT NULL,
-  `highest_educ_father` text NOT NULL,
-  `father_birthday` date NOT NULL,
-  `father_contact_no` text NOT NULL,
-  `father_occupation` text NOT NULL,
-  `father_income` text NOT NULL,
-  `father_company` text NOT NULL,
-  `father_company_address` text NOT NULL,
-  `father_status` text NOT NULL,
-  `mother_name` text NOT NULL,
-  `highest_educ_mother` text NOT NULL,
-  `mother_birthday` date NOT NULL,
-  `mother_contact_no` text NOT NULL,
-  `mother_occupation` text NOT NULL,
-  `mother_income` text NOT NULL,
-  `mother_company` text NOT NULL,
-  `mother_company_address` text NOT NULL,
-  `mother_status` text NOT NULL,
-  `program2` text NOT NULL,
-  `whose_choice1` text NOT NULL,
-  `whose_choice2` text NOT NULL
+  `program` text DEFAULT NULL,
+  `grade_level` int(11) DEFAULT NULL,
+  `requirements` text DEFAULT NULL,
+  `exam_result` int(11) DEFAULT NULL,
+  `learning_reference_number` text DEFAULT NULL,
+  `voucher` text DEFAULT NULL,
+  `voucher_number` text DEFAULT NULL,
+  `place_of_birth` text DEFAULT NULL,
+  `citizenship` text DEFAULT NULL,
+  `religion` text DEFAULT NULL,
+  `sex` text DEFAULT NULL,
+  `registered_voter` text DEFAULT NULL,
+  `registered_at` text DEFAULT NULL,
+  `registered_since` text DEFAULT NULL,
+  `last_school` text DEFAULT NULL,
+  `school_type` text DEFAULT NULL,
+  `telephone_number` text DEFAULT NULL,
+  `junior_school` text DEFAULT NULL,
+  `junior_year_graduated` int(11) DEFAULT NULL,
+  `honors_junior` text DEFAULT NULL,
+  `junior_school_address` text DEFAULT NULL,
+  `elementary_school` text DEFAULT NULL,
+  `elementary_year_graduated` int(11) DEFAULT NULL,
+  `honors_elementary` text DEFAULT NULL,
+  `elementary_school_address` text DEFAULT NULL,
+  `civil_status` text DEFAULT NULL,
+  `spouse_name` text DEFAULT NULL,
+  `spouse_residence` text DEFAULT NULL,
+  `father_name` text DEFAULT NULL,
+  `highest_educ_father` text DEFAULT NULL,
+  `father_birthday` date DEFAULT NULL,
+  `father_contact_no` text DEFAULT NULL,
+  `father_occupation` text DEFAULT NULL,
+  `father_income` text DEFAULT NULL,
+  `father_company` text DEFAULT NULL,
+  `father_company_address` text DEFAULT NULL,
+  `father_status` text DEFAULT NULL,
+  `mother_name` text DEFAULT NULL,
+  `highest_educ_mother` text DEFAULT NULL,
+  `mother_birthday` date DEFAULT NULL,
+  `mother_contact_no` text DEFAULT NULL,
+  `mother_occupation` text DEFAULT NULL,
+  `mother_income` text DEFAULT NULL,
+  `mother_company` text DEFAULT NULL,
+  `mother_company_address` text DEFAULT NULL,
+  `mother_status` text DEFAULT NULL,
+  `program2` text DEFAULT NULL,
+  `whose_choice1` text DEFAULT NULL,
+  `whose_choice2` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
@@ -406,7 +377,7 @@ ALTER TABLE `contents`
 -- AUTO_INCREMENT for table `enrollees`
 --
 ALTER TABLE `enrollees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
 
 --
 -- AUTO_INCREMENT for table `exam_schedule`
@@ -418,7 +389,7 @@ ALTER TABLE `exam_schedule`
 -- AUTO_INCREMENT for table `programs`
 --
 ALTER TABLE `programs`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT for table `students`

@@ -34,8 +34,11 @@
                 <div class="row">
                 <form class="form-inline" id="frm_search_stats">
                     <div class="form-group mx-sm-3 mb-2">
-                        <label for="inputPassword2" class="sr-only">Password</label>
                         <input type="number" class="form-control" id="txt_year" name="year" min=1990 placeholder="Select Year" required>
+                    </div>
+                    <div class="form-group mx-sm-3 mb-2">
+                        <select class="form-control" id="txt_program" name="program" required>
+                        </select>
                     </div>
                     <button type="submit" class="btn btn-primary mb-2">Search</button>
                 </form>

@@ -40,8 +40,13 @@ if ($action == "getPassedEnrollee") {
     echo json_encode($datastorage);
 } else if ($action == "getEnrolleeStats") {
     $year = $_POST["year"];
-    $enrollee_list = $enrollee->load_enrollee_stats("where a.year=$year");
-
+    $program = $_POST["program"];
+    if($program == "0") {
+        $enrollee_list = $enrollee->load_enrollee_stats("where a.year=$year");
+    } 
+    else{
+        $enrollee_list = $enrollee->load_enrollee_stats("where a.year=$year", "where program='$program'", "and program='$program'"); 
+    }  
     $datastorage          = [];
     $total_count_array    = [];
     $total_accepted_array = [];
@@ -91,7 +96,7 @@ if ($action == "getPassedEnrollee") {
     foreach ($_POST as $key => $value) {
         $$key = $value;
     }
-    $enrollee_list = $enrollee->load_all_enrollees("where accepted=1 and substr(date_registered,1,4) = '$year'");
+    $enrollee_list = $enrollee->load_all_enrollees("where accepted=1 and substr(date_registered,1,4) = '$year' and program ='$program'");
 
     $datastorage = [];
     foreach ($enrollee_list as $enrollee) {

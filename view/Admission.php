@@ -81,7 +81,7 @@
                                             <input type="text" class="form-control" id="txt_place_of_birth" name="place_of_birth" placeholder="Place of Birth*" required>
                                         </div>
                                         <div class="form-group col-md-4">
-                                            <input type="text" class="form-control" id="txt_cititzenship" name="cititzenship" placeholder="Cititzenship*" required>
+                                            <input type="text" class="form-control" id="txt_citizenship" name="citizenship" placeholder="Cititzenship*" required>
                                         </div>
                                     </div>
                                     <div class="row">
@@ -357,8 +357,8 @@
                                             <select class="form-control" id="txt_whose_choice" name="whose_choice1" required>
                                                 <option value="" disabled selected>Whose choice is your first course?*</option>
                                                 <option value="My own choice">My own choice</option>
-                                                <option value="My Parent's Choice">My Parent's Choice</option>
-                                                <option value="My Relative's Choice">My Relative's Choice</option>
+                                                <option value="My Parents Choice">My Parent's Choice</option>
+                                                <option value="My Relatives Choice">My Relative's Choice</option>
                                                 <option value="No one in particular">No one in particular</option>
                                             </select>
                                         </div>
@@ -366,8 +366,8 @@
                                             <select class="form-control" id="txt_whose_choice2" name="whose_choice2" required>
                                                 <option value="" disabled selected>Whose choice is your first course?*</option>
                                                 <option value="My own choice">My own choice</option>
-                                                <option value="My Parent's Choice">My Parent's Choice</option>
-                                                <option value="My Relative's Choice">My Relative's Choice</option>
+                                                <option value="My Parents Choice">My Parent's Choice</option>
+                                                <option value="My Relatives Choice">My Relative's Choice</option>
                                                 <option value="No one in particular">No one in particular</option>
                                             </select>
                                         </div>

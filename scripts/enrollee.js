@@ -344,15 +344,15 @@ let ENROLLEE = {
                 ENROLLEE.getEnrolleesForAccept();
                 ENROLLEE.getEnrolleesForExam();
 
-                $("#txt_fname").val("");
-                $("#txt_mname").val("");
-                $("#txt_lname").val("");
-                $("#txt_address").val("");
-                $("#txt_birthday").val("");
-                $("#txt_email").val("");
-                $("#txt_number").val("");
-                $("#txt_program").val("");
-                $("#file_image").val("");
+                // $("#txt_fname").val("");
+                // $("#txt_mname").val("");
+                // $("#txt_lname").val("");
+                // $("#txt_address").val("");
+                // $("#txt_birthday").val("");
+                // $("#txt_email").val("");
+                // $("#txt_number").val("");
+                // $("#txt_program").val("");
+                // $("#file_image").val("");
                 swal(result.message, {
                     title: result.title,
                     text: result.message,
