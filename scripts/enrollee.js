@@ -646,7 +646,7 @@ let ENROLLEE = {
             dataType: "json",
             success: function (result) {
                 var row1 = `<option value="" disabled selected>First Choice*</option>`;
-                var row2 = `<option value="" disabled selected>First Choice*</option>`;
+                var row2 = `<option value="" disabled selected>Second Choice*</option>`;
 
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];

@@ -335,6 +335,15 @@
                                 </div>
                                 <div class = "panel-body">
                                     <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <select class="form-control" id="txt_grades" name="grade_level"required>
+                                                <option value="" disabled selected>Please select a grade</option>
+                                                <option value="11">XI</option>
+                                                <option value="12">XII</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="form-group col-md-6">
                                             <select class="form-control" id="txt_program" name="program" required>
                                                 <option value="" disabled selected>First Choice*</option>
