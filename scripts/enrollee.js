@@ -295,7 +295,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForExam();
                         swal(text, {
                             title: "Success!",
-                            text: result,
+                            text: resutextlt,
                             icon: "success",
                             button: "OK",
                         });

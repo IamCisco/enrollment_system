@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: May 10, 2021 at 12:21 PM
+-- Generation Time: May 23, 2021 at 12:36 PM
 -- Server version: 10.4.17-MariaDB
 -- PHP Version: 7.4.13
 
@@ -35,6 +35,15 @@ CREATE TABLE `announcements` (
   `image` varchar(100) NOT NULL,
   `type` varchar(50) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `announcements`
+--
+
+INSERT INTO `announcements` (`id`, `title`, `announcement`, `validity_date`, `image`, `type`) VALUES
+(16, 'Test', 'test', '2021-06-05', 'Gaming_5000x3125.jpg', 'Announcements'),
+(17, 'Test', 'test2', '2021-06-05', 'Gaming_5000x3125.jpg', 'Announcements'),
+(18, 'Test', 'test', '2021-05-22', 'Gaming_5000x3125.jpg', 'Announcements');
 
 -- --------------------------------------------------------
 
@@ -168,7 +177,8 @@ CREATE TABLE `enrollees` (
 --
 
 INSERT INTO `enrollees` (`id`, `first_name`, `middle_name`, `last_name`, `address`, `email`, `birthdate`, `contact_number`, `image`, `date_registered`, `accepted`, `passed`, `program`, `grade_level`, `requirements`, `exam_result`, `learning_reference_number`, `voucher`, `voucher_number`, `place_of_birth`, `citizenship`, `religion`, `sex`, `registered_voter`, `registered_at`, `registered_since`, `last_school`, `school_type`, `telephone_number`, `junior_school`, `junior_year_graduated`, `honors_junior`, `junior_school_address`, `elementary_school`, `elementary_year_graduated`, `honors_elementary`, `elementary_school_address`, `civil_status`, `spouse_name`, `spouse_residence`, `father_name`, `highest_educ_father`, `father_birthday`, `father_contact_no`, `father_occupation`, `father_income`, `father_company`, `father_company_address`, `father_status`, `mother_name`, `highest_educ_mother`, `mother_birthday`, `mother_contact_no`, `mother_occupation`, `mother_income`, `mother_company`, `mother_company_address`, `mother_status`, `program2`, `whose_choice1`, `whose_choice2`) VALUES
-(20, 'John Francis', 'Consigo', 'Cabral', 'Palincaro, Tuy, Batangas', 'jhnfranciscabral@gmail.com', '2021-05-06', 'sdfgsdfg', 'Gaming_5000x3125.jpg', '2021-05-07', 1, -1, 'HUMMS', 11, 'Gaming_5000x3125.jpg', NULL, '12j3klkaefioad', 'No', '', 'asdfadasdfasdfas', 'sdkfasdf', 'Roman Catholic', 'Male', 'No', '', '', 'asdfasdfa', 'Private', 'sdsdfgsd', 'Maria Paz Fronda National High School', 2021, '', 'Palincaro, Tuy, Batangas', 'Santiago de Guzman Elementary School', 2017, '', 'Palincaro, Tuy, Batangas', 'Single', '', '', 'dfadfa', 'Elementary', '2021-05-07', 'sdfgsdfg', 'sdfg', '', '', 'Palincar', 'Separated', 'asdfadf', 'High School', '2021-05-20', 'asdfadf', '', '', '', '', 'Employed', 'HUMMS', 'My Parents Choice', 'My Parents Choice');
+(27, 'John Francis', 'Consigo', 'Cabral', 'Palincaro, Tuy, Batangas', 'jhnfranciscabral@gmail.com', '2021-05-29', '09399395763', 'COCOMELON_JJ_OK.png', '2021-05-23', 1, 1, 'STEM', 11, '2e2cea3cf5c7d01b6a6716c9f432822ca27d8664.png', 75, NULL, NULL, NULL, 'asdfadasdfasdfas', 'sdkfasdf', 'Roman Catholic', 'Male', NULL, NULL, NULL, NULL, NULL, 'sdsdfgsd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'HUMMS', 'My own choice', 'My own choice'),
+(28, 'John Francis', 'Consigo', 'Cabral', 'Palincaro, Tuy, Batangas', 'raquellachicacoe@gmail.com', '2021-05-29', '09399395763', 'dascasv.png', '2021-05-23', 1, 0, 'STEM', 12, 'AAAABd49YxQm3QTtMW9GMB-AjDDQvJteRExKmJ5xzxBa4fFbeUWQ8uKlXAPyqxiCMESEn_QwRAXqBtlLkBJQfuQClT-iVtnoembSlnU84bay9_nDpehd8g9ptjb6wz08d6ZZv28.jpg', 74, NULL, NULL, NULL, 'Tuy, Batangas', 'asdfasdf', 'Roman Catholic', 'Female', NULL, NULL, NULL, NULL, NULL, 'sdsdfgsd', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, 'ABM', 'My own choice', 'My own choice');
 
 -- --------------------------------------------------------
 
@@ -208,6 +218,69 @@ INSERT INTO `programs` (`id`, `program`, `abbreviation`) VALUES
 (3, 'Humanities and Social Sciences', 'HUMMS'),
 (4, 'Accountancy, Business and Management', 'ABM'),
 (5, 'Science, Technology, Engineering, and Mathematics', 'STEM');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requirements`
+--
+
+CREATE TABLE `requirements` (
+  `id` int(11) NOT NULL,
+  `form_label` text NOT NULL,
+  `input_type` text NOT NULL,
+  `select_values` text NOT NULL,
+  `is_required` int(1) NOT NULL,
+  `is_active` int(1) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `requirements`
+--
+
+INSERT INTO `requirements` (`id`, `form_label`, `input_type`, `select_values`, `is_required`, `is_active`) VALUES
+(11, 'Mothers Name', 'text', '', 1, 1),
+(12, 'Mothers Birthday', 'date', '', 1, 1),
+(13, 'Mother\'s Highest Education Attainment', 'select', 'Elemetary|High School|Vocation|College Graduate|Post Graduate', 1, 1),
+(14, 'Father\'s Name', 'text', '', 0, 1),
+(15, 'Father\'s Birthday', 'date', '', 0, 1),
+(16, 'Father\'s Highest Educational Attainment', 'select', 'Elemetary|High School|Vocation|College Graduate|Post Graduate', 0, 1),
+(17, 'Father\'s Age', 'number', '', 0, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `requirement_values`
+--
+
+CREATE TABLE `requirement_values` (
+  `id` int(11) NOT NULL,
+  `enrollee_id` int(11) NOT NULL,
+  `requirement_id` int(11) NOT NULL,
+  `value` text NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `requirement_values`
+--
+
+INSERT INTO `requirement_values` (`id`, `enrollee_id`, `requirement_id`, `value`) VALUES
+(1, 25, 11, 'Emma'),
+(2, 25, 12, '2021-05-25'),
+(3, 25, 13, 'High School'),
+(4, 26, 11, 'Emma'),
+(5, 26, 12, '2021-05-23'),
+(6, 26, 13, 'Elemetary'),
+(7, 27, 11, 'Emma'),
+(8, 27, 12, '2021-05-24'),
+(9, 27, 13, 'College Graduate'),
+(10, 28, 11, 'Marlyn'),
+(11, 28, 12, '2021-05-27'),
+(12, 28, 13, 'High School'),
+(13, 28, 14, 'Freddie'),
+(14, 28, 15, '2021-05-27'),
+(15, 28, 16, 'High School'),
+(16, 28, 17, '60');
 
 -- --------------------------------------------------------
 
@@ -335,6 +408,18 @@ ALTER TABLE `programs`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `requirements`
+--
+ALTER TABLE `requirements`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `requirement_values`
+--
+ALTER TABLE `requirement_values`
+  ADD PRIMARY KEY (`id`);
+
+--
 -- Indexes for table `students`
 --
 ALTER TABLE `students`
@@ -360,7 +445,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `announcements`
 --
 ALTER TABLE `announcements`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
 
 --
 -- AUTO_INCREMENT for table `backgrounds`
@@ -384,7 +469,7 @@ ALTER TABLE `contents`
 -- AUTO_INCREMENT for table `enrollees`
 --
 ALTER TABLE `enrollees`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=29;
 
 --
 -- AUTO_INCREMENT for table `exam_schedule`
@@ -397,6 +482,18 @@ ALTER TABLE `exam_schedule`
 --
 ALTER TABLE `programs`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `requirements`
+--
+ALTER TABLE `requirements`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=18;
+
+--
+-- AUTO_INCREMENT for table `requirement_values`
+--
+ALTER TABLE `requirement_values`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `students`
