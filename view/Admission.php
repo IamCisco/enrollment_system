@@ -47,7 +47,7 @@
                                             <input type="file" name="input_file" class="form-control-file border" id="file_image"required>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="form-group col-md-4">
                                             <input type="text" class="form-control" id="txt_lrn" name="learning_reference_number" placeholder="Learning Reference Number*" required>
                                         </div>
@@ -61,7 +61,7 @@
                                         <div class="form-group col-md-4">
                                             <input type="text" class="form-control" id="txt_voucher_number" name="voucher_number" placeholder="Voucher/ESC/QVR">
                                         </div>
-                                    </div>
+                                    </div> -->
                                     <div class="row">
                                         <div class="form-group col-md-4">
                                             <input type="text" class="form-control" id="txt_lname" name="last_name" placeholder="Last Name*"required>
@@ -99,7 +99,7 @@
                                             </select>
                                         </div>
                                     </div>
-                                    <div class="row">
+                                    <!-- <div class="row">
                                         <div class="form-group col-md-5">
                                             <select class="form-control" id="txt_registered_voter" name="registered_voter" required>
                                                 <option value="" disabled selected>Are you a registered voter of Cabuyao?*</option>
@@ -125,7 +125,7 @@
                                                 <option value="Private">Private</option>
                                             </select>
                                         </div>
-                                    </div>
+                                    </div> -->
                                 </div>
                             </div>
                             <br>
@@ -149,8 +149,75 @@
                                     </div>
                                 </div>
                             </div>
+                            
                             <br>
                             <div class = "panel panel-primary">
+                                <div class = "panel-heading">
+                                    <h3 class = "panel-title">
+                                        Course
+                                    </h3>
+                                </div>
+                                <div class = "panel-body">
+                                    <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <select class="form-control" id="txt_grades" name="grade_level"required>
+                                                <option value="" disabled selected>Please select a grade</option>
+                                                <option value="11">XI</option>
+                                                <option value="12">XII</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="txt_program" name="program" required>
+                                                <option value="" disabled selected>First Choice*</option>
+                                                <option value="ABM">ABM</option>
+                                                <option value="STEM">STEM</option>
+                                                <option value="HUMMS">HUMMS</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="txt_program2" name="program2" required>
+                                                <option value="" disabled selected>Second Choice*</option>
+                                                <option value="ABM">ABM</option>
+                                                <option value="STEM">STEM</option>
+                                                <option value="HUMMS">HUMMS</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="txt_whose_choice" name="whose_choice1" required>
+                                                <option value="" disabled selected>Whose choice is your first course?*</option>
+                                                <option value="My own choice">My own choice</option>
+                                                <option value="My Parents Choice">My Parent's Choice</option>
+                                                <option value="My Relatives Choice">My Relative's Choice</option>
+                                                <option value="No one in particular">No one in particular</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group col-md-6">
+                                            <select class="form-control" id="txt_whose_choice2" name="whose_choice2" required>
+                                                <option value="" disabled selected>Whose choice is your first course?*</option>
+                                                <option value="My own choice">My own choice</option>
+                                                <option value="My Parents Choice">My Parent's Choice</option>
+                                                <option value="My Relatives Choice">My Relative's Choice</option>
+                                                <option value="No one in particular">No one in particular</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class = "panel panel-primary">
+                                <div class = "panel-heading">
+                                    <h3 class = "panel-title">
+                                        Other Information
+                                    </h3>
+                                </div>
+                                <div class = "panel-body" id="div_others">
+                                </div>
+                            </div>
+                            <br>
+                            <!-- <div class = "panel panel-primary">
                                 <div class = "panel-heading">
                                     <h3 class = "panel-title">
                                         Educational Background
@@ -325,64 +392,7 @@
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <br>
-                            <div class = "panel panel-primary">
-                                <div class = "panel-heading">
-                                    <h3 class = "panel-title">
-                                        Course
-                                    </h3>
-                                </div>
-                                <div class = "panel-body">
-                                    <div class="row">
-                                        <div class="form-group col-md-12">
-                                            <select class="form-control" id="txt_grades" name="grade_level"required>
-                                                <option value="" disabled selected>Please select a grade</option>
-                                                <option value="11">XI</option>
-                                                <option value="12">XII</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <select class="form-control" id="txt_program" name="program" required>
-                                                <option value="" disabled selected>First Choice*</option>
-                                                <option value="ABM">ABM</option>
-                                                <option value="STEM">STEM</option>
-                                                <option value="HUMMS">HUMMS</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <select class="form-control" id="txt_program2" name="program2" required>
-                                                <option value="" disabled selected>Second Choice*</option>
-                                                <option value="ABM">ABM</option>
-                                                <option value="STEM">STEM</option>
-                                                <option value="HUMMS">HUMMS</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                    <div class="row">
-                                        <div class="form-group col-md-6">
-                                            <select class="form-control" id="txt_whose_choice" name="whose_choice1" required>
-                                                <option value="" disabled selected>Whose choice is your first course?*</option>
-                                                <option value="My own choice">My own choice</option>
-                                                <option value="My Parents Choice">My Parent's Choice</option>
-                                                <option value="My Relatives Choice">My Relative's Choice</option>
-                                                <option value="No one in particular">No one in particular</option>
-                                            </select>
-                                        </div>
-                                        <div class="form-group col-md-6">
-                                            <select class="form-control" id="txt_whose_choice2" name="whose_choice2" required>
-                                                <option value="" disabled selected>Whose choice is your first course?*</option>
-                                                <option value="My own choice">My own choice</option>
-                                                <option value="My Parents Choice">My Parent's Choice</option>
-                                                <option value="My Relatives Choice">My Relative's Choice</option>
-                                                <option value="No one in particular">No one in particular</option>
-                                            </select>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                            </div> -->
                             
                             
                             <!-- <div class="form-group">

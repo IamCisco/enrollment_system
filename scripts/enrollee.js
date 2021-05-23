@@ -4,6 +4,7 @@ $(document).ready(function () {
     ENROLLEE.getEnrolleesForAccept();
     ENROLLEE.getEnrolleesForExam();
     ENROLLEE.getPrograms();
+    ENROLLEE.getRequirements();
 
     $('#frm_enrollee_add').submit(function(event) {
         event.preventDefault();
@@ -71,6 +72,10 @@ let ENROLLEE = {
                         <td>${data["name"]}</td>
                         <td>${data["address"]}</td>
                         <td>${data["birthdate"]}</td>
+                        <td>${data["place_of_birth"]}</td>
+                        <td>${data["citizenship"]}</td>
+                        <td>${data["religion"]}</td>
+                        <td>${data["sex"]}</td>
                         <td>${data["email"]}</td>
                         <td>${data["phone_number"]}</td>
                         <td>${data["date_registered"]}</td>
@@ -99,6 +104,13 @@ let ENROLLEE = {
                     $('#tbl_enrollee_for_exam').DataTable().destroy();
                 }
                 var row = ``;
+                
+                // <td>
+                //     <button type="button"class="btn btn-danger btn-sm data-toggle="tooltip" data-placement="top" title="Reject" style='font-size:24px' onclick="ENROLLEE.failEnrollee(${data["id"]})">
+                    
+                //         <i class='fas fa-times'></i>
+                //     </button>
+                // </td>
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
                     row += `
@@ -115,17 +127,15 @@ let ENROLLEE = {
                                 <i class='fas fa-check'></i>
                             </button>
                         </td>
-                        <td>
-                            <button type="button"class="btn btn-danger btn-sm data-toggle="tooltip" data-placement="top" title="Reject" style='font-size:24px' onclick="ENROLLEE.failEnrollee(${data["id"]})">
-                            
-                                <i class='fas fa-times'></i>
-                            </button>
-                        </td>
                         <td><a href="../assets/img/enrollees/${data["image"]}" target="_blank"><img src="../assets/img/enrollees/${data["image"]}" alt="Avatar" class="avatar"></a></td>
                         <td><a href="../assets/img/enrollees/${data["requirements"]}" target="_blank"><img src="../assets/img/requirements/${data["requirements"]}" alt="Requirement" class="avatar"></a></td>
                         <td>${data["name"]}</td>
                         <td>${data["address"]}</td>
                         <td>${data["birthdate"]}</td>
+                        <td>${data["place_of_birth"]}</td>
+                        <td>${data["citizenship"]}</td>
+                        <td>${data["religion"]}</td>
+                        <td>${data["sex"]}</td>
                         <td>${data["email"]}</td>
                         <td>${data["phone_number"]}</td>
                         <td>${data["date_registered"]}</td>
@@ -257,9 +267,9 @@ let ENROLLEE = {
     passEnrollee: function (id) {
         // swal("Hello world!");
         swal({
-            title: "Are you sure?",
+            title: "Input Grade",
             content: "input",
-            text: "You want to pass this examinee? Please input grade.",
+            text: "Please input examination grade.",
             icon: "info",
             buttons: true,
             dangerMode: true,
@@ -277,9 +287,13 @@ let ENROLLEE = {
                     dataType: "json",
                     assync : false, 
                     success: function (result) {
+                        var text = "You passed this examinee";
+                        if( grade < 60) {
+                            var text = "You failed this examinee";
+                        }
                         ENROLLEE.getEnrolleesForAccept();
                         ENROLLEE.getEnrolleesForExam();
-                        swal("You pass this examinee", {
+                        swal(text, {
                             title: "Success!",
                             text: result,
                             icon: "success",
@@ -373,19 +387,13 @@ let ENROLLEE = {
             },
             type : "post",
             assync: false,
-            success: function (result) {
+            success: function (data) {
+                result = data[0];
+                otherInfo = data[1];
                 var basic_info = `
                 <tr>
-                    <td><b>Learning Reference Number</b></td>
+                    <td><b>Enrollee Photo</b></td>
                     <td><img src="../assets/img/enrollees/${result.image}" alt="Avatar" class="rounded mx-auto d-block"></td>
-                </tr>
-                <tr>
-                    <td><b>Learning Reference Number</b></td>
-                    <td>${result.learning_reference_number}</td>
-                </tr>
-                <tr>
-                    <td><b>Voucher</b></td>
-                    <td>${result.voucher_number}</td>
                 </tr>
                 <tr>
                     <td><b>Fullname</b></td>
@@ -415,26 +423,6 @@ let ENROLLEE = {
                     <td><b>Sex</b></td>
                     <td>${result.sex}</td>
                 </tr>
-                <tr>
-                    <td><b>Cabuyao Registered Voter?</b></td>
-                    <td>${result.registered_voter}</td>
-                </tr>
-                <tr>
-                    <td><b>Registered At</b></td>
-                    <td>${result.registered_at}</td>
-                </tr>
-                <tr>
-                    <td><b>Registered Since</b></td>
-                    <td>${result.registered_since}</td>
-                </tr>
-                <tr>
-                    <td><b>Last School Attended</b></td>
-                    <td>${result.last_school}</td>
-                </tr>
-                <tr>
-                    <td><b>Registered Since</b></td>
-                    <td>${result.school_type}</td>
-                </tr>
                 `;
 
                 $("#tbl_employee_basic_info_body").html(basic_info);
@@ -456,133 +444,6 @@ let ENROLLEE = {
 
                 $("#tbl_employee_contact_info_body").html(contact_info);
 
-                var education_info = `
-                <tr>
-                    <td><b>Junior High School</b></td>
-                    <td>${result.junior_school}</td>
-                </tr>
-                <tr>
-                    <td><b>Year Graduated</b></td>
-                    <td>${result.junior_year_graduated}</td>
-                </tr>
-                <tr>
-                    <td><b>Honors Received</b></td>
-                    <td>${result.honors_junior}</td>
-                </tr>
-                <tr>
-                    <td><b>Junior High School Address</b></td>
-                    <td>${result.junior_school_address}</td>
-                </tr>
-                <tr>
-                    <td><b>Elementary School</b></td>
-                    <td>${result.elementary_school}</td>
-                </tr>
-                <tr>
-                    <td><b>Year Graduated</b></td>
-                    <td>${result.elementary_year_graduated}</td>
-                </tr>
-                <tr>
-                    <td><b>Honors Received</b></td>
-                    <td>${result.honors_elementary}</td>
-                </tr>
-                <tr>
-                    <td><b>Junior High School Address</b></td>
-                    <td>${result.elementary_school_address}</td>
-                </tr>
-                `;
-
-                $("#tbl_employee_education_info_body").html(education_info);
-
-                var family_background = `
-                <tr>
-                    <td><b>Civil Status</b></td>
-                    <td>${result.civil_status}</td>
-                </tr>
-                <tr>
-                    <td><b>Spouse Name</b></td>
-                    <td>${result.spouse_name}</td>
-                </tr>
-                <tr>
-                    <td><b>Spouse Legal Residence</b></td>
-                    <td>${result.spouse_residence}</td>
-                </tr>
-
-                <tr>
-                    <td><b>Father's Name</b></td>
-                    <td>${result.father_name}</td>
-                </tr>
-                <tr>
-                    <td><b>Highest Educational Attainment</b></td>
-                    <td>${result.highest_educ_father}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Birthday</b></td>
-                    <td>${result.father_birthday}</td>
-                </tr>
-                <tr>
-                    <td><b>Contact Number</b></td>
-                    <td>${result.father_contact_no}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Occupation</b></td>
-                    <td>${result.father_occupation}</td>
-                </tr>
-                <tr>
-                    <td><b>Monthly Income</b></td>
-                    <td>${result.father_income}</td>
-                </tr>
-                <tr>
-                    <td><b>Company</b></td>
-                    <td>${result.father_company}</td>
-                </tr>
-                <tr>
-                    <td><b>Company Address</b></td>
-                    <td>${result.father_company_address}</td>
-                </tr>
-                <tr>
-                    <td><b>Status</b></td>
-                    <td>${result.father_status}</td>
-                </tr>
-                
-                <tr>
-                    <td><b>Mother's Name</b></td>
-                    <td>${result.mother_name}</td>
-                </tr>
-                <tr>
-                    <td><b>Highest Educational Attainment</b></td>
-                    <td>${result.highest_educ_mother}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Birthday</b></td>
-                    <td>${result.mother_birthday}</td>
-                </tr>
-                <tr>
-                    <td><b>Contact Number</b></td>
-                    <td>${result.mother_contact_no}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Occupation</b></td>
-                    <td>${result.mother_occupation}</td>
-                </tr>
-                <tr>
-                    <td><b>Monthly Income</b></td>
-                    <td>${result.mother_income}</td>
-                </tr>
-                <tr>
-                    <td><b>Company</b></td>
-                    <td>${result.mother_company}</td>
-                </tr>
-                <tr>
-                    <td><b>Company Address</b></td>
-                    <td>${result.mother_company_address}</td>
-                </tr>
-                <tr>
-                    <td><b>Status</b></td>
-                    <td>${result.mother_status}</td>
-                </tr>
-                `;
-
-                $("#tbl_employee_family_background_body").html(family_background);
                 
                 var course = `
                 <tr>
@@ -604,6 +465,19 @@ let ENROLLEE = {
                 `;
 
                 $("#tbl_employee_course_body").html(course);
+
+                var otherInfoDetails = '';
+                for (let i = 0; i < otherInfo.length; i++) {
+                    element = otherInfo[i];
+                    otherInfoDetails += `
+                        <tr>
+                            <td><b>${element.form_label}</b></td>
+                            <td>${element.value}</td>
+                        </tr>
+                    `;
+                }
+                
+                $("#tbl_employee_other_info_body").html(otherInfoDetails);
 
                 $("#modal_enrollee_info").modal();
                 // ENROLLEE.id = id;
@@ -659,6 +533,57 @@ let ENROLLEE = {
                 }
                 $("#txt_program2").html(row2);
                 $("#txt_program").html(row1);
+            }
+        });
+    },
+    
+    getRequirements: function () {
+        $.ajax({
+            url: "../data/RequirementData.php?action=getActiveRequirements",
+            dataType: "json",
+            success: function (result) {
+                var row = ``;
+                var input = "";
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    
+                    var isRequired = "";
+                    if(data["is_required"] == 1)
+                    {
+                        isRequired = "required"
+                    }
+                    var inputType = data['input_type'];
+                    if (inputType == 'select') {
+                        var dropdownValues = data['select_values'].split("|");
+                        var options = `<option value="" disabled selected></option>`;
+                        for(var y = 0; y < dropdownValues.length; y++) {
+                            options += `
+                            <option value="${dropdownValues[y]}">${dropdownValues[y]}</option>
+                            `
+                        }
+                        input += `
+                            <div class="form-group">
+                                <label for="${data['id']}">${data['form_label']}</label>
+                                <select class="form-control" id="${data['id']}" name="${data['id']}" ${isRequired} >
+                                    ${options}
+                                </select>
+                            </div>
+                        `;
+                    }
+                    else {
+                        input += `
+                            <div class="form-group">
+                                <label for="${data['id']}">${data['form_label']}</label>
+                                <input class="form-control" type="${inputType}" id="${data['id']}" name="${data['id']}">
+                                
+                            </div>
+                        `;
+                    }
+
+                    
+                    
+                    
+                }$("#div_others").html(input);
             }
         });
     },

@@ -31,7 +31,7 @@ class AnnouncementModel extends Connection
             $sql = "INSERT INTO announcements ($columns) VALUES ($prepare)";
             $stmt = $this->conn->prepare($sql);
             $stmt->execute($values);
-            return "success";
+            return $this->conn->lastInsertId();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }

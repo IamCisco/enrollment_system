@@ -92,6 +92,60 @@ let INDEX = {
             }
         });
     },
+    getArchiveAnnouncements: function (){
+        $.ajax({
+            url: "../data/AnnouncementData.php?action=getAnnouncements",
+            dataType: "json",
+            // assync: false,
+            success: function (result) {
+                // console.log(result)
+                var result_length = result.length;
+                var row = ``;
+                for (var x = 0; x < result_length; x++) {
+                    btn_add_comment = "";
+                    data = result[x];
+                    if(INDEX.user_id != 0)
+                    {
+                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
+                    }
+                    row += `
+                    <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
+                        <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">
+                        <div class="portfolio-info">
+                            <h4>${data["title"]}</h4>
+                            ${btn_add_comment} 
+                            <a href="../assets/img/announcements/${data["image"]}" class="venobox preview-link vbox-item" title="${data["title"]}"><i class="bx bx-link"></i></a><br>
+                            
+                        </div>
+                    </div>
+                    `;
+                }
+
+                $('.portfolio-container').isotope('destroy');
+                $(".portfolio-container").html(row);
+                setTimeout(function(){
+                    var portfolioIsotope = $('.portfolio-container').isotope({
+                    itemSelector: '.portfolio-item'
+                    });
+                
+                    $('#portfolio-flters li').on('click', function() {
+                    $("#portfolio-flters li").removeClass('filter-active');
+                    $(this).addClass('filter-active');
+                
+                    portfolioIsotope.isotope({
+                        filter: $(this).data('filter')
+                    });
+                    INDEX.aos_init();
+                    });
+                }, 1000);
+                
+                $('.venobox').venobox();
+                $('.comment_button').on("click", function(e){
+                    $("#modal_comments").modal();
+                }); 
+            }
+        });
+    },
     searchAnnouncements: function (_this){
         $.ajax({
             url: "../data/AnnouncementData.php?action=searchAnnouncements",
@@ -127,8 +181,9 @@ let INDEX = {
                     </div>
                     `;
                 }
-
+                $('.portfolio-container').isotope('destroy');
                 $(".portfolio-container").html(row);
+                
                 setTimeout(function(){
                     var portfolioIsotope = $('.portfolio-container').isotope({
                     itemSelector: '.portfolio-item'

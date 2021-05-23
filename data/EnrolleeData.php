@@ -34,6 +34,10 @@ if ($action == "getPassedEnrollee") {
             "date_registered" => $enrollee["date_registered"],
             "grade_level"     => $enrollee["grade_level"],
             "program"         => $enrollee["program"],
+            "place_of_birth"  => $enrollee["place_of_birth"],
+            "citizenship"     => $enrollee["citizenship"],
+            "religion"        => $enrollee["religion"],
+            "sex"             => $enrollee["sex"],
             "requirements"    => $enrollee["requirements"]
         ];
     }
@@ -88,6 +92,10 @@ if ($action == "getPassedEnrollee") {
             "date_registered" => $enrollee["date_registered"],
             "grade_level"     => $enrollee["grade_level"],
             "program"         => $enrollee["program"],
+            "place_of_birth"  => $enrollee["place_of_birth"],
+            "citizenship"     => $enrollee["citizenship"],
+            "religion"        => $enrollee["religion"],
+            "sex"             => $enrollee["sex"],
             "requirements"    => $enrollee["requirements"]
         ];
     }
@@ -135,10 +143,18 @@ if ($action == "getPassedEnrollee") {
     $columns = "";
     $prepare = "";
     $values = [];
+    $otherValues = [];
     foreach ($post_data as $key => $value) {
-        $values[] = $value;
-        $columns .= $key . ",";
-        $prepare .= "?,";
+        if( !is_numeric($key)) {
+            $values[] = $value;
+            $columns .= $key . ",";
+            $prepare .= "?,";
+        } else { 
+            
+            $otherValues[$key] = $value;
+
+        }
+        
 
         $$key = $value;
     }
@@ -194,7 +210,13 @@ if ($action == "getPassedEnrollee") {
                 }
             }
         }
-        $enrollee->insert_enrollee($columns, $values, $prepare);
+        $enrollee_id = $enrollee->insert_enrollee($columns, $values, $prepare);
+        foreach ($otherValues as $key => $value) {
+            $columns = "enrollee_id, requirement_id, value";
+            $values = [$enrollee_id, $key, $value];
+            $prepare = "?, ?, ?";
+            $enrollee->insert_enrollee_details($columns, $values, $prepare);
+        }
         $title = "Successfully Registered";
         $status = "success";
         $message = "We sent an email to you. Please check your inbox or spam folder. We will keep you informed through Emails";
@@ -227,15 +249,16 @@ if ($action == "getPassedEnrollee") {
     $id = $_POST["id"];
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
     $datastorage = [];
-    foreach ($enrollee_list as $enrollee) {
-        foreach ($enrollee as $enrollee_key => $enrollee_value) {
+    foreach ($enrollee_list as $enrolleeDetails) {
+        foreach ($enrolleeDetails as $enrollee_key => $enrollee_value) {
             if(!is_numeric($enrollee_key)){
                 $datastorage[$enrollee_key] = $enrollee_value;
             }
             
         }
     }
-    echo json_encode($datastorage);
+    $enrollee_details = $enrollee->load_enrollee_details($id);
+    echo json_encode([$datastorage, $enrollee_details]);
 } else if ($action == "updateEnrollee") {
     $id = $_POST["id"];
     $columns = "";
@@ -305,9 +328,12 @@ if ($action == "getPassedEnrollee") {
     $id = $_POST["id"];
     $exam_result = $_POST["exam_result"];
     
+
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
     $first_name = $enrollee_list[0]["first_name"];
     $email = $enrollee_list[0]["email"];
+
+    $passed = 1;
     $subject = 'Congratulations!';
     $body = "
         <html>
@@ -319,9 +345,25 @@ if ($action == "getPassedEnrollee") {
         Thank you,
         CITech
         </html>";
+    if ($exam_result < 60) {
+        $passed = 0;
+        $subject = 'Inquiry Denied!';
+        $body = "
+            <html>
+            Hi there $first_name,
+            
+            We are very sorry to inform that you failed on our entrance exam.
+            Don't lose hope. Try and try until you succeed
+            
+            Thank you,
+            CITech
+            </html>";
+    }
+    
+    
 
     $columns = "passed=?, exam_result=?";
-    $values = [1,$exam_result];
+    $values = [$passed,$exam_result];
     
 
     $enrollee->update_enrollee($id, $columns, $values);

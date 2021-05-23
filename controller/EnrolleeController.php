@@ -14,6 +14,11 @@ class EnrolleeController
         return $this->enrollee->get_enrollee($where);
     }
 
+    public function load_enrollee_details($id)
+    {
+        return $this->enrollee->get_enrollee_details($id);
+    }
+
     public function load_enrollee_stats($where = null, $where_strand1 = null, $where_strand2 = null)
     {
         return $this->enrollee->get_enrollee_stats($where, $where_strand1, $where_strand2);
@@ -22,6 +27,11 @@ class EnrolleeController
     public function insert_enrollee($columns, $values, $prepare)
     {
         return $this->enrollee->insert_enrollee($columns, $values, $prepare);
+    }
+
+    public function insert_enrollee_details($columns, $values, $prepare)
+    {
+        return $this->enrollee->insert_enrollee_details($columns, $values, $prepare);
     }
 
 

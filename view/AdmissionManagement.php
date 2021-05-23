@@ -50,6 +50,10 @@
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Birthday</td>
+                                    <td>Place Of Birth</td>
+                                    <td>Citizenship</td>
+                                    <td>Religion</td>
+                                    <td>Sex</td>
                                     <td>Email</td>
                                     <td>Phone Number</td>
                                     <td>Date Registered</td>
@@ -77,12 +81,15 @@
                                 <tr>
                                     <td>View</td>
                                     <td>Accept</td>
-                                    <td>Reject</td>
                                     <td>Image</td>
                                     <td>TOR</td>
                                     <td>Name</td>
                                     <td>Address</td>
                                     <td>Birthday</td>
+                                    <td>Place Of Birth</td>
+                                    <td>Citizenship</td>
+                                    <td>Religion</td>
+                                    <td>Sex</td>
                                     <td>Email</td>
                                     <td>Phone Number</td>
                                     <td>Date Registered</td>
@@ -125,7 +132,7 @@
                                 </thead>
                                 <tbody id= "tbl_employee_contact_info_body">
                                 </tbody>
-                                <thead>
+                                <!-- <thead>
                                     <tr>
                                         <th colspan=2 style="color:greenyellow;text-align:center">Educational Background</th>
                                     </tr>
@@ -138,13 +145,20 @@
                                     </tr>
                                 </thead>
                                 <tbody id= "tbl_employee_family_background_body">
-                                </tbody>
+                                </tbody> -->
                                 <thead>
                                     <tr>
                                         <th colspan=2 style="color:greenyellow;text-align:center">Course</th>
                                     </tr>
                                 </thead>
                                 <tbody id= "tbl_employee_course_body">
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Other Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_other_info_body">
                                 </tbody>
                             </table>
                         </div>

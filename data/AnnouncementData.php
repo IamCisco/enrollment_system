@@ -40,7 +40,7 @@ if ($action == "getAnnouncements") {
 } else if ($action == "searchAnnouncements") {
     $date = date("Y-m-d");
     $search_text = $_POST["search_text"];
-    $announcement_list = $announcement->load_all_announcements("where validity_date >= '$date' and (title like '%$search_text%' or announcement like '%$search_text%')");
+    $announcement_list = $announcement->load_all_announcements("where (title like '%$search_text%' or announcement like '%$search_text%')");
 
     $datastorage = [];
     foreach($announcement_list as $announcement) {

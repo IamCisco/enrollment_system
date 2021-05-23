@@ -23,7 +23,21 @@ class EnrolleeModel extends Connection
             return $th->getMessage();
         }
     }
-
+    
+    public function get_enrollee_details($id)
+    {
+        try {
+            $sql = "SELECT a.id, a.value, b.form_label FROM requirement_values as a
+             left join requirements as b 
+             on a.requirement_id = b .id
+             where a.enrollee_id =$id";
+            $stmt = $this->conn->query($sql);
+            return $stmt->fetchAll();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+//  
     public function get_enrollee_stats($where = null, $where_strand1 = null, $where_strand2 = null)
     {
         try {
@@ -108,7 +122,20 @@ class EnrolleeModel extends Connection
 
             $sql = "INSERT INTO enrollees ($columns) VALUES ($prepare)";
             $stmt = $this->conn->prepare($sql);
-            return   $stmt->execute($values);
+            $stmt->execute($values);
+            return $this->conn->lastInsertId();
+        } catch (\Throwable $th) {
+            return $th->getMessage();
+        }
+    }
+    public function insert_enrollee_details($columns, $values, $prepare)
+    {
+        try {
+
+            $sql = "INSERT INTO requirement_values ($columns) VALUES ($prepare)";
+            $stmt = $this->conn->prepare($sql);
+            $stmt->execute($values);
+            return $this->conn->lastInsertId();
         } catch (\Throwable $th) {
             return $th->getMessage();
         }
