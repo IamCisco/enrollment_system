@@ -522,6 +522,8 @@ let INDEX = {
                     $("#btn_addmission").hide();
                     $("#btn_logout").hide();
                     $("#btn_stats").hide();
+                    $("#btn_program").hide();
+                    $("#btn_requirement").hide();
                     $("#btn_profile").hide();
                     $("#btn_background").hide();
                     $("#btn_login").show();
@@ -537,6 +539,8 @@ let INDEX = {
                         $("#btn_announcement").show();
                         $("#btn_addmission").show();
                         $("#btn_stats").show();
+                        $("#btn_program").show();
+                        $("#btn_requirement").show();
                         $("#btn_background").show();
                         $("#btn_profile").show();
                         $("#btn_login").hide();
