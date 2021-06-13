@@ -276,6 +276,7 @@ if ($action == "getPassedEnrollee") {
     echo json_encode("Data Successfully Updated");
 } else if ($action == "acceptEnrollee"){
     $id = $_POST["id"];
+    $exam_date = $_POST["exam_date"];
     
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
     $first_name = $enrollee_list[0]["first_name"];
@@ -286,14 +287,14 @@ if ($action == "getPassedEnrollee") {
         Hi there $first_name,
         
         We would like to inform that your apllication to CITech website has been verified and accepted.
-        Please take note that your exam will be on yyy-mm-dd at 08:00 am.
+        Please take note that your exam will be on $exam_date.
         
         Thank you,
         CITech
         </html>";
 
-    $columns = "accepted=?";
-    $values = [1];
+    $columns = "accepted=?, exam_date= ?";
+    $values = [1,$exam_date];
 
     $enrollee->update_enrollee($id, $columns, $values);
 
@@ -332,6 +333,7 @@ if ($action == "getPassedEnrollee") {
     $enrollee_list = $enrollee->load_all_enrollees("where id=$id");
     $first_name = $enrollee_list[0]["first_name"];
     $email = $enrollee_list[0]["email"];
+    $exam_date = $enrollee_list[0]["exam_date"];
 
     $passed = 1;
     $subject = 'Congratulations!';
@@ -339,7 +341,7 @@ if ($action == "getPassedEnrollee") {
         <html>
         Hi there $first_name,
         
-        Congratulations, you passed our entrance exam held last yyyy-mm-dd.
+        Congratulations, you passed our entrance exam held last $exam_date.
         You may now come to our school and proceed to enrollment process
         
         Thank you,

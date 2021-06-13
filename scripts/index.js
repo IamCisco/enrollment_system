@@ -11,6 +11,9 @@ $(document).ready(function () {
     $('#btn_update_comment').on("click", function(e){
         INDEX.updateComment();
     }); 
+    $('#btnLoadAllAnnouncement').on("click", function(e){
+        INDEX.getArchiveAnnouncements();
+    }); 
 
     $('#frm_search_announcement').submit(function(event) {
         event.preventDefault();
@@ -523,6 +526,8 @@ let INDEX = {
                     $("#btn_logout").hide();
                     $("#btn_stats").hide();
                     $("#btn_program").hide();
+                    $("#btn_grade").hide();
+                    $("#btn_semeter").hide();
                     $("#btn_requirement").hide();
                     $("#btn_profile").hide();
                     $("#btn_background").hide();
@@ -540,6 +545,8 @@ let INDEX = {
                         $("#btn_addmission").show();
                         $("#btn_stats").show();
                         $("#btn_program").show();
+                        $("#btn_grade").show();
+                        $("#btn_semeter").show();
                         $("#btn_requirement").show();
                         $("#btn_background").show();
                         $("#btn_profile").show();

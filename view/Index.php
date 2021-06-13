@@ -56,14 +56,15 @@
             <div class="container" data-aos="fade-up">
 
                 <div class="section-title">
-                    <h2>Portfolio</h2>
-                    <h3>Check our <span>Portfolio</span></h3>
+                    <!-- <h2></h2> -->
+                    <h3><span>Announcement</span></h3>
                 </div>
                     <form id="frm_search_announcement">
                 <div class="input-group mb-3">
                         <input type="text" class="form-control" name="search_text" id="txt_search_announcement" placeholder="Search announcement" aria-label="Search Announcement" aria-describedby="basic-addon2">
                         <div class="input-group-append">
                             <button class="btn btn-outline-secondary" type="submit">Search</button>
+                            <button class="btn btn-outline-secondary" type="button" id="btnLoadAllAnnouncement">Load All Announcements</button>
                         </div>
                     </form>
                     

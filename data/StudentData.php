@@ -24,6 +24,7 @@ if ($action == "getStudents") {
             "grade_level"    => $student["grade_level"],
             "status"         => $student["status"],
             "enrollee_id"    => $student["enrollee_id"],
+            "semester"       => $student["semester"],
         ];
     }
     echo json_encode($datastorage);
@@ -50,7 +51,7 @@ if ($action == "getStudents") {
     else{
         $path_from = '../assets/img/enrollees/';
         $path_to = '../assets/img/students/';
-        // copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
+        copy($path_from.$_POST["image"],$path_to.$_POST["image"]);
     
         //generating of uniquestudent number
         $year = date("y");  
@@ -88,6 +89,7 @@ if ($action == "getStudents") {
             "image"         => $student["image"],
             "grade_level"   => $student["grade_level"],
             "enrollee_id"   => $student["enrollee_id"],
+            "semester"      => $student["semester"],
         ];
     }
     echo json_encode($datastorage);

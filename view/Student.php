@@ -136,6 +136,14 @@
                                 <option value="12">XII</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="txt_semester">Semester</label>
+                            <select class="form-control" id="txt_semester" name="semester" required disabled>
+                                <option value="" disabled selected>Please select semester</option>
+                                <option value="11">XI</option>
+                                <option value="12">XII</option>
+                            </select>
+                        </div>
                     </div>
                     <div class="modal-footer">
                         
@@ -206,6 +214,14 @@
                                 <option value="12">XII</option>
                             </select>
                         </div>
+                        <div class="form-group">
+                            <label for="txt_semester_update">Semester</label>
+                            <select class="form-control" id="txt_semester_update" name="semester" required>
+                                <option value="" disabled selected>Please select semester</option>
+                                <option value="11">XI</option>
+                                <option value="12">XII</option>
+                            </select>
+                        </div>
                         
 
                     </div>
@@ -231,7 +247,7 @@
                 <div class="modal-body">
                     <div class ="row">
                         <div class="col-md-12">
-                            <table class="" width="100%" border="none">
+                        <table class="" width="100%" border="none">
                                 <thead>
                                     <tr>
                                         <th colspan=2 style="color:greenyellow;text-align:center">Basic Information</th>
@@ -246,7 +262,7 @@
                                 </thead>
                                 <tbody id= "tbl_employee_contact_info_body">
                                 </tbody>
-                                <thead>
+                                <!-- <thead>
                                     <tr>
                                         <th colspan=2 style="color:greenyellow;text-align:center">Educational Background</th>
                                     </tr>
@@ -259,13 +275,20 @@
                                     </tr>
                                 </thead>
                                 <tbody id= "tbl_employee_family_background_body">
-                                </tbody>
+                                </tbody> -->
                                 <thead>
                                     <tr>
                                         <th colspan=2 style="color:greenyellow;text-align:center">Course</th>
                                     </tr>
                                 </thead>
                                 <tbody id= "tbl_employee_course_body">
+                                </tbody>
+                                <thead>
+                                    <tr>
+                                        <th colspan=2 style="color:greenyellow;text-align:center">Other Info</th>
+                                    </tr>
+                                </thead>
+                                <tbody id= "tbl_employee_other_info_body">
                                 </tbody>
                             </table>
                         </div>

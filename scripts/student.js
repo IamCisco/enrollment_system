@@ -3,6 +3,8 @@ $(document).ready(function () {
     USER.checkSession();
     STUDENT.getStudents();
     STUDENT.getPrograms();
+    STUDENT.getGrades();
+    STUDENT.getSemesters();
     STUDENT.loadEntranceExamPassers();
     $('#txt_passers').on('change', function() {
         STUDENT.getSpecificPasser( this );
@@ -20,7 +22,8 @@ $(document).ready(function () {
             phone_number : $("#txt_phonenumber").val(),
             program      : $("#txt_program").val(),
             grade_level  : $("#txt_grade").val(),
-            enrollee_id  : $("#txt_passers").val()
+            enrollee_id  : $("#txt_passers").val(),
+            semester     : $("#txt_semester").val()
         }
         STUDENT.insertStudent(post_data)
     });
@@ -128,6 +131,7 @@ let STUDENT = {
         });
     },
     getSpecificPasser : function(this_){
+        
         $.ajax({
             url: "../data/EnrolleeData.php?action=getSpecificEnrollee",
             dataType: "json",
@@ -137,7 +141,8 @@ let STUDENT = {
             },
             type : "post",
             assync: false,
-            success: function (result) {
+            success: function (data) {
+                result = data[0]
                 // console.log(result)
                 
                 $("#txt_image").val(result.image);
@@ -147,9 +152,10 @@ let STUDENT = {
                 $("#txt_address").val(result.address);
                 $("#txt_bday").val(result.birthdate);
                 $("#txt_email").val(result.email);
-                $("#txt_phonenumber").val(result.phone_number);
+                $("#txt_phonenumber").val(result.contact_number);
                 $("#txt_program").val(result.program);
                 $("#txt_grade").val(result.grade_level);
+                $("#txt_semester").val(result.semester);
             }
         });
     },
@@ -249,7 +255,7 @@ let STUDENT = {
             type : "post",
             assync: false,
             success: function (result) {
-                // console.log(result)
+                console.log(result)
                 STUDENT.id = id;
                 $("#modal_student_form_update").modal("show");
                 $("#txt_id").val(id);
@@ -262,6 +268,7 @@ let STUDENT = {
                 $("#txt_phonenumber_update").val(result.phone_number);
                 $("#txt_program_update").val(result.program);
                 $("#txt_grade_update").val(result.grade_level);
+                $("#txt_semester_update").val(result.semester);
             }
         });
     },
@@ -322,6 +329,7 @@ let STUDENT = {
         $.ajax({
             url: "../data/ProgramData.php?action=getPrograms",
             dataType: "json",
+            assync : false,
             success: function (result) {
                 var row = `<option value="" disabled selected>Please select a program</option>`;
 
@@ -336,6 +344,47 @@ let STUDENT = {
             }
         });
     },
+    
+    getGrades: function () {
+        $.ajax({
+            url: "../data/GradeData.php?action=getGrades",
+            dataType: "json",
+            assync : false,
+            success: function (result) {
+                var row1 = `<option value="" disabled selected>Please Select Grade</option>`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row1 += `
+                        <option value="${data["grade"]}">${data["grade_roman_numeral"]}</option>
+                    `;
+                }
+                $("#txt_grade").html(row1);
+                $("#txt_grade_update").html(row1);
+            }
+        });
+    },
+    
+    getSemesters: function () {
+        $.ajax({
+            url: "../data/SemesterData.php?action=getSemesters",
+            assync : false,
+            dataType: "json",
+            success: function (result) {
+                console.log(result);
+                var row1 = `<option value="" disabled selected>Please Select Semester</option>`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row1 += `
+                        <option value="${data["semester"]}">${data["semester"]}</option>
+                    `;
+                }
+                $("#txt_semester_update").html(row1);
+                $("#txt_semester").html(row1);
+            }
+        });
+    },
     getSpecificEnrollee : function(id){
         $.ajax({
             url: "../data/EnrolleeData.php?action=getSpecificEnrollee",
@@ -346,10 +395,12 @@ let STUDENT = {
             },
             type : "post",
             assync: false,
-            success: function (result) {
+            success: function (data) {
+                result = data[0];
+                otherInfo = data[1];
                 var basic_info = `
                 <tr>
-                    <td><b>Learning Reference Number</b></td>
+                    <td><b>Enrollee Photo</b></td>
                     <td><img src="../assets/img/enrollees/${result.image}" alt="Avatar" class="rounded mx-auto d-block"></td>
                 </tr>
                 <tr>
@@ -380,26 +431,6 @@ let STUDENT = {
                     <td><b>Sex</b></td>
                     <td>${result.sex}</td>
                 </tr>
-                <tr>
-                    <td><b>Cabuyao Registered Voter?</b></td>
-                    <td>${result.registered_voter}</td>
-                </tr>
-                <tr>
-                    <td><b>Registered At</b></td>
-                    <td>${result.registered_at}</td>
-                </tr>
-                <tr>
-                    <td><b>Registered Since</b></td>
-                    <td>${result.registered_since}</td>
-                </tr>
-                <tr>
-                    <td><b>Last School Attended</b></td>
-                    <td>${result.last_school}</td>
-                </tr>
-                <tr>
-                    <td><b>Registered Since</b></td>
-                    <td>${result.school_type}</td>
-                </tr>
                 `;
 
                 $("#tbl_employee_basic_info_body").html(basic_info);
@@ -421,133 +452,6 @@ let STUDENT = {
 
                 $("#tbl_employee_contact_info_body").html(contact_info);
 
-                var education_info = `
-                <tr>
-                    <td><b>Junior High School</b></td>
-                    <td>${result.junior_school}</td>
-                </tr>
-                <tr>
-                    <td><b>Year Graduated</b></td>
-                    <td>${result.junior_year_graduated}</td>
-                </tr>
-                <tr>
-                    <td><b>Honors Received</b></td>
-                    <td>${result.honors_junior}</td>
-                </tr>
-                <tr>
-                    <td><b>Junior High School Address</b></td>
-                    <td>${result.junior_school_address}</td>
-                </tr>
-                <tr>
-                    <td><b>Elementary School</b></td>
-                    <td>${result.elementary_school}</td>
-                </tr>
-                <tr>
-                    <td><b>Year Graduated</b></td>
-                    <td>${result.elementary_year_graduated}</td>
-                </tr>
-                <tr>
-                    <td><b>Honors Received</b></td>
-                    <td>${result.honors_elementary}</td>
-                </tr>
-                <tr>
-                    <td><b>Junior High School Address</b></td>
-                    <td>${result.elementary_school_address}</td>
-                </tr>
-                `;
-
-                $("#tbl_employee_education_info_body").html(education_info);
-
-                var family_background = `
-                <tr>
-                    <td><b>Civil Status</b></td>
-                    <td>${result.civil_status}</td>
-                </tr>
-                <tr>
-                    <td><b>Spouse Name</b></td>
-                    <td>${result.spouse_name}</td>
-                </tr>
-                <tr>
-                    <td><b>Spouse Legal Residence</b></td>
-                    <td>${result.spouse_residence}</td>
-                </tr>
-
-                <tr>
-                    <td><b>Father's Name</b></td>
-                    <td>${result.father_name}</td>
-                </tr>
-                <tr>
-                    <td><b>Highest Educational Attainment</b></td>
-                    <td>${result.highest_educ_father}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Birthday</b></td>
-                    <td>${result.father_birthday}</td>
-                </tr>
-                <tr>
-                    <td><b>Contact Number</b></td>
-                    <td>${result.father_contact_no}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Occupation</b></td>
-                    <td>${result.father_occupation}</td>
-                </tr>
-                <tr>
-                    <td><b>Monthly Income</b></td>
-                    <td>${result.father_income}</td>
-                </tr>
-                <tr>
-                    <td><b>Company</b></td>
-                    <td>${result.father_company}</td>
-                </tr>
-                <tr>
-                    <td><b>Company Address</b></td>
-                    <td>${result.father_company_address}</td>
-                </tr>
-                <tr>
-                    <td><b>Status</b></td>
-                    <td>${result.father_status}</td>
-                </tr>
-                
-                <tr>
-                    <td><b>Mother's Name</b></td>
-                    <td>${result.mother_name}</td>
-                </tr>
-                <tr>
-                    <td><b>Highest Educational Attainment</b></td>
-                    <td>${result.highest_educ_mother}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Birthday</b></td>
-                    <td>${result.mother_birthday}</td>
-                </tr>
-                <tr>
-                    <td><b>Contact Number</b></td>
-                    <td>${result.mother_contact_no}</td>
-                </tr>
-                <tr>
-                    <td><b>Father's Occupation</b></td>
-                    <td>${result.mother_occupation}</td>
-                </tr>
-                <tr>
-                    <td><b>Monthly Income</b></td>
-                    <td>${result.mother_income}</td>
-                </tr>
-                <tr>
-                    <td><b>Company</b></td>
-                    <td>${result.mother_company}</td>
-                </tr>
-                <tr>
-                    <td><b>Company Address</b></td>
-                    <td>${result.mother_company_address}</td>
-                </tr>
-                <tr>
-                    <td><b>Status</b></td>
-                    <td>${result.mother_status}</td>
-                </tr>
-                `;
-
-                $("#tbl_employee_family_background_body").html(family_background);
                 
                 var course = `
                 <tr>
@@ -569,6 +473,19 @@ let STUDENT = {
                 `;
 
                 $("#tbl_employee_course_body").html(course);
+
+                var otherInfoDetails = '';
+                for (let i = 0; i < otherInfo.length; i++) {
+                    element = otherInfo[i];
+                    otherInfoDetails += `
+                        <tr>
+                            <td><b>${element.form_label}</b></td>
+                            <td>${element.value}</td>
+                        </tr>
+                    `;
+                }
+                
+                $("#tbl_employee_other_info_body").html(otherInfoDetails);
 
                 $("#modal_enrollee_info").modal();
                 // ENROLLEE.id = id;

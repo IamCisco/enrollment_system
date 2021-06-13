@@ -4,6 +4,8 @@ $(document).ready(function () {
     ENROLLEE.getEnrolleesForAccept();
     ENROLLEE.getEnrolleesForExam();
     ENROLLEE.getPrograms();
+    ENROLLEE.getGrades();
+    ENROLLEE.getSemesters();
     ENROLLEE.getRequirements();
 
     $('#frm_enrollee_add').submit(function(event) {
@@ -195,21 +197,25 @@ let ENROLLEE = {
           });
     },
     acceptEnrollee: function (id) {
-        swal("Hello world!");
         swal({
-            title: "Are you sure?",
-            text: "You want to accept this application?",
+            title: "Are you sure to accept this enrollee?",
+            content: "input",
+            text: "Please input examination date.",
             icon: "info",
             buttons: true,
             dangerMode: true,
           })
-          .then((willDelete) => {
-            if (willDelete) {
+          .then((inputDate) => {
+            if (ENROLLEE.validateDate(inputDate) != 'Invalid Date') {
+                var date_ = ENROLLEE.validateDate(inputDate);
+                var examDate =  date_.getFullYear()+'-'+(date_.getMonth()+1)+'-'+date_.getDate();
+                
                 $.ajax({
                     url: "../data/EnrolleeData.php?action=acceptEnrollee",
                     data:
                     {
-                        id: id
+                        id: id,
+                        exam_date: examDate,
                     },
                     type: "post",
                     dataType: "json",
@@ -226,6 +232,8 @@ let ENROLLEE = {
                     }
                 });
               
+            } else {
+                alert("invalid date")
             }
           });
     },
@@ -295,7 +303,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForExam();
                         swal(text, {
                             title: "Success!",
-                            text: resutextlt,
+                            text: result,
                             icon: "success",
                             button: "OK",
                         });
@@ -537,6 +545,43 @@ let ENROLLEE = {
         });
     },
     
+    getGrades: function () {
+        $.ajax({
+            url: "../data/GradeData.php?action=getGrades",
+            dataType: "json",
+            success: function (result) {
+                var row1 = `<option value="" disabled selected>Please Select Grade</option>`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row1 += `
+                        <option value="${data["grade_roman_numeral"]}">${data["grade_roman_numeral"]}</option>
+                    `;
+                }
+                $("#txt_grades").html(row1);
+            }
+        });
+    },
+    
+    getSemesters: function () {
+        $.ajax({
+            url: "../data/SemesterData.php?action=getSemesters",
+            assync : false,
+            dataType: "json",
+            success: function (result) {
+                var row1 = `<option value="" disabled selected>Please Select Semester</option>`;
+
+                for (var x = 0; x < result.length; x++) {
+                    data = result[x];
+                    row1 += `
+                        <option value="${data["semester"]}">${data["semester"]}</option>
+                    `;
+                }
+                $("#txt_semesters").html(row1);
+            }
+        });
+    },
+    
     getRequirements: function () {
         $.ajax({
             url: "../data/RequirementData.php?action=getActiveRequirements",
@@ -587,4 +632,8 @@ let ENROLLEE = {
             }
         });
     },
+    validateDate: function(inputText) {
+        return new Date(inputText);
+    }
+  
 } 

@@ -13,11 +13,19 @@ if ($action == "login") {
         $$key = $value;
     }
     $users = $user->getUsers(" where username='$username' and password='$password'");
-
+    
+    $user_type = $users[0]["user_level"];
     $stop = 0;
     if($username != 'admin')
     {
-        $user_status = $user->getPersons(" where student_number ='$username'", "students")[0]["status"];
+        if($user_type == "student")
+        {
+            $user_status = $user->getPersons(" where student_number='$username'", "students")[0]["status"];
+        }
+        else if($user_type == "teacher")
+        {
+            $user_status = $user->getPersons(" where id_number='$username'", "teachers")[0]["status"];
+        }
         if($user_status == 0)
         {
             echo json_encode("disabled");
@@ -214,15 +222,16 @@ if ($action == "login") {
 
         if($user_type == "student")
         {
-            $students = $user->getPersons(" where id_number='$id_number'", "students")[0];
-            $teacher = [
+            $students = $user->getPersons(" where student_number='$id_number'", "students")[0];
+            
+            $student = [
                 "first_name" => $students["first_name"] ,
                 "middle_name" => $students["middle_name"],
                 "last_name" => $students["last_name"],
                 "email" => $students["email"],
                 "image" => 'students/'.$users["image"],
             ];
-            echo json_encode($students);
+            echo json_encode($student);
         }
         else if($user_type == "teacher")
         {

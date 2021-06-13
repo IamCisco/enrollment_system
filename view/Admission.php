@@ -168,6 +168,15 @@
                                         </div>
                                     </div>
                                     <div class="row">
+                                        <div class="form-group col-md-12">
+                                            <select class="form-control" id="txt_semesters" name="semester"required>
+                                                <option value="" disabled selected>Please select a grade</option>
+                                                <option value="11">XI</option>
+                                                <option value="12">XII</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="row">
                                         <div class="form-group col-md-6">
                                             <select class="form-control" id="txt_program" name="program" required>
                                                 <option value="" disabled selected>First Choice*</option>
@@ -449,7 +458,7 @@
                     </div>
                     <div class="modal-footer">
                         
-                        <button type="submit" class="btn btn-success pull-right" id="btn_login">Save</button>
+                        <button type="submit" class="btn btn-success pull-right" id="btn_login">Login</button>
                         <button type="button" class="btn btn-danger pull-right" data-dismiss="modal">Close</button>
                     </div>
                 </form>
