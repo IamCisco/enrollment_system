@@ -527,7 +527,7 @@ let INDEX = {
                     $("#btn_stats").hide();
                     $("#btn_program").hide();
                     $("#btn_grade").hide();
-                    $("#btn_semeter").hide();
+                    $("#btn_semester").hide();
                     $("#btn_requirement").hide();
                     $("#btn_profile").hide();
                     $("#btn_background").hide();
@@ -546,7 +546,7 @@ let INDEX = {
                         $("#btn_stats").show();
                         $("#btn_program").show();
                         $("#btn_grade").show();
-                        $("#btn_semeter").show();
+                        $("#btn_semester").show();
                         $("#btn_requirement").show();
                         $("#btn_background").show();
                         $("#btn_profile").show();
