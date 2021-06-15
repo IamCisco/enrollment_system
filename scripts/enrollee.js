@@ -555,7 +555,7 @@ let ENROLLEE = {
                 for (var x = 0; x < result.length; x++) {
                     data = result[x];
                     row1 += `
-                        <option value="${data["grade_roman_numeral"]}">${data["grade_roman_numeral"]}</option>
+                        <option value="${data["grade"]}">${data["grade_roman_numeral"]}</option>
                     `;
                 }
                 $("#txt_grades").html(row1);
