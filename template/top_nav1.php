@@ -4,7 +4,7 @@
 
         <!-- <h1 class="logo mr-auto"><a href="index.php">CITech<span>.</span></a></h1> -->
         <!-- Uncomment below if you prefer to use an image logo -->
-        <a href="index.php" class="logo mr-auto"><img src="../assets/img/logo1.png" alt=""></a>
+        <a href="Index.php" class="logo mr-auto"><img src="../assets/img/logo1.png" alt=""></a>
 
         <nav class="nav-menu d-none d-lg-block">
             <ul>
