@@ -211,13 +211,13 @@
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
-                    Comment
+                    <label id="lblModalTitle"></label>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
                     <p id="announcement_title">Comment</p>
                     <p id="announcement_details"><b>Announcement Detail</b></p>
-                    <div class="panel panel-default widget">
+                    <div class="panel panel-default widget" id="div_comment">
                         <div class="panel-body">
                             <ul class="list-group" id="list_comment">
 

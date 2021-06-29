@@ -36,7 +36,17 @@ let INDEX = {
         $("#announcement_title").html(`<b>Announcement Title : </b>${title}`);
         $("#announcement_details").html(`<b>Announcement Detail : </b>${details}`);
         this.announcement_id = id
-        this.getComments(id);
+        if(INDEX.user_id != 0)
+        {
+            $("#div_comment").show();
+            $("#lblModalTitle").html("Comments");
+            this.getComments(id);
+        }
+        else
+        {
+            $("#lblModalTitle").html("Details");
+            $("#div_comment").hide();
+        }
     },
     getAnnouncements: function (){
         $.ajax({
@@ -54,10 +64,9 @@ let INDEX = {
                 for (var x = 0; x < result_length; x++) {
                     btn_add_comment = "";
                     data = result[x];
-                    if(INDEX.user_id != 0)
-                    {
-                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
-                    }
+                    
+                    btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
+                    
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
                         <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">
@@ -107,10 +116,9 @@ let INDEX = {
                 for (var x = 0; x < result_length; x++) {
                     btn_add_comment = "";
                     data = result[x];
-                    if(INDEX.user_id != 0)
-                    {
-                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
-                    }
+                    
+                    btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
+                    
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
                         <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">
@@ -168,10 +176,9 @@ let INDEX = {
                 for (var x = 0; x < result_length; x++) {
                     btn_add_comment = "";
                     data = result[x];
-                    if(INDEX.user_id != 0)
-                    {
-                        btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
-                    }
+                    
+                    btn_add_comment = `<a href="#portfolio"  id="${data["id"]}" onclick="INDEX.setAnnouncementId(${data["id"]},'${data["title"]}','${data["announcement"]}')"class="details-link comment_button" title="More Details"><i class="bx bx-comment-add"></i></a>`;
+                    
                     row += `
                     <div class="col-lg-4 col-md-6 portfolio-item filter-${data["type"]}">
                         <img src="../assets/img/announcements/${data["image"]}" class="img-fluid" alt="">

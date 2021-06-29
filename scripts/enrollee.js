@@ -303,7 +303,7 @@ let ENROLLEE = {
                         ENROLLEE.getEnrolleesForExam();
                         swal(text, {
                             title: "Success!",
-                            text: result,
+                            text: text,
                             icon: "success",
                             button: "OK",
                         });
